@@ -1,0 +1,9 @@
+﻿<Window x:Class="UIAutomationController.MainWindow"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    Title="UI Automation Controller" Height="232" Width="384">
+    <Grid>
+        <Button Height="23" Margin="20,14,18,0" Name="btnStartAutomation" VerticalAlignment="Top" Click="btnStartAutomation_Click">Start Automation</Button>
+        <TextBox Margin="20,51,18,20" Name="txtLogs" />
+    </Grid>
+</Window>
