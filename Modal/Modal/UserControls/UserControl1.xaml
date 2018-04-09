@@ -1,0 +1,12 @@
+<UserControl x:Class="Modal.UserControls.UserControl1"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    BorderThickness="2" Padding="5" Background="#ff9933"
+    Margin="20" BorderBrush="Gray">
+    <StackPanel Orientation="Vertical">
+      <Button Click="ButtonClick">Ok</Button>
+      <Button Click="CancelClick">Cancel</Button>
+        <Button Click="Screen2_Click">Screen Client</Button>
+        <TextBox x:Name="txtSender" Text="Message for 2nd Screen"/>
+    </StackPanel>
+</UserControl>
