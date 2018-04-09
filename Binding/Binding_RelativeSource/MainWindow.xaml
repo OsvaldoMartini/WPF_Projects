@@ -1,0 +1,202 @@
+﻿<Window
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" mc:Ignorable="d" x:Class="Binding_RelativeSource.MainWindow"
+        Title="MainWindow" Height="Auto" Width="Auto" >
+    <Window.Resources>
+        <ControlTemplate x:Key="TemplatedParentSample">
+            <Canvas>
+                <Canvas.RenderTransform>
+                    <RotateTransform Angle="20"/>
+                </Canvas.RenderTransform>
+                <Ellipse Height="100" Width="150" 
+        			Fill="{Binding Background, RelativeSource={RelativeSource TemplatedParent}}"/>
+                <ContentPresenter Margin="35" 
+        			Content="{Binding Content, RelativeSource={RelativeSource TemplatedParent}}"/>
+            </Canvas>
+        </ControlTemplate>
+    </Window.Resources>
+
+    <Grid >
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
+        </Grid.RowDefinitions>
+        <!--<Line Grid.Row="0" Stroke="Red" StrokeThickness="10" Stretch="Uniform"/>
+        <Line Grid.Row="1" Stroke="Red" StrokeThickness="10" Stretch="Uniform"/>-->
+        <Border HorizontalAlignment="Stretch" VerticalAlignment="Stretch" BorderBrush="Black" BorderThickness="1"  Grid.Row="0" Grid.Column="0">
+            <StackPanel Orientation="Vertical" >
+                <TextBlock TextWrapping="Wrap" ><Run Text="1.1- Model Self: A rectangle when its height is always equal to its width, a square let's say&quot;, in this above case we are obliged to indicate the name of the binding object, namely the rectangle."/></TextBlock>
+                <Separator/>
+                <Rectangle Grid.Row="1" Fill="Red" x:Name="rectangle" 
+                       Height="20" Stroke="Black" 
+                       Canvas.Top="20" Canvas.Left="20"
+                       Width="{Binding Height, ElementName=rectangle}"/>
+
+
+            </StackPanel>
+        </Border>
+        <Border HorizontalAlignment="Stretch" VerticalAlignment="Stretch" BorderBrush="Black" BorderThickness="1"   Grid.Row="1" Grid.Column="0">
+            <StackPanel Orientation="Vertical" >
+                <TextBlock TextWrapping="Wrap" ><Run Text="1.2- Model Self: A rectangle when its height is always equal to its width, a square let's say, For this case we are not obliged to mention the name of the binding object and the Width will be always equal to the Height whenever the height is changed."/></TextBlock>
+                <Separator/>
+                <Rectangle Grid.Row="3" Fill="Red" Height="20" 
+                       Stroke="Black" 
+                       Width="{Binding Height, RelativeSource={RelativeSource Self}}"/>
+            </StackPanel>
+        </Border>
+        <Border HorizontalAlignment="Stretch" VerticalAlignment="Stretch" BorderBrush="Black" BorderThickness="1"  Grid.Row="2"  Grid.Column="0"  Grid.RowSpan="4" >
+            <StackPanel Orientation="Vertical" >
+                <TextBlock TextWrapping="Wrap" ><Run Text="2- Model FindAncestor: it's up to you to determine the ancestor type and the ancestor rank in the hierarchy to tie the property. Change AncestorLevel=2 to AncestorLevel=1 and change the type of the ancestor from AncestorType=Border to AncestorType=Canvas"/></TextBlock>
+                <Separator/>
+                <Canvas Grid.Row="5" x:Name="Parent0">
+                    <Border x:Name="Parent1"
+                        Width="{Binding Parent.ActualWidth, RelativeSource={RelativeSource Self}}"
+                        Height="{Binding Parent.ActualHeight, RelativeSource={RelativeSource Self}}">
+                        <Canvas x:Name="Parent2">
+                            <Border x:Name="Parent3"
+                                Width="{Binding Parent.ActualWidth, RelativeSource={RelativeSource Self}}"
+                                Height="{Binding Parent.ActualHeight, RelativeSource={RelativeSource Self}}">
+                                <Canvas x:Name="Parent4">
+                                    <TextBlock FontSize="16" 
+                                           Margin="5" Text="Display the name of the ancestor"/>
+                                    <TextBlock FontSize="16" 
+                                           Margin="50" 
+                                           Text="{Binding Name, RelativeSource={RelativeSource FindAncestor, AncestorLevel=2, AncestorType={x:Type Border}}}" 
+                                           Width="200"/>
+                                </Canvas>
+                            </Border>
+                        </Canvas>
+                    </Border>
+                </Canvas>
+            </StackPanel>
+        </Border>
+
+
+        <Border HorizontalAlignment="Stretch" VerticalAlignment="Stretch" BorderBrush="Black" BorderThickness="1"  Grid.Row="0"  Grid.Column="1" Grid.RowSpan="3">
+            <StackPanel Orientation="Vertical" >
+                <TextBlock TextWrapping="Wrap" ><Run Text="3- Model TemplatedParent: This mode enables tie a given ControlTemplate property to a property of the control that the ControlTemplate is applied to."/></TextBlock>
+                <Canvas x:Name="Parent5">
+                    <Button   Margin="50" 
+                          Template="{StaticResource TemplatedParentSample}" Height="0" 
+                          Canvas.Left="0" Canvas.Top="0" Width="0">
+                        <TextBlock FontSize="22"><Run Text="Click me"/></TextBlock>
+                    </Button>
+                </Canvas>
+            </StackPanel>
+        </Border>
+
+        <Border HorizontalAlignment="Stretch" VerticalAlignment="Stretch" BorderBrush="Black" BorderThickness="1"  Grid.Row="3"  Grid.Column="1" Grid.RowSpan="3">
+            <StackPanel Orientation="Vertical">
+                <TextBlock TextWrapping="Wrap" ><Run Text="4.1- Model PreviousData: Bingind the List"/></TextBlock>
+                <Separator/>
+                <ItemsControl Grid.Row="10" ItemsSource="{Binding}" Margin="10"/>
+            </StackPanel>
+        </Border>
+
+        <Border HorizontalAlignment="Stretch" VerticalAlignment="Stretch" BorderBrush="Black" BorderThickness="1"  Grid.Row="0"  Grid.Column="2" Grid.RowSpan="3" Grid.ColumnSpan="2">
+            <StackPanel Orientation="Vertical">
+                <TextBlock TextWrapping="Wrap" ><Run Text="4.2- Model PreviousData: The idea consists of adding a TextBox and tie the Text property to the Value of the previous border in the items' list."/></TextBlock>
+                <Separator/>
+                <ItemsControl ItemsSource="{Binding}" Margin="10">
+                    <ItemsControl.RenderTransform>
+                        <TransformGroup>
+                            <ScaleTransform ScaleY="-1"/>
+                            <TranslateTransform Y="250"/>
+                        </TransformGroup>
+                    </ItemsControl.RenderTransform>
+                    <ItemsControl.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <StackPanel Orientation="Horizontal"/>
+                        </ItemsPanelTemplate>
+                    </ItemsControl.ItemsPanel>
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <StackPanel>
+                                <TextBlock FontSize="14" FontWeight="bold" 
+                           Margin="20" 
+                           Text="{Binding 
+                           RelativeSource={RelativeSource PreviousData}, 
+                                               Path=Value}">
+                                    <TextBlock.RenderTransform>
+                                        <ScaleTransform ScaleY="-1"/>
+                                    </TextBlock.RenderTransform>
+                                </TextBlock>
+                                <Border CornerRadius="3" BorderThickness="3" 
+                           Width="80" Height="{Binding Value}" 
+                           Margin="0,0,35,0"  
+                        BorderBrush="Violet" Background="BlueViolet">
+                                    <TextBlock Text="{Binding Value}" 
+                           FontWeight="bold" VerticalAlignment="Center" 
+                                   HorizontalAlignment="Center" 
+                                   Foreground="Wheat">
+                                        <TextBlock.RenderTransform>
+                                            <TransformGroup>
+                                                <ScaleTransform ScaleY="-1"/>
+                                            </TransformGroup>
+                                        </TextBlock.RenderTransform>
+                                    </TextBlock>
+                                </Border>
+                            </StackPanel>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+            </StackPanel>
+        </Border>
+
+
+        <Border HorizontalAlignment="Stretch" VerticalAlignment="Stretch" BorderBrush="Black" BorderThickness="1"  Grid.Row="3"  Grid.Column="2" Grid.RowSpan="3" Grid.ColumnSpan="2" >
+            <StackPanel Orientation="Vertical">
+                <TextBlock TextWrapping="Wrap" ><Run Text="4.3- Model PreviousData: Now Using TextBlock.RenderTransform first to see the result."/></TextBlock>
+                <Separator/>
+                <ItemsControl ItemsSource="{Binding}" Margin="10">
+
+                    <ItemsControl.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <StackPanel Orientation="Horizontal"/>
+                        </ItemsPanelTemplate>
+                    </ItemsControl.ItemsPanel>
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <StackPanel>
+                                <Border CornerRadius="3" BorderThickness="3" 
+							Width="80" Height="{Binding Value}" 
+							Margin="0,0,35,0"  
+							BorderBrush="Violet"  
+							Background="BlueViolet">
+                                    <TextBlock Text="{Binding Value}" 
+								FontWeight="bold" 
+								VerticalAlignment="Center" 
+								HorizontalAlignment="Center"  
+								Foreground="Wheat">
+                                        <TextBlock.RenderTransform>
+                                            <TransformGroup>
+                                                <ScaleTransform ScaleY="-1"/>
+                                            </TransformGroup>
+                                        </TextBlock.RenderTransform>
+                                    </TextBlock>
+                                </Border>
+                            </StackPanel>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                    <ItemsControl.RenderTransform>
+                        <TransformGroup>
+                            <ScaleTransform ScaleY="-1"/>
+                            <TranslateTransform Y="250"/>
+                        </TransformGroup>
+                    </ItemsControl.RenderTransform>
+                </ItemsControl>
+            </StackPanel>
+        </Border>
+    </Grid>
+</Window>

@@ -1,0 +1,37 @@
+﻿<UserControl x:Class="Binding.Basics.TwoWays.PersonWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:src="clr-namespace:Binding.Basics.TwoWays.Concrete"
+        xmlns:viewModel="clr-namespace:Binding.Basics.TwoWays.ViewModel"
+        BorderThickness="2" Padding="5" Background="#ff9933"
+        Margin="20" BorderBrush="Gray"
+        Height="auto" Width="400">
+    <UserControl.Resources>
+        <viewModel:Person x:Key="PersonXAMLDataSource" FullName="Osvaldo Martini"/>
+        <viewModel:Person x:Key="Person1" FullName="Person_1_Name"/>
+    </UserControl.Resources>
+
+    <Grid DataContext="{Binding Source={StaticResource Person1}}">
+        <!--DataContext="{StaticResource Person1}"-->
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+        </Grid.RowDefinitions>
+        <StackPanel Grid.Row="0">
+            <TextBox Text="{Binding Source={StaticResource PersonXAMLDataSource}, Path=FullName}"></TextBox>
+        </StackPanel>
+        <StackPanel Grid.Row="1">
+            <TextBox Text="{Binding Path=FullName}"/>
+        </StackPanel>
+        <StackPanel Grid.Row="2">
+            <TextBlock Text="{Binding}"/>
+        </StackPanel>
+        <StackPanel Orientation="Horizontal"  Grid.Row="3">
+            <Button Click="ButtonClick">Ok</Button>
+            <Separator/>
+            <Button Click="CancelClick">Cancel</Button>
+        </StackPanel>
+    </Grid>
+</UserControl>
