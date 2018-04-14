@@ -10,5 +10,6 @@ namespace Binding.Different.Ways.Model
     {
         public string EmpName { get; set; }
         public bool IsChecked { get; set; }
+
     }
 }

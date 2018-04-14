@@ -574,19 +574,9 @@
                         Visibility="{Binding IsModified, Converter={StaticResource BoolToVisibility}}"/>
             </StackPanel>
         </Grid>
-        <Grid Grid.Row="1" Grid.Column="9" Grid.ColumnSpan="2">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="Auto"/>
-                <ColumnDefinition Width="Auto"/>
-            </Grid.ColumnDefinitions>
-            <Grid.RowDefinitions>
-                <RowDefinition Height="Auto"></RowDefinition>
-                <RowDefinition Height="Auto"></RowDefinition>
-                <RowDefinition Height="Auto"></RowDefinition>
-            </Grid.RowDefinitions>
-         
-            <StackPanel VerticalAlignment="Top">
-                <TextBlock FontSize="10" Grid.Row="0" Grid.Column="0" Grid.RowSpan="2" FontWeight="Bold" Margin="10" Foreground="Green" TextWrapping="Wrap"
+        <Grid Grid.Row="1" Grid.Column="9">
+            <StackPanel Orientation="Vertical">
+                <TextBlock FontSize="10" FontWeight="Bold" Margin="10" Foreground="Green" TextWrapping="Wrap"
                            HorizontalAlignment="Center">Bound From Class List "Employees List ViewModel "
                 </TextBlock>
                 <Grid Grid.Row="1" Grid.Column="0" DataContext="{StaticResource EmployeeListViewModelList}">
@@ -604,11 +594,19 @@
                         </ListBox.ItemTemplate>
                     </ListBox>
                 </Grid>
-                <Grid Grid.Row="2" Grid.Column="2">
-                    <DataGrid Grid.Row="1" Grid.Column="1" Margin="5,5,5,5"
+            </StackPanel>
+        </Grid>
+        <Grid Grid.Row="1" Grid.Column="10">
+            <StackPanel Orientation="Vertical">
+                <TextBlock FontSize="10" FontWeight="Bold" Margin="10" Foreground="Green" TextWrapping="Wrap"
+                           HorizontalAlignment="Center">Bound From Class List "Employees List ViewModel "
+                </TextBlock>
+
+                <Grid Grid.Row="1" Grid.Column="2">
+                    <DataGrid Margin="5,5,5,5"
                               Name="dataGrid" 
                               AutoGenerateColumns="false" 
-                              ItemsSource="{Binding Path=Records}" 
+                              ItemsSource="{Binding Path=Records}"
                     >
                         <DataGridTemplateColumn>
                             <DataGridTemplateColumn.CellTemplate>
@@ -622,8 +620,6 @@
                     </DataGrid>
                 </Grid>
             </StackPanel>
-           
-
         </Grid>
     </Grid>
 </Window>
