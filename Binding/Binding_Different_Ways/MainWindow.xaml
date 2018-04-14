@@ -1,10 +1,11 @@
 ﻿<Window x:Class="Binding.Different.Ways.MainWindow"
+    x:Name="WindowDifferentWays"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:dataProvider="clr-namespace:Binding.Different.Ways.DataProvider"
     xmlns:model="clr-namespace:Binding.Different.Ways.Model"
     xmlns:viewModel="clr-namespace:Binding.Different.Ways.ViewModel"
-    Title="Window1" Height="600" Width="1500">
+    Title="Window Different Ways" Height="600" Width="1500">
     <Window.Resources>
         <!-- create an instance of our DataProvider class -->
         <!-- Customers -->

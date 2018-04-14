@@ -82,6 +82,7 @@
     <Compile Include="Model\EmployeeModel.cs" />
     <Compile Include="Utils\CustomBoundColumn.cs" />
     <Compile Include="Commands\ApplyChangesCommand.cs" />
+    <Compile Include="Utils\TreeHelper.cs" />
     <Compile Include="ViewModel\EmployeeListViewModel.cs" />
     <Compile Include="ViewModel\EmployeeViewModel.cs" />
     <Compile Include="ViewModel\Record.cs" />

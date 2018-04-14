@@ -6,10 +6,12 @@ using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Input;
 using Binding.Different.Ways.Annotations;
 using Binding.Different.Ways.Commands;
 using Binding.Different.Ways.Model;
+using Binding.Different.Ways.Utils;
 
 namespace Binding.Different.Ways.ViewModel
 {
@@ -22,6 +24,8 @@ namespace Binding.Different.Ways.ViewModel
             {
                 item.Model.IsChecked = item.IsChecked;
             }
+            
+
         }
 
         private EmployeeViewModel _selectedEmployeeViewModel;

@@ -59,8 +59,8 @@ namespace Binding.Different.Ways
             LoadGridDynamic();
 
 
-            //GridAuthors.Filter += new 
-
+           
+                
         }
 
         private void LoadGridDynamic()
