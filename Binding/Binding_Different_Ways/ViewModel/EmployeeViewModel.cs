@@ -57,6 +57,7 @@ namespace Binding.Different.Ways.ViewModel
             if (handler != null)
             {
                 handler(this, new PropertyChangedEventArgs(propertyName));
+
             }
         }
     }
