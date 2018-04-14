@@ -6,8 +6,8 @@ namespace Modules_ViewModel
     {
         private string _userName;
 
-        [ValidatableProperty]
-        [Required]
+        //[ValidatableProperty]
+        //[Required]
         public string UserName
         {
             get

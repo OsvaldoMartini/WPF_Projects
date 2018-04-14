@@ -1,5 +1,6 @@
 ﻿using System;
 using System.ComponentModel;
+using System.Diagnostics;
 using Binding.Different.Ways.Abstract;
 
 namespace Binding.Different.Ways.ViewModel
@@ -46,6 +47,7 @@ namespace Binding.Different.Ways.ViewModel
             set 
             { 
                 _lastName = value;
+                Debug.WriteLine(_lastName);
                 OnPropertyChanged("LastName");
             }
         }
@@ -74,23 +76,5 @@ namespace Binding.Different.Ways.ViewModel
         {
             return String.Format("{0} {1} ({2})", FirstName, LastName, EmployeeNumber);
         }
-
-
-        protected void OnPropertyChanged(string propertyName)
-        {
-            if (PropertyChanged != null)
-            {
-                PropertyChangedEventArgs args = new PropertyChangedEventArgs(propertyName);
-                this.PropertyChanged(this, args);
-            }
-        }
-
-        #region INotifyPropertyChanged Members
-        
-        //hides inherited member, Use the new keyword if hiding was intended.
-        //public new event PropertyChangedEventHandler PropertyChanged;
-        public event PropertyChangedEventHandler PropertyChanged;
-
-        #endregion
     }
 }

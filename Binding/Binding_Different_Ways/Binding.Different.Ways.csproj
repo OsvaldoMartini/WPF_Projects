@@ -49,6 +49,7 @@
     <Reference Include="System.Core">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
     </Reference>
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xaml" />
     <Reference Include="System.Xml.Linq">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
@@ -78,6 +79,12 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Model\EmployeeModel.cs" />
+    <Compile Include="Utils\CustomBoundColumn.cs" />
+    <Compile Include="Commands\ApplyChangesCommand.cs" />
+    <Compile Include="ViewModel\EmployeeListViewModel.cs" />
+    <Compile Include="ViewModel\EmployeeViewModel.cs" />
+    <Compile Include="ViewModel\Record.cs" />
     <Page Include="NewEmployeeDetails.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -104,10 +111,12 @@
     <Compile Include="Model\OrderItem.cs" />
     <Compile Include="Model\Person.cs" />
     <Compile Include="Model\Product.cs" />
-    <Compile Include="Model\FileObject.cs" />
+    <Compile Include="ViewModel\FileObject.cs" />
     <Compile Include="Model\ListOfStrings.cs" />
+    <Compile Include="Properties\Annotations.cs" />
     <Compile Include="Utils\ListBoxExtender.cs" />
     <Compile Include="Utils\ObservedCollection.cs" />
+    <Compile Include="ViewModel\Property.cs" />
     <Compile Include="ViewModel\EmployeeDirectContent.cs" />
     <Compile Include="ViewModel\ListFilesPath.cs" />
     <Compile Include="MainWindow.xaml.cs">
@@ -145,6 +154,9 @@
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
     <AppDesigner Include="Properties\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Views\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

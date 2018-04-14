@@ -1,6 +1,6 @@
 ﻿using Binding.Different.Ways.Abstract;
 
-namespace Binding.Different.Ways.Model
+namespace Binding.Different.Ways.ViewModel
 {
     public class FileObject : ViewModelBase
     {
@@ -14,7 +14,7 @@ namespace Binding.Different.Ways.Model
             {
                 if (value != this._location)
                     _location = value;
-                this.SetPropertyChanged("Location");
+                this.OnPropertyChanged("Location");
             }
         }
         #endregion Location
@@ -28,7 +28,7 @@ namespace Binding.Different.Ways.Model
             {
                 if (value != this._fileName)
                     _fileName = value;
-                this.SetPropertyChanged("FileName");
+                this.OnPropertyChanged("FileName");
             }
         }
         #endregion FileName

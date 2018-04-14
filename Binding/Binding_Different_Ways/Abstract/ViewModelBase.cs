@@ -1,16 +1,19 @@
-﻿using System.ComponentModel;
+﻿    using System.ComponentModel;
+    using System.Runtime.CompilerServices;
+    using Binding.Different.Ways.Annotations;
 
 namespace Binding.Different.Ways.Abstract
 {
     // The ViewModelBase
     public abstract class ViewModelBase : INotifyPropertyChanged
     {
-        #region Property Changed Event Handler
-        public void SetPropertyChanged(string propertyName)
-        {
-            if (PropertyChanged != null) PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-        }
         public event PropertyChangedEventHandler PropertyChanged;
-        #endregion Property Changed Event Handler
+
+        [NotifyPropertyChangedInvocator]
+        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
+        {
+            var handler = PropertyChanged;
+            if (handler != null) handler(this, new PropertyChangedEventArgs(propertyName));
+        }
     }
 }

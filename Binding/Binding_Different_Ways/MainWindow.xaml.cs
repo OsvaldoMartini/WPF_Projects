@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Text;
 using System.Windows;
 using System.Windows.Controls;
@@ -9,8 +10,11 @@ using Binding.Different.Ways.Model;
 using Binding.Different.Ways.Utils;
 using Binding.Different.Ways.ViewModel;
 using Modules_ViewModel;
+using System.Diagnostics;
+using System.Linq;
+using MessageBox = System.Windows.MessageBox;
 
-namespace Binding.Different.Ways 
+namespace Binding.Different.Ways
 {
     /// <summary>
     /// Interaction logic for Window1.xaml
@@ -18,8 +22,7 @@ namespace Binding.Different.Ways
     public partial class MainWindow : Window
     {
 
-        public EmployeeList EmployeeListProperty { get; set; }
-        
+
         private ObservableCollection<Person> _person;
 
         ObservableCollection<string> mineObservableCollection;
@@ -29,6 +32,12 @@ namespace Binding.Different.Ways
         public MainWindow()
         {
             InitializeComponent();
+
+
+            Program pm = new Program();
+            pm.bl[0].IsActive = false;
+            pm.oc[0].IsActive = true;
+
 
 
             Loaded += OnLoaded;
@@ -41,13 +50,50 @@ namespace Binding.Different.Ways
             GridAuthors.ItemsSource = LoadCollectionData();
 
 
-
             LstGridViewOrange.ItemsSource = AuthorsGridViewList();
             CreateDynamicGridView();
             LstGridViewDynamic.ItemsSource = LstGridViewOrange.ItemsSource;
 
 
+
+            LoadGridDynamic();
+
+
+            //GridAuthors.Filter += new 
+
         }
+
+        private void LoadGridDynamic()
+        {
+            var records = new ObservableCollection<Record>();
+            records.Add(new Record(new Property("FirstName", "Paul"), new Property("LastName", "Stovell")));
+            records.Add(new Record(new Property("FirstName", "Tony"), new Property("LastName", "Black")));
+
+            var columns = records.First()
+                .Properties
+                .Select((x, i) => new { Name = x.Name, Index = i })
+                .ToArray();
+
+            //foreach (var column in columns)
+            //{
+            //    var binding = new System.Windows.Data.Binding(string.Format("Properties[{0}].Value", column.Index));
+
+            //    dataGrid.Columns.Add(new DataGridTextColumn() { Header = column.Name, Binding = binding });
+            //}
+
+            foreach (var column in columns)
+            {
+                var binding = new System.Windows.Data.Binding(string.Format("Properties[{0}]", column.Index));
+                dataGrid.Columns.Add(new CustomBoundColumn()
+                {
+                    Header = column.Name,
+                    Binding = binding,
+                    TemplateName = "CustomTemplate"
+                });
+            } 
+        }
+
+        
 
         private void SetUserModule_ViewModel()
         {
@@ -55,7 +101,7 @@ namespace Binding.Different.Ways
             user.UserName = "User";
             user.IsModified = false;
             //DataContext = user;
-            this.GridUserViewModel.DataContext = user;  
+            this.GridUserViewModel.DataContext = user;
         }
 
         private void SettingObservableEvents()
@@ -278,7 +324,7 @@ namespace Binding.Different.Ways
 
         private void LastNameCM_Click(object sender, RoutedEventArgs e)
         {
-        
+
         }
 
 
@@ -332,9 +378,74 @@ namespace Binding.Different.Ways
 
         private void MenuItem_Click(object sender, RoutedEventArgs e)
         {
-        
+
         }
 
     }
+    class Program
+    {
+        public ObservableCollection<MyStruct> oc = new ObservableCollection<MyStruct>();
+        public System.ComponentModel.BindingList<MyStruct> bl = new BindingList<MyStruct>();
+
+        public Program()
+        {
+            oc.Add(new MyStruct());
+            oc.CollectionChanged += CollectionChanged;
+
+            bl.Add(new MyStruct());
+            bl.ListChanged += ListChanged;
+        }
+
+        void ListChanged(object sender, ListChangedEventArgs e)
+        {
+            //Observe when the IsActive value is changed this event is triggered.
+            Debug.WriteLine(e.ListChangedType.ToString());
+        }
+
+        void CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
+        {
+            //Observe when the IsActive value is changed this event is not triggered.
+            Debug.WriteLine(e.Action.ToString());
+        }
+
+
+
+    }
+
+
+
+
+
+
+    public class MyStruct : INotifyPropertyChanged
+    {
+        public event PropertyChangedEventHandler PropertyChanged;
+        private bool isactive;
+        public bool IsActive
+        {
+            get { return isactive; }
+            set
+            {
+                isactive = value;
+                NotifyPropertyChanged("IsActive");
+            }
+        }
+
+        private void NotifyPropertyChanged(String PropertyName)
+        {
+            if (PropertyChanged != null)
+            {
+                PropertyChanged(this, new PropertyChangedEventArgs(PropertyName));
+            }
+        }
+    }
+
+
+
+
+
+
 
 }
+
+

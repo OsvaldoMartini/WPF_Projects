@@ -15,10 +15,10 @@
         <!-- ListOfStrings -->
         <ObjectDataProvider x:Key="ListOfStrings" ObjectType="{x:Type model:ListOfStrings}"/>
         <ObjectDataProvider x:Key="ListOfDrinks" ObjectInstance="{StaticResource ListOfStrings}" MethodName="GetListOfDrinks" />
-
         <BooleanToVisibilityConverter x:Key="BoolToVisibility"/>
         <viewModel:ListFilesPath x:Key="FilePathList" />
         <viewModel:EmployeeList x:Key="EmployeeList"/>
+        <viewModel:EmployeeListViewModel x:Key="EmployeeListViewModelList"/>
         <viewModel:EmployeeDirectContent x:Key="DirectContentEmployeeList">
             <viewModel:Employee EmployeeNumber="4" FirstName="John" LastName="Dow" Title="Accountant" Department="Payroll" />
             <viewModel:Employee EmployeeNumber="5" FirstName="Jane" LastName="Austin" Title="Account Executive" Department="Customer Management" />
@@ -153,10 +153,16 @@
                 </TextBlock>
             </DockPanel>
         </DataTemplate>
+        <DataTemplate x:Key="CustomTemplate">
+            <Border Padding="3" Background="Purple">
+                <TextBox Text="{Binding Path=Value}" />
+            </Border>
+        </DataTemplate>
     </Window.Resources>
 
     <Grid>
         <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
             <ColumnDefinition Width="*" />
             <ColumnDefinition Width="*" />
             <ColumnDefinition Width="*" />
@@ -177,7 +183,7 @@
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
-        <Grid Grid.Row="0" Grid.Column="0" DataContext="{Binding ElementName=LstBindingStatic, Path=SelectedItem}" Height="284" VerticalAlignment="Top">
+        <Grid Grid.Row="0" Grid.Column="0" DataContext="{Binding ElementName=LstFromObject, Path=SelectedItem}" Height="284" VerticalAlignment="Top">
             <Grid.RowDefinitions>
                 <RowDefinition Height="45*" />
                 <RowDefinition Height="45*" />
@@ -198,7 +204,7 @@
             <Label Grid.Row="3" Grid.Column="0">Title</Label>
             <Label Grid.Row="4" Grid.Column="0">Department</Label>
             <TextBox Grid.Row="1" Grid.Column="1" Text="{Binding Path=FirstName}" />
-            <TextBox Grid.Row="2" Grid.Column="1" Text="{Binding Path=LastName}" />
+            <TextBox Grid.Row="2" Grid.Column="1" Text="{Binding Path=LastName, UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" />
             <TextBox Grid.Row="3" Grid.Column="1" Text="{Binding Path=Title}" />
             <TextBox Grid.Row="4" Grid.Column="1" Text="{Binding Path=Department}" />
             <Button Grid.Row="5" Grid.ColumnSpan="2" Width="100"  Name="cmdAddEmployee" Click="cmdAddEmployee_Click" Height="25" VerticalAlignment="Bottom">Add Employee</Button>
@@ -218,8 +224,8 @@
                 <TextBlock FontSize="10" FontWeight="Bold" Margin="5" Foreground="Green" TextWrapping="Wrap"
                            HorizontalAlignment="Center">Bound From Class Parent List "EmployeeList"
                 </TextBlock>
-                <ListBox ItemsSource="{Binding EmployeeObjectCollection}" 
-                     SelectedItem="{Binding SelectedEmployeeObject}"/>
+                <ListBox x:Name="LstFromObject" ItemsSource="{Binding EmployeeObjectCollection}" 
+                     SelectedItem="{Binding SelectedEmployeeObject, UpdateSourceTrigger=PropertyChanged}"/>
             </StackPanel>
         </Grid>
         <Grid Grid.Row="0" Grid.Column="3">
@@ -307,7 +313,7 @@
         <Grid Grid.Row="0" Grid.Column="7" DataContext="{StaticResource EmployeeList}">
             <StackPanel VerticalAlignment="Top">
                 <TextBlock FontSize="10" FontWeight="Bold" Margin="5" Foreground="Green" TextWrapping="WrapWithOverflow"
-                           HorizontalAlignment="Center">Chield Object List "EmployeeList"
+                           HorizontalAlignment="Center">Chield "Inventory" Object source "EmployeeList"
                 </TextBlock>
 
                 <Border HorizontalAlignment="Stretch" VerticalAlignment="Stretch" BorderBrush="Black" BorderThickness="1">
@@ -431,20 +437,6 @@
                 <TextBox Name="tboxLog" AcceptsReturn="True" VerticalScrollBarVisibility="Visible" HorizontalScrollBarVisibility="Auto"/>
             </StackPanel>
         </Grid>
-        <Grid x:Name="GridUserViewModel" Grid.Row="1" Grid.Column="8" >
-            <StackPanel Orientation="Vertical">
-                <TextBlock FontSize="10" FontWeight="Bold" Margin="10" Foreground="Green" TextWrapping="Wrap"
-                           HorizontalAlignment="Center">Module_ViewModule.Dll PropertyChangedEventHandler [ValidatableProperty]
-                </TextBlock>
-                <TextBox Text="{Binding UserName, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}"
-                         Margin="5"/>
-                <Button Content="Save" 
-                        Visibility="{Binding IsModified, Converter={StaticResource BoolToVisibility}}"
-                        IsEnabled="{Binding IsValid}"/>
-                <Button Content="Cancel" 
-                        Visibility="{Binding IsModified, Converter={StaticResource BoolToVisibility}}"/>
-            </StackPanel>
-        </Grid>
         <Grid Grid.Row="1" Grid.Column="4" Grid.ColumnSpan="2">
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"></RowDefinition>
@@ -542,9 +534,9 @@
                     </ListView.View>
                 </ListView>
 
-            <TextBlock Grid.Row="2" FontSize="10" FontWeight="Bold" Margin="10" Foreground="Green" TextWrapping="Wrap"
+                <TextBlock Grid.Row="2" FontSize="10" FontWeight="Bold" Margin="10" Foreground="Green" TextWrapping="Wrap"
                        HorizontalAlignment="Center">Dynamic GridView Bounded by Code Behing
-            </TextBlock>
+                </TextBlock>
                 <ListView Grid.Row="3" Name="LstGridViewDynamic" Margin="5" >
                     <ListView.View>
                         <GridView AllowsColumnReorder="true" ColumnHeaderToolTip="Authors"
@@ -567,10 +559,72 @@
                     </ListView.View>
                 </ListView>
             </StackPanel>
+        </Grid>
+        <Grid x:Name="GridUserViewModel" Grid.Row="1" Grid.Column="8" >
+            <StackPanel Orientation="Vertical">
+                <TextBlock FontSize="10" FontWeight="Bold" Margin="10" Foreground="Green" TextWrapping="Wrap"
+                           HorizontalAlignment="Center">Module_ViewModule.Dll PropertyChangedEventHandler [ValidatableProperty]
+                </TextBlock>
+                <TextBox Text="{Binding UserName, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}"
+                         Margin="5"/>
+                <Button Content="Save" 
+                        Visibility="{Binding IsModified, Converter={StaticResource BoolToVisibility}}"
+                        IsEnabled="{Binding IsValid}"/>
+                <Button Content="Cancel" 
+                        Visibility="{Binding IsModified, Converter={StaticResource BoolToVisibility}}"/>
+            </StackPanel>
+        </Grid>
+        <Grid Grid.Row="1" Grid.Column="9" Grid.ColumnSpan="2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"></RowDefinition>
+                <RowDefinition Height="Auto"></RowDefinition>
+                <RowDefinition Height="Auto"></RowDefinition>
+            </Grid.RowDefinitions>
+         
+            <StackPanel VerticalAlignment="Top">
+                <TextBlock FontSize="10" Grid.Row="0" Grid.Column="0" Grid.RowSpan="2" FontWeight="Bold" Margin="10" Foreground="Green" TextWrapping="Wrap"
+                           HorizontalAlignment="Center">Bound From Class List "Employees List ViewModel "
+                </TextBlock>
+                <Grid Grid.Row="1" Grid.Column="0" DataContext="{StaticResource EmployeeListViewModelList}">
+                    <ListBox ItemsSource="{Binding EmployeeListViewModelCollection, IsAsync=True, UpdateSourceTrigger=Explicit}" SelectedItem="{Binding SelectedEmployeeViewModel}">
+                        <ListBox.ItemTemplate>
+                            <DataTemplate>
+                                <CheckBox IsChecked="{Binding IsChecked, UpdateSourceTrigger=Explicit}">
+                                    <CheckBox.Content>
+                                        <StackPanel Orientation="Horizontal">
+                                            <TextBlock Text="{Binding EmpName, IsAsync=True}" Visibility="Visible" />
+                                        </StackPanel>
+                                    </CheckBox.Content>
+                                </CheckBox>
+                            </DataTemplate>
+                        </ListBox.ItemTemplate>
+                    </ListBox>
+                </Grid>
+                <Grid Grid.Row="2" Grid.Column="2">
+                    <DataGrid Grid.Row="1" Grid.Column="1" Margin="5,5,5,5"
+                              Name="dataGrid" 
+                              AutoGenerateColumns="false" 
+                              ItemsSource="{Binding Path=Records}" 
+                    >
+                        <DataGridTemplateColumn>
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <Border Padding="3" Background="Purple">
+                                        <TextBox Text="{Binding Path=FirstName}" />
+                                    </Border>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                    </DataGrid>
+                </Grid>
+            </StackPanel>
+           
 
-</Grid>
-
-
+        </Grid>
     </Grid>
 </Window>
 

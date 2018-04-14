@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using Binding.Different.Ways.Abstract;
 using Binding.Different.Ways.Model;
 
@@ -15,19 +16,19 @@ namespace Binding.Different.Ways.ViewModel
             {
                 if (value != this._selectedEmployeeObject)
                     _selectedEmployeeObject = value;
-                this.SetPropertyChanged("SelectedEmployeeObject");
+                this.OnPropertyChanged("SelectedEmployeeObject");
             }
         }
 
-        private ObservableCollection<Employee> _employeeObjectCollection;
-        public ObservableCollection<Employee> EmployeeObjectCollection
+        private BindingList<Employee> _employeeObjectCollection;
+        public BindingList<Employee> EmployeeObjectCollection
         {
             get { return _employeeObjectCollection; }
             set
             {
                 if (value != this._employeeObjectCollection)
                     _employeeObjectCollection = value;
-                this.SetPropertyChanged("EmployeeObjectCollection");
+                this.OnPropertyChanged("EmployeeObjectCollection");
             }
         }
 
@@ -39,7 +40,7 @@ namespace Binding.Different.Ways.ViewModel
             {
                 if (value != this._inventoryObjectCollection)
                     _inventoryObjectCollection = value;
-                this.SetPropertyChanged("InventoryObjectCollection");
+                this.OnPropertyChanged("InventoryObjectCollection");
             }
         }
         public EmployeeList()
@@ -50,7 +51,7 @@ namespace Binding.Different.Ways.ViewModel
 
         private void SetFiles()
         {
-            this._employeeObjectCollection = new ObservableCollection<Employee>();
+            this._employeeObjectCollection = new BindingList<Employee>();
             
             this._employeeObjectCollection.Add(new Employee
             {

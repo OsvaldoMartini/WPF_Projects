@@ -22,7 +22,7 @@ namespace Binding.Different.Ways.ViewModel
             {
                 if (value != this._selectedFileObjects)
                     _selectedFileObjects = value;
-                this.SetPropertyChanged("SelectedFileObject");
+                this.OnPropertyChanged("SelectedFileObject");
             }
         }
      
@@ -34,7 +34,7 @@ namespace Binding.Different.Ways.ViewModel
             {
                 if (value != this._fileObjectCollection)
                     _fileObjectCollection = value;
-                this.SetPropertyChanged("FileObjectCollection");
+                this.OnPropertyChanged("FileObjectCollection");
             }
         }
      
@@ -47,7 +47,7 @@ namespace Binding.Different.Ways.ViewModel
             {
                 if (value != this._path)
                     _path = value;
-                this.SetPropertyChanged("Path");
+                this.OnPropertyChanged("Path");
             }
         }
      
