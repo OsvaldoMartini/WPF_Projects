@@ -7,7 +7,8 @@ using NUnit.Framework;
 using Binding.Tests.InvoiceDomains;
 using System.Diagnostics;
 using System.Linq;
-using BindingTests.HelperTests;
+using BindingTests.HelperAssert;
+using BindingTests.PersonDomain;
 
 namespace Binding.Tests
 {
@@ -78,32 +79,24 @@ namespace Binding.Tests
             // Arrange
             var expected = new List<InvoiceItem>
             {
-                new InvoiceItem (1, "IPad", 20.00d),
+                new InvoiceItem (5, "IPad", 20.00d),
                 new InvoiceItem (2, "Stand for IPad", 15.00d),
                 new InvoiceItem (3,"LapTop Asus", 505.00d)
-            }.ToArray();
+            }.ToList();
           
             // Act 
             Invoice invoice = new InvoiceBuilder().WithInvoiceLines();
-            var result = invoice.GetInvoiceItems();
-            var lines = result.InvoiceList;
+            var resultTypeTest = invoice.GetInvoiceItems();
+            var resultValues = resultTypeTest.InvoiceList.ToList();
             // Assert
 
 
-            Person person1 = new Person("John","A");
-            Person person2 = new Person("John","A");
-
-            Debug.WriteLine("Calling Equals:");
-            Debug.WriteLine(person1.Equals(person2));
-
-            Debug.WriteLine("\nCasting to an Object and calling Equals:");
-            Debug.WriteLine(((object)person1).Equals((object)person2));  
-
-
-            Assert.IsInstanceOf<InvoiceLines>( result );
+            Assert.IsInstanceOf<InvoiceLines>(resultTypeTest);
+            AssertHelper.HasEqualFieldValues(expected, resultValues);
+            
             //Assert.IsInstanceOf<List<InvoiceItem>>(lines);
 
-            Assert.That(expected, Is.EqualTo(lines));
+            //Assert.That(expected, Is.EqualTo(lines));
 
             //Assert.That("Hello", Is.TypeOf(typeof(string)));
             //Assert.That("Hello", Is.Not.TypeOf(typeof(int)));
@@ -135,23 +128,26 @@ namespace Binding.Tests
         }
         #endregion
 
-        public class Person
+
+        [Test]
+        // [ExpectedException(typeof(AssertFailedException))]
+        public void ShouldFailForDifferentClasses()
         {
-            private string personName;
-            public string address { get; private set; }
+            var actual = new PersonDomain("John", "A");
+            var expected = new PersonDomain("John", "A");
 
-            public Person(string name, string address)
-            {
-                this.personName = name;
-                this.address = address;
-            }
+            PersonDomain person1 = new PersonDomain("John", "A");
+            PersonDomain person2 = new PersonDomain("John", "A");
 
-            public override string ToString()
-            {
-                return this.personName + " " +this.address;
-            }
+            Debug.WriteLine("Calling Equals:");
+            Debug.WriteLine(person1.Equals(person2));
+
+            Debug.WriteLine("\nCasting to an Object and calling Equals:");
+            Debug.WriteLine(((object)person1).Equals((object)person2));  
+
+
+            AssertHelper.HasEqualFieldValues(expected, actual);
         }
-
 
     }
 }

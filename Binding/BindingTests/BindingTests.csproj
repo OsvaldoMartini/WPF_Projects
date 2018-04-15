@@ -59,6 +59,7 @@
   <ItemGroup>
     <Compile Include="EmployeeBuilders\EmployeeBuilder.cs" />
     <Compile Include="EmployeeDomains\Employee.cs" />
+    <Compile Include="HelperAssert\HasEqualFieldValues.cs" />
     <Compile Include="InvoiceBuilders\InvoiceBuilder.cs" />
     <Compile Include="InvoiceBuilders\InvoiceItemBuilder.cs" />
     <Compile Include="InvoiceBuilders\InvoiceLinesBuilder.cs" />
@@ -68,6 +69,7 @@
     <Compile Include="InvoiceDomains\InvoiceLines.cs" />
     <Compile Include="InvoiceDomains\PoundsShillingsPence.cs" />
     <Compile Include="InvoiceDomains\Recipient.cs" />
+    <Compile Include="PersonDomain\PersonDomain.cs" />
     <Compile Include="PhoneBuilders\AndroidPhoneBuilder.cs" />
     <Compile Include="PhoneBuilders\IPhoneBuilder.cs" />
     <Compile Include="PhoneBuilders\Manufacturer.cs" />
