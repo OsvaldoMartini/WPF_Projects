@@ -23,6 +23,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Binding.Basics.TwoWays", "B
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Binding.Different.Ways", "Binding_Different_Ways\Binding.Different.Ways.csproj", "{112F27E5-27D2-43D2-9B3C-BE8FE99750CB}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Binding.Tests", "Binding.Tests\Binding.Tests.csproj", "{D1F38A6D-3CF0-46BE-9071-5036D9CE813E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -69,6 +71,10 @@ Global
 		{112F27E5-27D2-43D2-9B3C-BE8FE99750CB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{112F27E5-27D2-43D2-9B3C-BE8FE99750CB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{112F27E5-27D2-43D2-9B3C-BE8FE99750CB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D1F38A6D-3CF0-46BE-9071-5036D9CE813E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D1F38A6D-3CF0-46BE-9071-5036D9CE813E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D1F38A6D-3CF0-46BE-9071-5036D9CE813E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D1F38A6D-3CF0-46BE-9071-5036D9CE813E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -581,7 +581,7 @@
                            HorizontalAlignment="Center">Bound From Class List "Employees List ViewModel "
                 </TextBlock>
                 <Grid Grid.Row="1" Grid.Column="0" DataContext="{StaticResource EmployeeListViewModelList}">
-                    <ListBox ItemsSource="{Binding EmployeeListViewModelCollection, IsAsync=True, UpdateSourceTrigger=Explicit}" SelectedItem="{Binding SelectedEmployeeViewModel}">
+                    <ListBox ItemsSource="{Binding EmployeeListViewModelCollection, IsAsync=True, UpdateSourceTrigger=PropertyChanged}" SelectedItem="{Binding SelectedEmployeeViewModel}">
                         <ListBox.ItemTemplate>
                             <DataTemplate>
                                 <CheckBox IsChecked="{Binding IsChecked, UpdateSourceTrigger=Explicit}">
