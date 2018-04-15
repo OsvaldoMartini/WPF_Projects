@@ -6,6 +6,8 @@ using Binding.Tests.PhoneBuilders;
 using NUnit.Framework;
 using Binding.Tests.InvoiceDomains;
 using System.Diagnostics;
+using System.Linq;
+using BindingTests.HelperTests;
 
 namespace Binding.Tests
 {
@@ -74,21 +76,32 @@ namespace Binding.Tests
         public void GetInvoiceObjct_MoreExpressive_Test()
         {
             // Arrange
-            List<InvoiceItem> expected = new List<InvoiceItem>
+            var expected = new List<InvoiceItem>
             {
                 new InvoiceItem (1, "IPad", 20.00d),
                 new InvoiceItem (2, "Stand for IPad", 15.00d),
                 new InvoiceItem (3,"LapTop Asus", 505.00d)
-            };
+            }.ToArray();
           
             // Act 
             Invoice invoice = new InvoiceBuilder().WithInvoiceLines();
-            InvoiceLines result = invoice.GetInvoiceItems();
+            var result = invoice.GetInvoiceItems();
             var lines = result.InvoiceList;
             // Assert
 
+
+            Person person1 = new Person("John","A");
+            Person person2 = new Person("John","A");
+
+            Debug.WriteLine("Calling Equals:");
+            Debug.WriteLine(person1.Equals(person2));
+
+            Debug.WriteLine("\nCasting to an Object and calling Equals:");
+            Debug.WriteLine(((object)person1).Equals((object)person2));  
+
+
             Assert.IsInstanceOf<InvoiceLines>( result );
-            Assert.IsInstanceOf<List<InvoiceItem>>(lines);
+            //Assert.IsInstanceOf<List<InvoiceItem>>(lines);
 
             Assert.That(expected, Is.EqualTo(lines));
 
@@ -121,6 +134,24 @@ namespace Binding.Tests
 
         }
         #endregion
+
+        public class Person
+        {
+            private string personName;
+            public string address { get; private set; }
+
+            public Person(string name, string address)
+            {
+                this.personName = name;
+                this.address = address;
+            }
+
+            public override string ToString()
+            {
+                return this.personName + " " +this.address;
+            }
+        }
+
 
     }
 }
