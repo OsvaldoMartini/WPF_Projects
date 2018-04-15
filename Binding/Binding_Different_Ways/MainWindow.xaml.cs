@@ -414,9 +414,6 @@ namespace Binding.Different.Ways
 
 
 
-
-
-
     public class MyStruct : INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler PropertyChanged;
