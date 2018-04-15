@@ -11,9 +11,9 @@ namespace Binding.Tests.Builders
         private DateTime birthdate = DateTime.Today;
         private string street = "street";
 
-        public EmployeeDomain Build()
+        public Employee Build()
         {
-            return new EmployeeDomain(id, firstname, lastname, birthdate, street);
+            return new Employee(id, firstname, lastname, birthdate, street);
         }
 
         public EmployeeBuilder WithFirstName(string firstname)
@@ -40,7 +40,7 @@ namespace Binding.Tests.Builders
             return this;
         }
 
-        public static implicit operator EmployeeDomain(EmployeeBuilder instance)
+        public static implicit operator Employee(EmployeeBuilder instance)
         {
             return instance.Build();
         }

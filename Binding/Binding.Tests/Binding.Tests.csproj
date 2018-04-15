@@ -13,7 +13,7 @@
     <AssemblyName>Binding.Tests</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
-    <NuGetPackageImportStamp>2753a2fa</NuGetPackageImportStamp>
+    <NuGetPackageImportStamp>03e1be83</NuGetPackageImportStamp>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -46,18 +46,28 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Builders\EmployeeBuilder.cs" />
+    <Compile Include="InvoiceBuilders\InvoiceItemBuilder.cs" />
+    <Compile Include="PhoneBuilders\IPhoneBuilder.cs" />
+    <Compile Include="EmployeeBuilders\EmployeeBuilder.cs" />
+    <Compile Include="InvoiceDomains\Invoice.cs" />
+    <Compile Include="InvoiceBuilders\InvoiceBuilder.cs" />
+    <Compile Include="InvoiceDomains\InvoiceItem.cs" />
+    <Compile Include="InvoiceBuilders\InvoiceLinesBuilder.cs" />
+    <Compile Include="InvoiceDomains\InvoiceLines.cs" />
+    <Compile Include="PhoneBuilders\AndroidPhoneBuilder.cs" />
+    <Compile Include="InvoiceDomains\PoundsShillingsPence.cs" />
+    <Compile Include="InvoiceDomains\Recipient.cs" />
+    <Compile Include="InvoiceBuilders\RecipientBuilder.cs" />
+    <Compile Include="EmployeeDomains\Employee.cs" />
+    <Compile Include="PhoneBuilders\Manufacturer.cs" />
+    <Compile Include="PhoneBuilders\WindowsPhoneBuilder.cs" />
+    <Compile Include="PhoneDomain\MobilePhone.cs" />
+    <Compile Include="PhoneDomain\PhoneParts.cs" />
     <Compile Include="Testing_Immutable_Domains.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\Binding_Different_Ways\Binding.Different.Ways.csproj">
-      <Project>{112f27e5-27d2-43d2-9b3c-be8fe99750cb}</Project>
-      <Name>Binding.Different.Ways</Name>
-    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <Service Include="{82A7F48D-3B50-4B1E-B82E-3ADA8210C358}" />

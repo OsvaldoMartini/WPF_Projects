@@ -1,8 +1,11 @@
 ﻿using System;
+using System.Collections.Generic;
 using Binding.Different.Ways.Model;
-using Binding.Different.Ways.ViewModel;
 using Binding.Tests.Builders;
+using Binding.Tests.PhoneBuilders;
 using NUnit.Framework;
+using Binding.Tests.InvoiceDomains;
+using System.Diagnostics;
 
 namespace Binding.Tests
 {
@@ -37,7 +40,7 @@ namespace Binding.Tests
         public void GetFullNameReturnsCombination_LessExpressive_Test()
         {
             // Arrange
-            EmployeeDomain emp = new EmployeeDomain(1, "Kenneth", "Truyers", new DateTime(1970, 1, 1), "My Street");
+            Employee emp = new Employee(1, "Kenneth", "Truyers", new DateTime(1970, 1, 1), "My Street");
             // Act 
             string fullname = emp.getFullName();
             // Assert 
@@ -49,7 +52,7 @@ namespace Binding.Tests
         public void GetFullNameReturnsCombination_MoreExpressive_Test()
         {
             // Arrange
-            EmployeeDomain emp = new EmployeeBuilder().WithFirstName("Kenneth").WithLastName("Truyers");
+            Employee emp = new EmployeeBuilder().WithFirstName("Kenneth").WithLastName("Truyers");
             // Act
             string fullname = emp.getFullName();
             // Assert 
@@ -59,14 +62,55 @@ namespace Binding.Tests
         public void GetAgeReturnsCorrectValue_MoreExpressive_Test()
         {
             // Arrange
-            EmployeeDomain emp = new EmployeeBuilder().WithBirthDate(new DateTime(1983, 1, 1));
+            Employee emp = new EmployeeBuilder().WithBirthDate(new DateTime(1983, 1, 1));
             // Act 
             int age = emp.getAge();
             // Assert
             Assert.That(age, Is.EqualTo(DateTime.Today.Year - 1983));
         }
 
+        #region Invoice Tests
+        [Test]
+        public void GetInvoiceObjct_MoreExpressive_Test()
+        {
+            // Arrange
+            Invoice invoice = new InvoiceBuilder().withInvoiceLines(new InvoiceLines(new List<InvoiceItem>()));
+            List<InvoiceItem> expected = new List<InvoiceItem>
+            {
+                new InvoiceItem (1, "IPad", 20.00d),
+                new InvoiceItem (2, "Stand for IPad", 15.00d),
+                new InvoiceItem (3,"LapTop Asus", 505.00d)
+            };
+          
+            // Act 
+            List<InvoiceItem> invoiceItems = invoice.lines.GetInvoceList();
+            // Assert
+            Assert.That(invoiceItems, Is.EqualTo(expected));
+        }
+        #endregion
 
+
+
+        #region Phone Builder Test
+        [Test]
+        public void MobilePhone_Android_BuilderPattern_Test()
+        {
+            // Arrange
+            Manufacturer newManufacturer = new Manufacturer();
+            IPhoneBuilder phoneBuilder = null; // Lets have the Builder class ready
+
+            // Creating an Android phone
+            phoneBuilder = new AndroidPhoneBuilder();
+            newManufacturer.Construct(phoneBuilder);
+            Debug.WriteLine("A new Phone built:\n\n{0}", phoneBuilder.Phone.ToString());
+
+            // Now let us create a Windows Phone
+            phoneBuilder = new WindowsPhoneBuilder();
+            newManufacturer.Construct(phoneBuilder);
+            Debug.WriteLine("A new Phone built:\n\n{0}", phoneBuilder.Phone.ToString());
+
+        }
+        #endregion
 
     }
 }
