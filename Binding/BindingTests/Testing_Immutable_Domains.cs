@@ -3,12 +3,13 @@ using System.Collections.Generic;
 using Binding.Different.Ways.Model;
 using Binding.Tests.Builders;
 using Binding.Tests.PhoneBuilders;
-using NUnit.Framework;
 using Binding.Tests.InvoiceDomains;
 using System.Diagnostics;
 using System.Linq;
 using BindingTests.HelperAssert;
 using BindingTests.PersonDomain;
+using NUnit.Framework;
+using DeepObj = NUnit.DeepObjectCompare.Is;
 
 namespace Binding.Tests
 {
@@ -79,7 +80,7 @@ namespace Binding.Tests
             // Arrange
             var expected = new List<InvoiceItem>
             {
-                new InvoiceItem (5, "IPad", 20.00d),
+                new InvoiceItem (1, "IPad", 20.00d),
                 new InvoiceItem (2, "Stand for IPad", 15.00d),
                 new InvoiceItem (3,"LapTop Asus", 505.00d)
             }.ToList();
@@ -92,7 +93,8 @@ namespace Binding.Tests
 
 
             Assert.IsInstanceOf<InvoiceLines>(resultTypeTest);
-            AssertHelper.HasEqualFieldValues(expected, resultValues);
+            Assert.That(expected, DeepObj.DeepEqualTo(resultValues));
+            //AssertHelper.HasEqualFieldValues(expected, resultValues);
             
             //Assert.IsInstanceOf<List<InvoiceItem>>(lines);
 
