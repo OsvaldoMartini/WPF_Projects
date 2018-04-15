@@ -117,6 +117,9 @@ Builder Pattern tests with Immutable Domains
 		
 		Reliability: 
 			Because our unit test is flexible towards changes, you won’t have to modify it often. 
-			In general, a unit test gets more reliable when it matures. To imagine this, you can compare the effect of a failing unit test that you just wrote over one that was written months ago. A recently written unit test that fails can have a lot of reasons (an error in the test, some code that is not written yet, etc.). On the other hand, a test that has been working for months but suddenly fails is more concerning and will most definitely indicate a problem with new code.
+			In general, a unit test gets more reliable when it matures. 
+			To imagine this, you can compare the effect of a failing unit test that you just wrote over one that was written months ago. 
+			A recently written unit test that fails can have a lot of reasons (an error in the test, some code that is not written yet, etc.). 
+			On the other hand, a test that has been working for months but suddenly fails is more concerning and will most definitely indicate a problem with new code.
 		
 		
