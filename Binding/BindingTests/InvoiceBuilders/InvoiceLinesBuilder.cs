@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using Binding.Tests.Builders;
 using Binding.Tests.InvoiceDomains;
 
 namespace Binding.Tests.InvoiceBuilders

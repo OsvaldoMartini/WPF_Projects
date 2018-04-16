@@ -7,7 +7,10 @@ using Binding.Tests.InvoiceDomains;
 using System.Diagnostics;
 using System.Linq;
 using BindingTests.HelperAssert;
+using BindingTests.LifeToursDomain;
 using BindingTests.PersonDomain;
+using BindingTests.Structs;
+using JetBrains.dotMemoryUnit;
 using NUnit.Framework;
 using DeepObj = NUnit.DeepObjectCompare.Is;
 
@@ -149,6 +152,39 @@ namespace Binding.Tests
 
 
             AssertHelper.HasEqualFieldValues(expected, actual);
+        }
+
+
+
+        [Test]
+        public void DotMemory_LifeTorus_IsAlive()
+        {
+            Dimensions dimensions = new Dimensions(32, 32);
+            LifeTorus lifeTorus = new LifeTorus(dimensions);
+
+            //lifeTorus.CopyTo();
+
+            // 1
+            dotMemory.Check(memory => //2
+                Assert.That(memory.GetObjects(where => where.Type.Is<LifeTorus>()).ObjectsCount, Is.EqualTo(0))); // 3
+
+            GC.KeepAlive(lifeTorus); // prevent objects from GC if this is implied by test logic
+        }
+
+
+        [Test]
+        public void DotMemory_Dimensions_IsAlive()
+        {
+            Dimensions dimensions = new Dimensions(32, 32);
+            //LifeTorus lifeTorus = new LifeTorus(dimensions);
+
+            //lifeTorus.CopyTo();
+
+            // 1
+            dotMemory.Check(memory => //2
+                Assert.That(memory.GetObjects(where => where.Type.Is<Dimensions>()).ObjectsCount, Is.EqualTo(0))); // 3
+
+            GC.KeepAlive(dimensions); // prevent objects from GC if this is implied by test logic
         }
 
     }

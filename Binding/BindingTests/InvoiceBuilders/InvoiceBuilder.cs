@@ -1,5 +1,4 @@
-﻿using System.Dynamic;
-using Binding.Tests.InvoiceBuilders;
+﻿using Binding.Tests.InvoiceBuilders;
 using Binding.Tests.InvoiceDomains;
 
 namespace Binding.Tests.Builders

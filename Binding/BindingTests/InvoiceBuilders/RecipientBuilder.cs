@@ -1,6 +1,4 @@
-﻿using System;
-using Binding.Tests.Builders;
-using Binding.Tests.InvoiceDomains;
+﻿using Binding.Tests.InvoiceDomains;
 
 namespace Binding.Tests.InvoiceBuilders
 {
