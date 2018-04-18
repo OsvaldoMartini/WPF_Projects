@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Reflection;
@@ -10,6 +11,7 @@ using System.Windows.Media.Imaging;
 using System.Xml;
 using System.Xml.Linq;
 using System.Xml.Serialization;
+using ProductMvvm.Foundation;
 using ProductMvvm.Model;
 
 namespace ProductMvvm.Util
@@ -73,6 +75,8 @@ namespace ProductMvvm.Util
             {
                 new ProductModel
                 {
+                    ID = Guid.NewGuid(),
+                    ProductId = 1,
                     CategoryName = "Category Descents",
                     Description = "Bla Bla Bla",
                     ModelName = "ModelName",
@@ -82,6 +86,8 @@ namespace ProductMvvm.Util
                 },
                 new ProductModel
                 {
+                    ID = Guid.NewGuid(),
+                    ProductId = 2,
                     CategoryName = "Category Vehicles",
                     Description = "Tom Tom Tom",
                     ModelName = "Toyota",
@@ -96,10 +102,18 @@ namespace ProductMvvm.Util
         }
 
 
-        public static List<T> CreateFile<T>(List<T> list, string fileName) 
+        public static List<T> CreateFile<T>(List<T> list, string fileName = "")
         {
-            string directory = Path.Combine(Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location), FilePath);
+            string directory =
+                Path.Combine(Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location),
+                    FilePath);
             Directory.CreateDirectory(directory); // no need to check if it exists
+
+            if (fileName == string.Empty)
+            {
+                Type objtype = typeof(T);
+                fileName = objtype.Name;
+            }
 
             string filePath = Path.Combine(directory, fileName);
             if (!File.Exists(filePath))
@@ -110,8 +124,8 @@ namespace ProductMvvm.Util
 
                 XDocument doc = new XDocument();
                 DBUtility.SerializeParams<T>(doc, list);
-                doc.Root.Name = fileName;
-                doc.Save(filePath +".xml");
+                doc.Root.Name = "ArrayOf" + fileName;
+                doc.Save(filePath + ".xml");
 
                 ////Creates Interelly XML File From Object
                 //DataContractSerializer serializer = new DataContractSerializer(typeof(List<T>));
@@ -121,23 +135,43 @@ namespace ProductMvvm.Util
                 //}
 
             }
-            
-            return list;
-            
-         }
 
-        public static bool UpdateByXML(ProductModel p, string xmlFilename)
+            return list;
+
+        }
+
+        public static bool UpdateByXML(ProductModel p , string xmlFilename)
         {
 
             XDocument xdoc = XDocument.Load(xmlFilename);
-            
-            IEnumerable<XElement> elemProduc =  
-                from el in xdoc.Descendants("ProductModel")  
-                where (string)el.Attribute("ProductId") == p.ProductId.ToString() 
-                select el;  
-            var items = from item in xdoc.Descendants("ProductModel")  
-                where item.Attribute("ID").Value == "2"  
-                select item;  
+
+            //IEnumerable<XElement> elemProduc =
+            //    from el in xdoc.Descendants("ProductModel")
+            //    where (string)el.Attribute("ProductId") == p.ProductId.ToString()
+            //    select el;
+
+            GenericPropertyFinder<ProductModel> objGenericPropertyFinder = new GenericPropertyFinder<ProductModel>();
+            objGenericPropertyFinder.PrintTModelPropertyAndValue(p);
+
+
+            //Type objtype = typeof(T);
+            //PropertyInfo prop = t.GetProperty("Items");
+            //PropertyInfo prop = objtype.GetProperty("ID");
+            //var items = from item in xdoc.Descendants(objtype.Name)
+            //            where item.Attribute("ID").Value == prop.GetValue(T)
+            //            select item;
+
+
+            //var items2 = from item in xdoc.Descendants("ArrayOf"+objtype.Name)
+            //    select item;
+
+            //var items3 = from item in xdoc.Descendants(objtype.Name)
+            //    select item;
+
+            //Debug.WriteLine(items);
+            //Debug.WriteLine(items2);
+            //Debug.WriteLine(items3);
+
             // Customers is a List<Customer>
             //XElement customersElement = new XElement("ProductModel",
             //    p.Select(c => new XElement("customer",
@@ -148,18 +182,10 @@ namespace ProductMvvm.Util
             //    new XAttribute("firstline", c.Address1),
             //    // etc
             //));
+          
 
+            
 
-            foreach (XElement item in items)  
-            {  
-                //item.SetAttributeValue(nameof(p.CategoryName),p.CategoryName);  
-                //item.SetAttributeValue(nameof(p.CategoryName),p.CategoryName);  
-                //item.SetAttributeValue(nameof(p.CategoryName),p.CategoryName);  
-                //item.SetAttributeValue(nameof(p.CategoryName),p.CategoryName);  
-                //item.SetAttributeValue(nameof(p.CategoryName),p.CategoryName);  
-            }  
-            
-            
             xdoc.Save(xmlFilename);
 
             return true;
@@ -248,13 +274,13 @@ namespace ProductMvvm.Util
 
                 System.Xml.XmlReader reader = xdoc.CreateReader();
 
-                result = (List<T>) serializer.Deserialize(reader);
+                result = (List<T>)serializer.Deserialize(reader);
                 reader.Close();
             }
             finally
             {
 
-            
+
             }
             return result;
 

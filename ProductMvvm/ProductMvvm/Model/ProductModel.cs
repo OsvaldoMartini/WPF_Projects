@@ -16,6 +16,7 @@ namespace ProductMvvm.Model
 {
     public class ProductModel
     {
+        public Guid ID { get; set; }
         public int ProductId { get; set; }
         public string ModelNumber { get; set; }
         public string ModelName { get; set; }
@@ -45,7 +46,7 @@ namespace ProductMvvm.Model
 
         public bool UpdateByXML()
         {
-            var filePath = String.Format("{0}{1}\\ProductModel", AppDomain.CurrentDomain.BaseDirectory,
+            var filePath = String.Format("{0}{1}\\ProductModel.xml", AppDomain.CurrentDomain.BaseDirectory,
                 DBUtility.FilePath);
 
             return DBUtility.UpdateByXML(this, filePath);
@@ -62,7 +63,9 @@ namespace ProductMvvm.Model
             List<ProductModel> list = null;
             if (this.checkFileFirst)
                 if (!File.Exists(filePath))
-                    list = DBUtility.CreateFile<ProductModel>(DBUtility.MockProductModel(), "ProductModel");
+                {
+                    list = DBUtility.CreateFile<ProductModel>(DBUtility.MockProductModel());
+                }
                 else
 
                     list = DBUtility.DeserializeParamsListOf<ProductModel>(filePath);
@@ -75,9 +78,10 @@ namespace ProductMvvm.Model
             return products;
         }
 
-        public ProductModel(int productId, string modelNumber, string modelName,
+        public ProductModel(Guid id,int productId, string modelNumber, string modelName,
             decimal unitCost, string description, string categoryName)
         {
+            ID = id;
             ProductId = productId;
             ModelNumber = modelNumber;
             ModelName = modelName;
@@ -88,6 +92,7 @@ namespace ProductMvvm.Model
 
         public ProductModel(Product p)
         {
+            ID = p._ID;
             ProductId = p._ProductId;
             ModelNumber = p.ModelNumber;
             ModelName = p.ModelName;
@@ -99,7 +104,7 @@ namespace ProductMvvm.Model
         public Product ProductModel2Product()
         {
             string unitCost = UnitCost.ToString();
-            return new Product(ProductId, ModelNumber, ModelName, unitCost, Description, CategoryName);
+            return new Product(ID,ProductId, ModelNumber, ModelName, unitCost, Description, CategoryName);
         } //ProductModel2Product()
 
 

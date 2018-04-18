@@ -113,6 +113,7 @@
     </Compile>
     <Compile Include="Controls\ProductObservableCollection.cs" />
     <Compile Include="Controls\ObservedCollection.cs" />
+    <Compile Include="Foundation\GenericPropertyFinder.cs" />
     <Compile Include="Model\CustomerModel.cs" />
     <Compile Include="Model\IDBUtility.cs" />
     <Compile Include="Model\ProductModel.cs" />

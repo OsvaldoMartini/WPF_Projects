@@ -19,7 +19,9 @@ namespace ProductMvvm.ViewModels
             if (PropertyChanged != null)
                 PropertyChanged(this, e);
         }
-
+        //For DB use only!
+        private Guid _id;
+        public Guid _ID { get { return _id; } }
         //For DB use only!
         private int _productId;
         public int _ProductId { get { return _productId; } }
@@ -65,9 +67,10 @@ namespace ProductMvvm.ViewModels
         {
         }
 
-        public Product(int productId, string modelNumber, string modelName,
+        public Product(Guid id, int productId, string modelNumber, string modelName,
                        string unitCost, string description, string categoryName)
         {
+            this._id = id;
             this._productId = productId;
             ModelNumber = modelNumber;
             ModelName = modelName;
@@ -78,6 +81,7 @@ namespace ProductMvvm.ViewModels
 
         public void CopyProduct(Product p)
         {
+            this._id = p._ID;
             this._productId = p._ProductId;
             this.ModelNumber = p.ModelNumber;
             this.ModelName = p.ModelName;
