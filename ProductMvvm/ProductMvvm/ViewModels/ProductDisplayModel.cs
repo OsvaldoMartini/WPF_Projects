@@ -62,7 +62,7 @@ namespace ProductMvvm.ViewModels
         private RelayCommand updateCommand;
         public ICommand UpdateCommand
         {
-            get { return updateCommand ?? (updateCommand = new RelayCommand(() => UpdateProduct(), ()=>isSelected)); }
+            get { return updateCommand ?? (updateCommand = new RelayCommand(() => UpdateProductByXML(), () => isSelected)); }
         }
 
         private void UpdateProduct()
@@ -73,7 +73,7 @@ namespace ProductMvvm.ViewModels
                     stat.Status = App.StoreDB.errorMessage;
                     return;
                 }
-                App.Messenger.NotifyColleagues("UpdateProductByXML", DisplayedProduct);
+                App.Messenger.NotifyColleagues("UpdateProduct", DisplayedProduct);
         } //UpdateProduct()
 
         private void UpdateProductByXML()

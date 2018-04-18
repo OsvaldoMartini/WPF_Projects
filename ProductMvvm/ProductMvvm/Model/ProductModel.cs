@@ -5,6 +5,7 @@ using System.IO;
 using System.Linq;
 using System.Runtime.Serialization;
 using System.Text;
+using System.Windows;
 using System.Xml.Linq;
 using System.Xml.Serialization;
 using ProductMvvm.Controls;
@@ -13,7 +14,6 @@ using ProductMvvm.ViewModels;
 
 namespace ProductMvvm.Model
 {
-    [Serializable]
     public class ProductModel
     {
         public int ProductId { get; set; }
@@ -22,9 +22,6 @@ namespace ProductMvvm.Model
         public decimal UnitCost { get; set; }
         public string Description { get; set; }
         public string CategoryName { get; set; }
-
-        [XmlArray]
-        public List<ProductModel> _listProd;
 
         #region Builder Fields
         private bool checkFileFirst = true;
@@ -48,7 +45,7 @@ namespace ProductMvvm.Model
 
         public bool UpdateByXML()
         {
-            var filePath = String.Format("{0}{1}\\ProductModel.xml", AppDomain.CurrentDomain.BaseDirectory,
+            var filePath = String.Format("{0}{1}\\ProductModel", AppDomain.CurrentDomain.BaseDirectory,
                 DBUtility.FilePath);
 
             return DBUtility.UpdateByXML(this, filePath);
@@ -65,7 +62,7 @@ namespace ProductMvvm.Model
             List<ProductModel> list = null;
             if (this.checkFileFirst)
                 if (!File.Exists(filePath))
-                    list = DBUtility.CreateFile<ProductModel>(DBUtility.MockProductModel(), filePath);
+                    list = DBUtility.CreateFile<ProductModel>(DBUtility.MockProductModel(), "ProductModel");
                 else
 
                     list = DBUtility.DeserializeParamsListOf<ProductModel>(filePath);

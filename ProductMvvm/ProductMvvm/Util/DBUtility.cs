@@ -110,7 +110,8 @@ namespace ProductMvvm.Util
 
                 XDocument doc = new XDocument();
                 DBUtility.SerializeParams<T>(doc, list);
-                doc.Save(filePath);
+                doc.Root.Name = fileName;
+                doc.Save(filePath +".xml");
 
                 ////Creates Interelly XML File From Object
                 //DataContractSerializer serializer = new DataContractSerializer(typeof(List<T>));
@@ -137,7 +138,18 @@ namespace ProductMvvm.Util
             var items = from item in xdoc.Descendants("ProductModel")  
                 where item.Attribute("ID").Value == "2"  
                 select item;  
-  
+            // Customers is a List<Customer>
+            //XElement customersElement = new XElement("ProductModel",
+            //    p.Select(c => new XElement("customer",
+            //        new XAttribute("name", c.Name),
+            //        new XAttribute("lastSeen", c.LastOrder)
+            //new XElement("address",
+            //    new XAttribute("town", c.Town),
+            //    new XAttribute("firstline", c.Address1),
+            //    // etc
+            //));
+
+
             foreach (XElement item in items)  
             {  
                 //item.SetAttributeValue(nameof(p.CategoryName),p.CategoryName);  
