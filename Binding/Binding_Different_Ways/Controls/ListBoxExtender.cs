@@ -2,7 +2,7 @@
 using System.Windows;
 using System.Windows.Controls;
 
-namespace Binding.Different.Ways.Utils
+namespace Binding.Different.Ways.Controls
 {
     /// <summary>
     /// This class contains a few useful extenders for the ListBox

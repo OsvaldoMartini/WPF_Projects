@@ -187,5 +187,30 @@ namespace Binding.Tests
             GC.KeepAlive(dimensions); // prevent objects from GC if this is implied by test logic
         }
 
+        [Test]
+        public void Static_Always_Is_Called_First()
+        {
+            Test t = new Test();
+            int expected = 2;
+            int result = Test.TestNum;
+            Assert.AreEqual(expected, result);
+        }
+
+        delegate void Logger();
+
+        [Test]
+        public void Delegate_Call_ListLogger()
+        {
+
+            List<Logger> logger;// = new List<Logger>();
+
+            int i = 0;
+            for (; i < 100; i++)
+            {
+                logger = new List<Logger> {delegate { Debug.WriteLine(i); }};
+            }
+            
+        }
+
     }
 }

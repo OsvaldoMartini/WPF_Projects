@@ -5,8 +5,8 @@ using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
-using Binding.Different.Ways.Annotations;
 using Binding.Different.Ways.Model;
+using Binding.Different.Ways.Properties;
 
 namespace Binding.Different.Ways.ViewModel
 {

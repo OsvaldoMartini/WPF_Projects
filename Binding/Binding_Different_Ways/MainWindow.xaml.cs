@@ -7,11 +7,11 @@ using System.Text;
 using System.Windows;
 using System.Windows.Controls;
 using Binding.Different.Ways.Model;
-using Binding.Different.Ways.Utils;
 using Binding.Different.Ways.ViewModel;
 using Modules_ViewModel;
 using System.Diagnostics;
 using System.Linq;
+using Binding.Different.Ways.Controls;
 using MessageBox = System.Windows.MessageBox;
 
 namespace Binding.Different.Ways

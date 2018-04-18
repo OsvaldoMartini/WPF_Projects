@@ -84,6 +84,7 @@
     <Compile Include="InvoiceDomains\Recipient.cs" />
     <Compile Include="LifeToursDomain\LifeTorus.cs" />
     <Compile Include="PersonDomain\PersonDomain.cs" />
+    <Compile Include="PersonDomain\Test.cs" />
     <Compile Include="PhoneBuilders\AndroidPhoneBuilder.cs" />
     <Compile Include="PhoneBuilders\IPhoneBuilder.cs" />
     <Compile Include="PhoneBuilders\Manufacturer.cs" />

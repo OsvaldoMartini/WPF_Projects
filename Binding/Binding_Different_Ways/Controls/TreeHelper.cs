@@ -2,7 +2,7 @@
 using System.Windows;
 using System.Windows.Media;
 
-namespace Binding.Different.Ways.Utils
+namespace Binding.Different.Ways.Controls
 {
     /// <summary>
     /// Helper methods for UI-related tasks.

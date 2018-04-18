@@ -83,9 +83,9 @@
     <Compile Include="Builders\EmployeeListViewModelBuilder.cs" />
     <Compile Include="Model\EmployeeDomain.cs" />
     <Compile Include="Model\EmployeeModel.cs" />
-    <Compile Include="Utils\CustomBoundColumn.cs" />
+    <Compile Include="Controls\CustomBoundColumn.cs" />
     <Compile Include="Commands\ApplyChangesCommand.cs" />
-    <Compile Include="Utils\TreeHelper.cs" />
+    <Compile Include="Controls\TreeHelper.cs" />
     <Compile Include="ViewModel\EmployeeListViewModel.cs" />
     <Compile Include="ViewModel\EmployeeViewModel.cs" />
     <Compile Include="ViewModel\Record.cs" />
@@ -118,8 +118,8 @@
     <Compile Include="ViewModel\FileObject.cs" />
     <Compile Include="Model\ListOfStrings.cs" />
     <Compile Include="Properties\Annotations.cs" />
-    <Compile Include="Utils\ListBoxExtender.cs" />
-    <Compile Include="Utils\ObservedCollection.cs" />
+    <Compile Include="Controls\ListBoxExtender.cs" />
+    <Compile Include="Controls\ObservedCollection.cs" />
     <Compile Include="ViewModel\Property.cs" />
     <Compile Include="ViewModel\EmployeeDirectContent.cs" />
     <Compile Include="ViewModel\ListFilesPath.cs" />

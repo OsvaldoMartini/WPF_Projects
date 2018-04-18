@@ -1,0 +1,28 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2013
+VisualStudioVersion = 12.0.21005.1
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Domains_DLL", "WPF_Domains\Domains_DLL.csproj", "{4A7F9071-8F66-4EC5-9718-32B16413C40D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WPF_Presentation", "WPF_Presentation\WPF_Presentation.csproj", "{A9991745-E1B9-4064-8AF9-F77B42C95341}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{4A7F9071-8F66-4EC5-9718-32B16413C40D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4A7F9071-8F66-4EC5-9718-32B16413C40D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4A7F9071-8F66-4EC5-9718-32B16413C40D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4A7F9071-8F66-4EC5-9718-32B16413C40D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A9991745-E1B9-4064-8AF9-F77B42C95341}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A9991745-E1B9-4064-8AF9-F77B42C95341}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A9991745-E1B9-4064-8AF9-F77B42C95341}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A9991745-E1B9-4064-8AF9-F77B42C95341}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

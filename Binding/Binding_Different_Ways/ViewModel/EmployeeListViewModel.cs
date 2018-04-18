@@ -8,10 +8,9 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
-using Binding.Different.Ways.Annotations;
 using Binding.Different.Ways.Commands;
 using Binding.Different.Ways.Model;
-using Binding.Different.Ways.Utils;
+using Binding.Different.Ways.Properties;
 
 namespace Binding.Different.Ways.ViewModel
 {

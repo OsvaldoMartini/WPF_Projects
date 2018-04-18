@@ -2,7 +2,7 @@
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
 
-namespace Binding.Different.Ways.Utils
+namespace Binding.Different.Ways.Controls
 {
 public class ObservedCollection<T> {
     public readonly ObservableCollection<T> Source;

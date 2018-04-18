@@ -1,6 +1,6 @@
 ﻿    using System.ComponentModel;
     using System.Runtime.CompilerServices;
-    using Binding.Different.Ways.Annotations;
+    using Binding.Different.Ways.Properties;
 
 namespace Binding.Different.Ways.Abstract
 {
