@@ -10,51 +10,6 @@ namespace ProductMvvm.Model
     {
         public bool hasError = false;
         public string errorMessage;
-        /*
-                private string conString = Properties.Settings.Default.StoreDBConnString;
-         
-                public MyObservableCollection<Product> GetProducts()
-                {
-                    hasError = false;
-                    SqlConnection con = new SqlConnection(conString);
-                    SqlCommand cmd = new SqlCommand("GetProducts", con);
-                    cmd.CommandType = CommandType.StoredProcedure;
-
-                    MyObservableCollection<Product> products = new MyObservableCollection<Product>();
-                    try
-                    {
-                        con.Open();
-                        SqlDataReader reader = cmd.ExecuteReader();
-                        while (reader.Read())
-                        {
-                            //create a Product object for the row
-                            ProductModel productModel = new ProductModel(
-                                (int) reader["ProductId"],
-                                (string)reader["ModelNumber"],
-                                (string)reader["ModelName"],
-                                (decimal)reader["UnitCost"],
-                                GetStringOrNull(reader, "Description"),
-                                (String)reader["CategoryName"]);
-                            products.Add(productModel.ProductModel2Product());
-                        } //while
-                    } //try
-                    catch (SqlException ex)
-                    {
-                        errorMessage = "GetProducts SQL error, " + ex.Message;
-                        hasError = true;
-                    }
-                    catch (Exception ex)
-                    {
-                        errorMessage = "GetProducts error, " + ex.Message;
-                        hasError = true;
-                    }
-                    finally
-                    {
-                        con.Close();
-                    }
-                    return products;
-                } //GetProducts()
-        */
 
         public bool AddProduct(Product displayP)
         {
@@ -78,12 +33,12 @@ namespace ProductMvvm.Model
         }
 
 
-        public  bool DeleteProductByXML(int p)
+        public bool DeleteProductByXML(int p)
         {
             try
             {
                 return new ProductModel().WhitProductId(p).DeleteByXML();
-          
+
             }
             catch (Exception ex)
             {
@@ -144,6 +99,7 @@ namespace ProductMvvm.Model
                 errorMessage = "GetProducts() error, " + ex.Message;
                 hasError = true;
             }
+
             return products;
         }
 
@@ -155,19 +111,24 @@ namespace ProductMvvm.Model
             {
                 LinqDataContext dc = new LinqDataContext();
                 var query = from q in dc.LinqProducts
-                    select new ProductModel{
-                        ProductId = q.ProductID, ModelNumber = q.ModelNumber,
-                        ModelName=q.ModelName, UnitCost = (decimal)q.UnitCost,
-                        Description = q.Description, CategoryName = q.LinqCategory.CategoryName
+                    select new ProductModel
+                    {
+                        ProductId = q.ProductID,
+                        ModelNumber = q.ModelNumber,
+                        ModelName = q.ModelName,
+                        UnitCost = (decimal) q.UnitCost,
+                        Description = q.Description,
+                        CategoryName = q.LinqCategory.CategoryName
                     };
                 foreach (ProductModel sp in query)
                     products.Add(sp.ProductModel2Product());
             } //try
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 errorMessage = "GetProducts() error, " + ex.Message;
                 hasError = true;
             }
+
             return products;
         } //GetProducts()
 
@@ -184,6 +145,7 @@ namespace ProductMvvm.Model
                 errorMessage = "Update error, " + ex.Message;
                 hasError = true;
             }
+
             return (!hasError);
         } //UpdateProduct()
 
@@ -203,8 +165,9 @@ namespace ProductMvvm.Model
                 errorMessage = "Delete error, " + ex.Message;
                 hasError = true;
             }
+
             return !hasError;
-        }// DeleteProduct()
+        } // DeleteProduct()
 
 
 
@@ -348,7 +311,53 @@ namespace ProductMvvm.Model
 
 
 
-    } 
-    } //class StoreDB
+        /*
+                private string conString = Properties.Settings.Default.StoreDBConnString;
+         
+                public MyObservableCollection<Product> GetProducts()
+                {
+                    hasError = false;
+                    SqlConnection con = new SqlConnection(conString);
+                    SqlCommand cmd = new SqlCommand("GetProducts", con);
+                    cmd.CommandType = CommandType.StoredProcedure;
 
+                    MyObservableCollection<Product> products = new MyObservableCollection<Product>();
+                    try
+                    {
+                        con.Open();
+                        SqlDataReader reader = cmd.ExecuteReader();
+                        while (reader.Read())
+                        {
+                            //create a Product object for the row
+                            ProductModel productModel = new ProductModel(
+                                (int) reader["ProductId"],
+                                (string)reader["ModelNumber"],
+                                (string)reader["ModelName"],
+                                (decimal)reader["UnitCost"],
+                                GetStringOrNull(reader, "Description"),
+                                (String)reader["CategoryName"]);
+                            products.Add(productModel.ProductModel2Product());
+                        } //while
+                    } //try
+                    catch (SqlException ex)
+                    {
+                        errorMessage = "GetProducts SQL error, " + ex.Message;
+                        hasError = true;
+                    }
+                    catch (Exception ex)
+                    {
+                        errorMessage = "GetProducts error, " + ex.Message;
+                        hasError = true;
+                    }
+                    finally
+                    {
+                        con.Close();
+                    }
+                    return products;
+                } //GetProducts()
+        */
+
+    }//class StoreDB
+
+} 
 
