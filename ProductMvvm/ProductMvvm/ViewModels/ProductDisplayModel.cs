@@ -2,6 +2,7 @@
 using MvvmFoundation.Wpf;
 using System.ComponentModel;
 using System.Windows.Input;
+using ProductMvvm.Foundation;
 
 
 namespace ProductMvvm.ViewModels
@@ -32,7 +33,7 @@ namespace ProductMvvm.ViewModels
         private RelayCommand getProductsCommand;
         public ICommand GetProductsCommand
         {
-            get { return getProductsCommand ?? (getProductsCommand = new RelayCommand(() => GetProducts())); }
+            get { return getProductsCommand ?? (getProductsCommand = new RelayCommand(() => GetProductsByXML())); }
         }
 
         private void GetProducts()
@@ -40,9 +41,15 @@ namespace ProductMvvm.ViewModels
             isSelected = false;
             stat.NoError();
             DisplayedProduct = new Product();
-            App.Messenger.NotifyColleagues("GetProductsByXMLCommand");
+            App.Messenger.NotifyColleagues("GetProductsCommand");
         }
-
+        private void GetProductsByXML()
+        {
+            isSelected = false;
+            stat.NoError();
+            DisplayedProduct = new Product();
+            App.Messenger.NotifyColleagues("GetProductsByXML");
+        }
       
         private RelayCommand clearCommand;
         public ICommand ClearCommand

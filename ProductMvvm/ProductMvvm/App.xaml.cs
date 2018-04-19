@@ -1,6 +1,7 @@
 ﻿using System.Windows;
 using ProductMvvm.Model;
 using MvvmFoundation.Wpf;
+using ProductMvvm.Foundation;
 
 namespace ProductMvvm
 {

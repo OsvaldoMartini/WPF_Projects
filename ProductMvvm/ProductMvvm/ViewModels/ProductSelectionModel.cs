@@ -3,6 +3,7 @@ using System.Windows.Input;
 using System.ComponentModel;
 using MvvmFoundation.Wpf;
 using ProductMvvm.Controls;
+using ProductMvvm.Foundation;
 
 namespace ProductMvvm.ViewModels
 {
@@ -22,24 +23,23 @@ namespace ProductMvvm.ViewModels
             App.Messenger.Register("UpdateProduct",  (Action<Product>)(param => UpdateProduct(param)));
             App.Messenger.Register("DeleteProduct", (Action)(() => DeleteProduct()));
             App.Messenger.Register("AddProduct", (Action<Product>)(param => AddProduct(param)));
+            //By XML
+            App.Messenger.Register("GetProductsByXML", (Action)(() => GetProductsByXML()));
         }
 
 
         private void GetProducts()
         {
-            //DataItems = App.StoreDB.GetProducts();
-            DataItems = new ProductObservableCollection<Product>
-            {
-                new Product
-                {
-                    CategoryName = "Category Descents",
-                    Description = "Bla Bla Bla",
-                    ModelName = "ModelName",
-                    ModelNumber = "ABL1235",
-                    UnitCost = "105.00"
-                }
-            };
+            DataItems = App.StoreDB.GetProducts();
             
+            if (App.StoreDB.hasError)
+                App.Messenger.NotifyColleagues("SetStatus", App.StoreDB.errorMessage);
+        }
+
+        private void GetProductsByXML()
+        {
+            DataItems = App.StoreDB.GetProductsByXML();
+
             if (App.StoreDB.hasError)
                 App.Messenger.NotifyColleagues("SetStatus", App.StoreDB.errorMessage);
         }
