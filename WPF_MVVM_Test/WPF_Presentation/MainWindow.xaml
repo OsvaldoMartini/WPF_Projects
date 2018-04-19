@@ -4,11 +4,14 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:ignore="http://www.galasoft.ch/ignore"
+        xmlns:viewModel="clr-namespace:Domains_DLL.ViewModel;assembly=Domains_DLL"
         mc:Ignorable="d ignore"
         Title="Europa - WPF CRUD Test"
-        Height="350" Width="525"
-        DataContext="{Binding MainViewModel, Source={StaticResource Locator}}">
-        <DockPanel LastChildFill="True">
+        Height="350" Width="525">
+    <Window.Resources>
+        <viewModel:ViewModelLocator x:Key="locator" />
+    </Window.Resources>
+    <DockPanel LastChildFill="True" DataContext="{Binding Source={StaticResource locator},  Path=ViewModel}">
 
         <ListBox DockPanel.Dock="Left" ItemsSource="{Binding EmployeeList}" DisplayMemberPath="Name" SelectedItem="{Binding SelectedEmployee}" Width="100" />
 

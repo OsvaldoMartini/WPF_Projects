@@ -6,9 +6,7 @@
              xmlns:viewModel="clr-namespace:Domains_DLL.ViewModel;assembly=Domains_DLL">
     <Application.Resources>
         <ResourceDictionary>
-         
-            <viewModel:ViewModelLocator x:Key="Locator" d:IsDataSource="True" xmlns:vm="clr-namespace:WPFDemo.ViewModel" />
-<ResourceDictionary.MergedDictionaries>
+            <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="Resources/GelButtonResourceDictionary.xaml"/>
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
