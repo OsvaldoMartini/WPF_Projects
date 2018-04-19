@@ -7,19 +7,6 @@
         Height="600" Width="880"
         WindowStartupLocation="CenterScreen">
     <Grid x:Name="BaseModalGrid">
-        <!--<Grid.Background>
-            <ImageBrush ImageSource="Images/BrushedLight.jpg" TileMode="Tile" 
-                        ViewportUnits="Absolute" Viewport="0,0,200,200">
-            </ImageBrush>
-        </Grid.Background>-->
-
-        <Grid.RowDefinitions>
-            <RowDefinition Height="3*"></RowDefinition>
-            <RowDefinition Height="Auto"></RowDefinition>
-            <RowDefinition Height="7*"></RowDefinition>
-        </Grid.RowDefinitions>
         <views:ProductSelectionView Grid.Row="0"/>
-        <GridSplitter Grid.Row="1" HorizontalAlignment="Stretch" VerticalAlignment="Bottom" ResizeBehavior="PreviousAndNext"
-                      Height="5"/>
     </Grid>
 </Window>

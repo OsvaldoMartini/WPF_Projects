@@ -3,30 +3,66 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:viewModels="clr-namespace:WPF_Europa_MVVM.ViewModels"
     xmlns:foundation="clr-namespace:WPF_Europa_MVVM.Foundation">
-
+    <UserControl.Resources>
+        <Style x:Key="DesignerItemStyle" TargetType="ContentControl" />
+    </UserControl.Resources>
     <UserControl.DataContext>
         <viewModels:ProductSelectionModel />
     </UserControl.DataContext>
+    <!--TextBox-->
+    <ContentControl Width="Auto"
+                    Height="Auto"
+                    Padding="2"
+                    Canvas.Left="360"
+                    Canvas.Top="60"
+                    Style="{StaticResource DesignerItemStyle}" Margin="196,0,274.6,-0.4">
+        <Grid>
+            <Border CornerRadius="5"
+                    IsHitTestVisible="False"
+                    BorderBrush="#E0E0E0"
+                    BorderThickness="0,1,0,0"
+                    Background="{DynamicResource FrameBackground}"/>
+            <Border BorderBrush="Black"
+                    BorderThickness="0,0,0,1"
+                    CornerRadius="5" />
+            <Border Background="WhiteSmoke" CornerRadius="5" Margin="5,5,5,25" IsHitTestVisible="False"/>
+            <Border BorderBrush="White" BorderThickness="0,0,1,1" CornerRadius="5" Margin="5,5,5,25"/>
+            <Border BorderBrush="Black" BorderThickness="1,1,0,0" CornerRadius="5" Margin="5,5,5,25">
 
-    <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"></RowDefinition>
-            <RowDefinition Height="*"></RowDefinition>
-        </Grid.RowDefinitions>
-        <ListBox Grid.Row="0" Margin="10" Background="LightSkyBlue"
-            ItemsSource="{Binding DataItems}" 
-            DisplayMemberPath="ModelName"
-            SelectedItem="{Binding SelectedUser}"
-            foundation:CommandBehavior.RoutedEventName="SelectionChanged"
-            foundation:CommandBehavior.TheCommandToRun="{Binding Path=ListBoxCommand}">
-        </ListBox>
-        <StackPanel  Grid.Row="1" HorizontalAlignment="Right" Orientation="Horizontal" Margin="5,2,10,10">
-            <Button Command="{Binding GetUsersCommand}" Margin="2,5,0,0"  Padding="5" Background="Black" Height="35" Width="70" 
-            >DB Refresh</Button>
-            <Button Margin="2,5,0,0"  Padding="2" Background="Black" Height="35" Width="50"
-                    Command="{Binding CloseAppCommand}">Close</Button>
-            <Button Margin="2,5,0,0"  Background="Black" Height="35" Width="50"
-                    Command="{Binding AddNewUserCommand}" Padding="2">Add User</Button>
-        </StackPanel>
-    </Grid>
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"></RowDefinition>
+                        <RowDefinition Height="Auto"></RowDefinition>
+                    </Grid.RowDefinitions>
+
+
+                    <Border Background="#90000000" Visibility="{Binding Visibility}">
+                        <Border BorderBrush="Black" BorderThickness="1" Background="AliceBlue" 
+                    CornerRadius="10,0,10,0" VerticalAlignment="Center"
+                    HorizontalAlignment="Center">
+                            <Border.BitmapEffect>
+                                <DropShadowBitmapEffect Color="Black" Opacity="0.5" Direction="270" ShadowDepth="0.7" />
+                            </Border.BitmapEffect>
+                            <ListBox Grid.Row="0" Margin="10" Background="LightSkyBlue"
+                                     ItemsSource="{Binding DataItems}" 
+                                     DisplayMemberPath="ModelName"
+                                     SelectedItem="{Binding SelectedUser}"
+                                     foundation:CommandBehavior.RoutedEventName="SelectionChanged"
+                                     foundation:CommandBehavior.TheCommandToRun="{Binding Path=ListBoxCommand}"/>
+
+                        </Border>
+                    </Border>
+                    <StackPanel  Grid.Row="1" HorizontalAlignment="Right" Orientation="Horizontal" Margin="5,2,10,10">
+                        <Button Command="{Binding GetUsersCommand}" Margin="2,5,0,0"  Padding="5" Height="35" Width="70" 
+                        >DB Refresh</Button>
+                        <Button Margin="2,5,0,0"  Padding="2" Height="35" Width="50"
+                                Command="{Binding CloseAppCommand}">Close</Button>
+                        <Button Margin="2,5,0,0"  Height="35" Width="60"
+                                Command="{Binding AddNewUserCommand}" Padding="2">Add User</Button>
+                    </StackPanel>
+                                        </Grid>
+            </Border>
+        </Grid>
+    </ContentControl>
+
 </UserControl>
