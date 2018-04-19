@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using NUnit.Framework;
 
 namespace BindingTests.HelperAssert
@@ -10,7 +11,7 @@ namespace BindingTests.HelperAssert
         public static void HasEqualFieldValues<T>(T expected, T actual)
         {
             var failures = new List<string>();
-            var fields = typeof(T).GetFields(System.Reflection.BindingFlags.Public | System.Reflection.BindingFlags.Instance);
+            var fields = typeof(T).GetFields(BindingFlags.Public | BindingFlags.Instance);
             foreach (var field in fields)
             {
                 var v1 = field.GetValue(expected);
@@ -24,6 +25,16 @@ namespace BindingTests.HelperAssert
             if (!fields.Any())
                 Assert.Fail("AssertHelper.HasEqualFieldValues failed. " + Environment.NewLine + string.Join(Environment.NewLine, "Fields Not Detected. Check the Types Of the Objects"));
 
+        }
+
+
+        public static void GetClassFields(Type t)
+        {
+            List<string> fieldNames = new List<string>(t.GetFields(BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance).Select(x => x.Name));
+            foreach (string name in fieldNames)
+            {
+                Console.WriteLine(name);
+            }       
         }
     }
 }

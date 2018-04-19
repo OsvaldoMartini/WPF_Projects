@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
@@ -7,6 +8,7 @@ using System.Reflection;
 using System.Runtime.Serialization;
 using System.Text;
 using System.Web.Hosting;
+using System.Windows.Documents;
 using System.Windows.Media.Imaging;
 using System.Xml;
 using System.Xml.Linq;
@@ -75,7 +77,7 @@ namespace ProductMvvm.Util
             {
                 new ProductModel
                 {
-                    ID = Guid.NewGuid(),
+                    Guid = Guid.NewGuid(),
                     ProductId = 1,
                     CategoryName = "Category Descents",
                     Description = "Bla Bla Bla",
@@ -86,7 +88,7 @@ namespace ProductMvvm.Util
                 },
                 new ProductModel
                 {
-                    ID = Guid.NewGuid(),
+                    Guid = Guid.NewGuid(),
                     ProductId = 2,
                     CategoryName = "Category Vehicles",
                     Description = "Tom Tom Tom",
@@ -125,6 +127,7 @@ namespace ProductMvvm.Util
                 XDocument doc = new XDocument();
                 DBUtility.SerializeParams<T>(doc, list);
                 doc.Root.Name = "ArrayOf" + fileName;
+                // doc.Root.Namespace = 
                 doc.Save(filePath + ".xml");
 
                 ////Creates Interelly XML File From Object
@@ -140,70 +143,109 @@ namespace ProductMvvm.Util
 
         }
 
-        public static bool UpdateByXML(ProductModel p , string xmlFilename)
+        public static bool AddByXML(ProductModel p, string xmlFilename)
         {
 
             XDocument xdoc = XDocument.Load(xmlFilename);
 
-            //IEnumerable<XElement> elemProduc =
-            //    from el in xdoc.Descendants("ProductModel")
-            //    where (string)el.Attribute("ProductId") == p.ProductId.ToString()
-            //    select el;
+            if (p.ProductId <= 0)
+                p.ProductId = xdoc.Root.Elements().Count()+1;
+            p.Guid = Guid.NewGuid();
 
             GenericPropertyFinder<ProductModel> objGenericPropertyFinder = new GenericPropertyFinder<ProductModel>();
             objGenericPropertyFinder.PrintTModelPropertyAndValue(p);
+            var lstDic = objGenericPropertyFinder.ReturTModelPropertyAndValue(p);
+
+            XElement ele = new XElement("ProductModel", null);
+
+            foreach (var item in lstDic)
+            {
+                var valueOf = (from x in lstDic
+                    where x.Key.Contains(item.Key)
+                    select x.Value).FirstOrDefault();
+
+                ele.SetElementValue(item.Key, valueOf);
+                //item.SetAttributeValue(item.Name, valueOf);
+            }
+
+            xdoc.Root.Add(ele);
 
 
-            //Type objtype = typeof(T);
-            //PropertyInfo prop = t.GetProperty("Items");
-            //PropertyInfo prop = objtype.GetProperty("ID");
-            //var items = from item in xdoc.Descendants(objtype.Name)
-            //            where item.Attribute("ID").Value == prop.GetValue(T)
-            //            select item;
-
-
-            //var items2 = from item in xdoc.Descendants("ArrayOf"+objtype.Name)
-            //    select item;
-
-            //var items3 = from item in xdoc.Descendants(objtype.Name)
-            //    select item;
-
-            //Debug.WriteLine(items);
-            //Debug.WriteLine(items2);
-            //Debug.WriteLine(items3);
-
-            // Customers is a List<Customer>
-            //XElement customersElement = new XElement("ProductModel",
-            //    p.Select(c => new XElement("customer",
-            //        new XAttribute("name", c.Name),
-            //        new XAttribute("lastSeen", c.LastOrder)
-            //new XElement("address",
-            //    new XAttribute("town", c.Town),
-            //    new XAttribute("firstline", c.Address1),
-            //    // etc
-            //));
-          
-
-            
 
             xdoc.Save(xmlFilename);
 
             return true;
 
-            //var query = from q in xdoc.Elements()
-            //            select new ProductModel
-            //            {
-            //                ProductId = p.ProductId,
-            //                ModelNumber = q.ModelNumber,
-            //                ModelName = q.ModelName,
-            //                UnitCost = (decimal)q.UnitCost,
-            //                Description = q.Description,
-            //                CategoryName = q.LinqCategory.CategoryName
-            //            };
+        }
+
+        public static bool DeleteByXML(int p, string xmlFilename)
+        {
+            XDocument xdoc = XDocument.Load(xmlFilename);
+            xdoc.Element("ArrayOfProductModel")
+                .Elements("ProductModel")
+                .Where(x => (string)x.Element("ProductId") == p.ToString())
+                .Remove();
+            xdoc.Save(xmlFilename);
+
+            //var settings = new XmlWriterSettings
+            //{
+            //    OmitXmlDeclaration = true
+            //};
+            //using (var stream = File.Create(xmlFilename))
+            //{
+            //    using (var writer = XmlWriter.Create(stream, settings))
+            //    {
+            //        xdoc.Save(writer);
+            //    }
+            //}
+            
+            return true;
+        }
 
 
+        public static bool UpdateByXML(ProductModel p, string xmlFilename)
+        {
+
+            GenericPropertyFinder<ProductModel> objGenericPropertyFinder = new GenericPropertyFinder<ProductModel>();
+            objGenericPropertyFinder.PrintTModelPropertyAndValue(p);
+            var lstDic = objGenericPropertyFinder.ReturTModelPropertyAndValue(p);
+
+            XDocument xdoc = XDocument.Load(xmlFilename);
+            var elements = xdoc.Element("ArrayOfProductModel").Elements();
+
+            var valueProdID = (from x in lstDic
+                               where x.Key.Contains("Guid")
+                               select x.Value).FirstOrDefault();
+
+            foreach (var child in elements)
+            {
+                var elmId = child.Element("Guid");
+                if (elmId.Value == valueProdID)
+                {
+                    foreach (var item in child.Elements())
+                    {
+                        var valueOf = (from x in lstDic
+                                       where x.Key.Contains(item.Name.ToString())
+                                       select x.Value).FirstOrDefault();
+                        if (valueOf != null)
+                            item.SetValue(valueOf);
+                    }
+                }
+                else
+                {
+                    continue;
+                }
+
+
+            }
+
+            xdoc.Save(xmlFilename);
+
+            return true;
 
         }
+
+
 
         public static Object ObjectToXML(string xml, Type objectType)
         {
@@ -316,7 +358,6 @@ namespace ProductMvvm.Util
             }
             return returnObject;
         }
-
 
 
     }

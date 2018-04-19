@@ -78,6 +78,39 @@ namespace ProductMvvm.Model
         }
 
 
+        public  bool DeleteProductByXML(int p)
+        {
+            try
+            {
+                return new ProductModel().WhitProductId(p).DeleteByXML();
+          
+            }
+            catch (Exception ex)
+            {
+                errorMessage = "Update error, " + ex.Message;
+                hasError = true;
+            }
+
+            return (!hasError);
+        }
+
+
+        public bool AddProductByXML(Product DisplayedProduct)
+        {
+            try
+            {
+                return new ProductModel(DisplayedProduct).AddByXML();
+
+            }
+            catch (Exception ex)
+            {
+                errorMessage = "Update error, " + ex.Message;
+                hasError = true;
+            }
+
+            return (!hasError);
+        }
+
         public bool UpdateProductByXML(Product displayP)
         {
 
@@ -103,7 +136,7 @@ namespace ProductMvvm.Model
             try
             {
                 //True: Check if File Exist
-                products = new ProductModel().WhiteCheckFileFirst(true);
+                products = new ProductModel().WhitCheckFileFirst(true);
 
             } //try
             catch (Exception ex)
@@ -153,8 +186,6 @@ namespace ProductMvvm.Model
             }
             return (!hasError);
         } //UpdateProduct()
-
-
 
 
 
@@ -313,9 +344,11 @@ namespace ProductMvvm.Model
             }
             return !hasError;
         } //AddProduct()
- */ 
-    
-        } //AddProduct()
+ */
+
+
+
+    } 
     } //class StoreDB
 
 

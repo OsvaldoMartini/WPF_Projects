@@ -148,7 +148,9 @@ namespace Binding.Tests
             Debug.WriteLine(person1.Equals(person2));
 
             Debug.WriteLine("\nCasting to an Object and calling Equals:");
-            Debug.WriteLine(((object)person1).Equals((object)person2));  
+            Debug.WriteLine(((object)person1).Equals((object)person2));
+
+            AssertHelper.GetClassFields(typeof(PersonDomain));
 
 
             AssertHelper.HasEqualFieldValues(expected, actual);

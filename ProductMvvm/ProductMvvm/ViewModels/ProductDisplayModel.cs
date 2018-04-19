@@ -90,8 +90,19 @@ namespace ProductMvvm.ViewModels
         private RelayCommand deleteCommand;
         public ICommand DeleteCommand
         {
-            get { return deleteCommand ?? (deleteCommand = new RelayCommand(() => DeleteProduct(), () => isSelected)); }
+            get { return deleteCommand ?? (deleteCommand = new RelayCommand(() => DeleteProductByXML(), () => isSelected)); }
         }
+
+        private void DeleteProductByXML()
+        {
+            if (!App.StoreDB.DeleteProductByXML(DisplayedProduct._ProductId))
+            {
+                stat.Status = App.StoreDB.errorMessage;
+                return;
+            }
+            isSelected = false;
+            App.Messenger.NotifyColleagues("DeleteProduct");
+        } //DeleteProduct
 
 
         private void DeleteProduct()
@@ -109,9 +120,20 @@ namespace ProductMvvm.ViewModels
         private RelayCommand addCommand;
         public ICommand AddCommand
         {
-            get { return addCommand ?? (addCommand = new RelayCommand(() => AddProduct(), () => !isSelected)); }
+            get { return addCommand ?? (addCommand = new RelayCommand(() => AddProductByXML(), () => !isSelected)); }
         }
 
+
+        private void AddProductByXML()
+        {
+            if (!stat.ChkProductForAdd(DisplayedProduct)) return;
+            if (!App.StoreDB.AddProductByXML(DisplayedProduct))
+            {
+                stat.Status = App.StoreDB.errorMessage;
+                return;
+            }
+            App.Messenger.NotifyColleagues("AddProduct", DisplayedProduct);
+        } //AddProduct()
 
         private void AddProduct()
         {

@@ -16,7 +16,7 @@ namespace ProductMvvm.Model
 {
     public class ProductModel
     {
-        public Guid ID { get; set; }
+        public Guid Guid { get; set; }
         public int ProductId { get; set; }
         public string ModelNumber { get; set; }
         public string ModelName { get; set; }
@@ -28,11 +28,18 @@ namespace ProductMvvm.Model
         private bool checkFileFirst = true;
 
         private ProductObservableCollection<Product> _Product;
-        public ProductModel WhiteCheckFileFirst(bool checkFileFirst)
+        public ProductModel WhitCheckFileFirst(bool checkFileFirst)
         {
             this.checkFileFirst = checkFileFirst;
             return this;
         }
+
+        public ProductModel WhitProductId(int p)
+        {
+            this.ProductId = p;
+            return this;
+        }
+
         public static implicit operator ProductObservableCollection<Product>(ProductModel instance)
         {
             return instance.Build();
@@ -42,6 +49,23 @@ namespace ProductMvvm.Model
 
         public ProductModel()
         {
+        }
+        
+        public bool DeleteByXML()
+        {
+            var filePath = String.Format("{0}{1}\\ProductModel.xml", AppDomain.CurrentDomain.BaseDirectory,
+                DBUtility.FilePath);
+
+            return DBUtility.DeleteByXML(this.ProductId, filePath);
+        }
+
+        public bool AddByXML()
+        {
+            var filePath = String.Format("{0}{1}\\ProductModel.xml", AppDomain.CurrentDomain.BaseDirectory,
+                DBUtility.FilePath);
+
+            return DBUtility.AddByXML(this, filePath);
+
         }
 
         public bool UpdateByXML()
@@ -81,7 +105,7 @@ namespace ProductMvvm.Model
         public ProductModel(Guid id,int productId, string modelNumber, string modelName,
             decimal unitCost, string description, string categoryName)
         {
-            ID = id;
+            Guid = id;
             ProductId = productId;
             ModelNumber = modelNumber;
             ModelName = modelName;
@@ -92,7 +116,7 @@ namespace ProductMvvm.Model
 
         public ProductModel(Product p)
         {
-            ID = p._ID;
+            Guid = p._Guid;
             ProductId = p._ProductId;
             ModelNumber = p.ModelNumber;
             ModelName = p.ModelName;
@@ -104,7 +128,7 @@ namespace ProductMvvm.Model
         public Product ProductModel2Product()
         {
             string unitCost = UnitCost.ToString();
-            return new Product(ID,ProductId, ModelNumber, ModelName, unitCost, Description, CategoryName);
+            return new Product(Guid,ProductId, ModelNumber, ModelName, unitCost, Description, CategoryName);
         } //ProductModel2Product()
 
 
