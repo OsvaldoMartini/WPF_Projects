@@ -1,0 +1,35 @@
+﻿<Window x:Class="Mediator_GoodLoad.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:viewModels="clr-namespace:Mediator_GoodLoad.ViewModels"
+        xmlns:views="clr-namespace:Mediator_GoodLoad.Views"
+        Title="MainWindow" Height="350" Width="525">
+
+    <Window.DataContext>
+        <viewModels:MainWindowViewModel />
+    </Window.DataContext>
+    
+    <Grid>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="50" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+    <Grid Grid.Row="1">
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="250" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+
+        <views:ChildMenuView Grid.Column="0" />
+        <Frame Grid.Column="1" NavigationUIVisibility="Hidden" Content="{Binding SourcePage}"/>
+
+    </Grid>
+
+    <views:ParentMenuView Grid.Row="0" />
+        
+    </Grid>
+
+</Window>

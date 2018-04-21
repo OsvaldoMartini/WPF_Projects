@@ -1,0 +1,34 @@
+﻿<Window x:Class="LoadXML.ByAttachedP.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:models="clr-namespace:LoadXML.ByAttachedP.Models"
+        xmlns:controls="clr-namespace:LoadXML.ByAttachedP.Controls"
+        xmlns:helpers="clr-namespace:LoadXML.ByAttachedP.Helpers"
+        Title="MainWindow" Height="300" Width="650"
+        TextOptions.TextFormattingMode="Display">   <!-- please notice the effect of this on font fuzzyness --> 
+
+    <Window.DataContext>
+        <models:MainViewModel />
+    </Window.DataContext>
+
+    <Grid>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="50" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <controls:HorizontalMenu x:Name="ParentMenu" SelectedIndex="1"  Grid.Row="0" ItemsSource="{Binding Menu.Items}" SelectedItem="{Binding Menu.SelectedItem, Mode=TwoWay}" DisplayMemberPath="Name" />
+
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="250" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <controls:VerticalMenu x:Name="ChildMenu" SelectedIndex="2" Grid.Column="0" DataContext="{Binding ElementName=ParentMenu, Path=SelectedItem}" ItemsSource="{Binding Items}" SelectedItem="{Binding SelectedItem, Mode=TwoWay}" DisplayMemberPath="Name" />
+            <Frame Grid.Column="1" DataContext="{Binding ElementName=ChildMenu, Path=SelectedItem}" NavigationUIVisibility="Hidden" Source="{Binding SourcePage}" helpers:FrameDataContextInherit.Inherit="true"/>
+        </Grid>
+
+
+    </Grid>
+</Window>

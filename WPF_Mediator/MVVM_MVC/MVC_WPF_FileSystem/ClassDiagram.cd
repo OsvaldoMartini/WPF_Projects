@@ -1,0 +1,77 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Comment CommentText="Model">
+    <Position X="4.604" Y="1.229" Height="0.291" Width="0.773" />
+  </Comment>
+  <Comment CommentText="Controllers">
+    <Position X="4.531" Y="3.281" Height="0.291" Width="0.981" />
+  </Comment>
+  <Comment CommentText="Views">
+    <Position X="4.729" Y="4.854" Height="0.291" Width="0.773" />
+  </Comment>
+  <Class Name="MoreThanJustMVPPart2.Mediator" Collapsed="true">
+    <Position X="1.75" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAQAAAAAAAAAAAAADAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Mediator.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MoreThanJustMVPPart2.Controllers.BaseController" Collapsed="true">
+    <Position X="4.25" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAIAQAAAAAiAAAAAAAAAAAAAAAIAA=</HashCode>
+      <FileName>Controllers\BaseController.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="MoreThanJustMVPPart2.Views.DirectorySelectorView" Collapsed="true">
+    <Position X="2.75" Y="5.5" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Views\DirectorySelectorView.xaml.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MoreThanJustMVPPart2.Views.FileSelectorView" Collapsed="true">
+    <Position X="5.75" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Views\FileSelectorView.xaml.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MoreThanJustMVPPart2.Controllers.DirectorySelectorController" Collapsed="true">
+    <Position X="2.75" Y="3.75" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AAAACAAAAAAAAgAACAIAAAAAAAAAAAAAAAAAAAAAIAA=</HashCode>
+      <FileName>Controllers\DirectorySelectorController.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MoreThanJustMVPPart2.Controllers.DirectoryDisplayItem" Collapsed="true">
+    <Position X="0.5" Y="3.75" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AQAAAAAEAAAAAAIAAAAQAAQAAAAAAIAAAAAAAAAAAAI=</HashCode>
+      <FileName>Controllers\DirectorySelectorController.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MoreThanJustMVPPart2.Controllers.FileSelectorController" Collapsed="true">
+    <Position X="5.5" Y="3.75" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAgAAAAIAAAAAAAAAAAAAAAAAAAAAJAA=</HashCode>
+      <FileName>Controllers\FileSelectorController.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MoreThanJustMVPPart2.Model.FileSystemDataService" Collapsed="true">
+    <Position X="4" Y="0.5" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAgAAAAgAAAAAAAACAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Model\FileSystemDataService.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Interface Name="MoreThanJustMVPPart2.IColleague" Collapsed="true">
+    <Position X="1.75" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAACAAAAAAAAAAAAAAAIAA=</HashCode>
+      <FileName>IColleague.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

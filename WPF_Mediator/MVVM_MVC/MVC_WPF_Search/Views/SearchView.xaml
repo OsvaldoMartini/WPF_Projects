@@ -1,0 +1,22 @@
+﻿<UserControl x:Class="MVC_WPF_Search.Views.SearchView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="clr-namespace:MVC_WPF_Search">
+    <Border BorderBrush="Silver" BorderThickness="1" 
+            CornerRadius="5" Margin="5" Padding="5">
+        
+        <WrapPanel VerticalAlignment="Center">
+            
+            <TextBlock Text="Search by Name"/>
+            <TextBox MinWidth="100" Name="searchText" Margin="10,0,10,0"/>
+            
+            <!--Set the command property of the button to fire the SearchProductByName command and pass the textbox text as parameter-->
+            <Button Content="Search" Command="local:Commands.SearchProductByName" 
+                CommandParameter="{Binding ElementName=searchText, Path=Text}" />
+            
+            <!--Set the command property of the button to fire the GetAllProducts command-->
+            <Button Content="Refresh" Command="local:Commands.GetAllProducts" Margin="10,0,10,0" />
+        
+        </WrapPanel>
+    </Border>
+</UserControl>

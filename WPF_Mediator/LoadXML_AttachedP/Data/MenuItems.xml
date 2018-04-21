@@ -1,0 +1,55 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<MenuItems>
+  <MenuItem Id="1">
+    <Name>ParentMenuItem1</Name>
+    <MenuItem Id="1">
+      <Name>ChildMenuItem11</Name>
+      <SourcePage>pack://application:,,,/Pages/SamplePage.xaml</SourcePage>
+    </MenuItem>
+    <MenuItem Id="2">
+      <Name>ChildMenuItem12</Name>
+      <SourcePage>pack://application:,,,/Pages/SamplePage.xaml</SourcePage>
+    </MenuItem>
+  </MenuItem>
+  <MenuItem Id="2">
+    <Name>ParentMenuItem2</Name>
+    <MenuItem Id="1">
+      <Name>ChildMenuItem21</Name>
+      <SourcePage>pack://application:,,,/Pages/SamplePage.xaml</SourcePage>
+    </MenuItem>
+    <MenuItem Id="2">
+      <Name>ChildMenuItem22</Name>
+      <SourcePage>pack://application:,,,/Pages/SamplePage.xaml</SourcePage>
+    </MenuItem>
+    <MenuItem Id="3">
+      <Name>ChildMenuItem23</Name>
+      <SourcePage>pack://application:,,,/Pages/SamplePage.xaml</SourcePage>
+    </MenuItem>
+    <MenuItem Id="4">
+      <Name>ChildMenuItem24</Name>
+      <SourcePage>pack://application:,,,/Pages/SamplePage.xaml</SourcePage>
+    </MenuItem>
+    <MenuItem Id="5">
+      <Name>ChildMenuItem25</Name>
+      <SourcePage>pack://application:,,,/Pages/SamplePage.xaml</SourcePage>
+    </MenuItem>
+  </MenuItem>
+  <MenuItem Id="3">
+    <Name>ParentMenuItem3</Name>
+    <MenuItem Id="1">
+      <Name>ChildMenuItem31</Name>
+      <SourcePage>pack://application:,,,/Pages/SamplePage.xaml</SourcePage>
+    </MenuItem>
+    <MenuItem Id="2">
+      <Name>ChildMenuItem32</Name>
+      <SourcePage>pack://application:,,,/Pages/SamplePage.xaml</SourcePage>
+    </MenuItem>
+    <MenuItem Id="3">
+      <Name>ChildMenuItem33</Name>
+      <SourcePage>pack://application:,,,/Pages/SamplePage.xaml</SourcePage>
+    </MenuItem>
+  </MenuItem>
+  <MenuItem Id="4">
+    <Name>ParentMenuItem4</Name>
+  </MenuItem>
+</MenuItems>
