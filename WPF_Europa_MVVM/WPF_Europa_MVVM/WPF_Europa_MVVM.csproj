@@ -56,7 +56,7 @@
     <Compile Include="Foundation\ApplicationCloseCommand.cs" />
     <Compile Include="Foundation\GlobalServices.cs" />
     <Compile Include="Foundation\IModalService.cs" />
-    <Compile Include="Util\DBUtility.cs" />
+    <Compile Include="Model\DBUtility.cs" />
     <Compile Include="ViewModels\Product.cs" />
     <Compile Include="ViewModels\ProductDisplayModel.cs" />
     <Compile Include="ViewModels\ProductDisplayModelStatus.cs" />

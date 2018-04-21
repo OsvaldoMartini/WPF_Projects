@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.IO;
 using WPF_Europa_MVVM.Controls;
-using WPF_Europa_MVVM.Util;
 using WPF_Europa_MVVM.ViewModels;
 
 namespace WPF_Europa_MVVM.Model
