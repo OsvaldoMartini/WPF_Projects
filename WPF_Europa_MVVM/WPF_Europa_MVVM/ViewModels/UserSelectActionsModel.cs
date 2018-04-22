@@ -52,17 +52,6 @@ namespace WPF_Europa_MVVM.ViewModels
         }
         #endregion
 
-        #region Mouse Double Click Command
-        private RelayCommand _doubleClickCommand;
-        public ICommand DoubleClickCommand
-        {
-            get
-            {
-                return _doubleClickCommand ?? (_doubleClickCommand = new RelayCommand(() => SelectionHasChanged()));
-            }
-        }
-        #endregion
-
         private void GetUsers()
         {
             DataItems = App.StoreXML.GetUsers();

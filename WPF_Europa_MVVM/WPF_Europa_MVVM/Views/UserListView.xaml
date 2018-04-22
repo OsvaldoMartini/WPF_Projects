@@ -8,7 +8,7 @@
         <loc:DateTimeToShortDate x:Key="DateShortDate"/>
         <loc:BooleanToYesNoConverter x:Key="BooleanToYesNo"/>
         <loc:ToLowerCaseConverter x:Key="LowerCase"/>
-        
+
         <Style x:Key="DesignerItemStyle" TargetType="ContentControl" />
         <DataTemplate x:Key="RowDetailTemplate">
             <Grid x:Name="RowDetailGrid"
@@ -142,11 +142,13 @@
                                       CanUserAddRows="False" 
                                       CanUserDeleteRows="False" 
                                       IsReadOnly="True" 
-                                      EnableRowVirtualization="True"
-                                      foundation:CommandBehavior.RoutedEventName="SelectionChanged"
-                                      foundation:CommandBehavior.TheCommandToRun="{Binding Path=ListBoxCommand}">
+                                      EnableRowVirtualization="True">
 
-                               
+                                <DataGrid.InputBindings>
+                                    <MouseBinding MouseAction="LeftDoubleClick"
+                                                  Command="{Binding Path=MouseDoubleClickCommand}"
+                                                  CommandParameter="{Binding ElementName=GridUsers, Path=DataContext.ListBoxCommand}" />
+                                </DataGrid.InputBindings>
                                 <DataGrid.RowHeaderTemplate>
                                     <DataTemplate>
                                         <ToggleButton x:Name="RowHeaderToggleButton"
