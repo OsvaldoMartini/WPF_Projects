@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Reflection;
 using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Input;
 
 namespace WPF_Europa_MVVM.Foundation
@@ -13,8 +14,8 @@ namespace WPF_Europa_MVVM.Foundation
         /// TheCommandToRun : The actual ICommand to run
         /// </summary>
         public static readonly DependencyProperty TheCommandToRunProperty =
-            DependencyProperty.RegisterAttached("TheCommandToRun", 
-                typeof(ICommand), 
+            DependencyProperty.RegisterAttached("TheCommandToRun",
+                typeof(ICommand),
                 typeof(CommandBehavior),
                 new FrameworkPropertyMetadata((ICommand)null));
 
@@ -42,7 +43,7 @@ namespace WPF_Europa_MVVM.Foundation
         /// ICommand
         /// </summary>
         public static readonly DependencyProperty RoutedEventNameProperty =
-            DependencyProperty.RegisterAttached("RoutedEventName", typeof(String), 
+            DependencyProperty.RegisterAttached("RoutedEventName", typeof(String),
             typeof(CommandBehavior),
                 new FrameworkPropertyMetadata((String)String.Empty,
                     new PropertyChangedCallback(OnRoutedEventNameChanged)));
@@ -68,11 +69,11 @@ namespace WPF_Europa_MVVM.Foundation
         /// <see cref="EventHooker">EventHooker</see> class) that when
         /// run will run the associated ICommand
         /// </summary>
-        private static void OnRoutedEventNameChanged(DependencyObject d, 
+        private static void OnRoutedEventNameChanged(DependencyObject d,
             DependencyPropertyChangedEventArgs e)
         {
             String routedEvent = (String)e.NewValue;
-            
+
             //If the RoutedEvent string is not null, create a new
             //dynamically created EventHandler that when run will execute
             //the actual bound ICommand instance (usually in the ViewModel)
@@ -81,7 +82,7 @@ namespace WPF_Europa_MVVM.Foundation
                 EventHooker eventHooker = new EventHooker();
                 eventHooker.ObjectWithAttachedCommand = d;
 
-                EventInfo eventInfo = d.GetType().GetEvent(routedEvent, 
+                EventInfo eventInfo = d.GetType().GetEvent(routedEvent,
                     BindingFlags.Public | BindingFlags.Instance);
 
                 //Hook up Dynamically created event handler
@@ -90,6 +91,49 @@ namespace WPF_Europa_MVVM.Foundation
                     eventInfo.AddEventHandler(d,
                         eventHooker.GetNewEventHandlerToRunCommand(eventInfo));
                 }
+            }
+        }
+        #endregion
+
+        #region DoubleClickBehavior
+        public static DependencyProperty DoubleClickCommandProperty =
+            DependencyProperty.RegisterAttached("DoubleClickCommand", typeof(ICommand), typeof(CommandBehavior),
+                new PropertyMetadata(DoubleClick_PropertyChanged));
+
+        public static void SetDoubleClickCommand(UIElement element, ICommand value)
+        {
+            element.SetValue(DoubleClickCommandProperty, value);
+        }
+
+        public static ICommand GetDoubleClickCommand(UIElement element)
+        {
+            return (ICommand)element.GetValue(DoubleClickCommandProperty);
+        }
+
+        private static void DoubleClick_PropertyChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        {
+            var row = d as DataGridRow;
+            if (row == null) return;
+
+            if (e.NewValue != null)
+            {
+                row.AddHandler(DataGridRow.MouseDoubleClickEvent, new RoutedEventHandler(DataGrid_MouseDoubleClick));
+            }
+            else
+            {
+                row.RemoveHandler(DataGridRow.MouseDoubleClickEvent, new RoutedEventHandler(DataGrid_MouseDoubleClick));
+            }
+        }
+
+        private static void DataGrid_MouseDoubleClick(object sender, RoutedEventArgs e)
+        {
+            var row = sender as DataGridRow;
+
+            if (row != null)
+            {
+                var cmd = GetDoubleClickCommand(row);
+                if (cmd.CanExecute(row.Item))
+                    cmd.Execute(row.Item);
             }
         }
         #endregion
@@ -128,7 +172,7 @@ namespace WPF_Europa_MVVM.Foundation
             if (del == null)
                 del = Delegate.CreateDelegate(eventInfo.EventHandlerType, this,
                       GetType().GetMethod("OnEventRaised",
-                        BindingFlags.NonPublic | 
+                        BindingFlags.NonPublic |
                         BindingFlags.Instance));
 
             return del;
@@ -152,5 +196,7 @@ namespace WPF_Europa_MVVM.Foundation
         }
         #endregion
     }
+
+
 
 }

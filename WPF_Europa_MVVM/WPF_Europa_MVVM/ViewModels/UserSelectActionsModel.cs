@@ -12,11 +12,11 @@ namespace WPF_Europa_MVVM.ViewModels
 
         public UserSelectActionsModel()
         {
-            dataItems = new UserObservableCollection<UserVM>();
+            _dataItems = new UserObservableCollection<UserVM>();
 
             DataItems = App.StoreXML.GetUsers();
 
-            listBoxCommand = new RelayCommand(() => SelectionHasChanged());
+            _listBoxCommand = new RelayCommand(() => SelectionHasChanged());
             
             //Messengers / messages
             App.Messenger.Register("UserCleared", (Action)(() => SelectedUser = null));
@@ -25,6 +25,43 @@ namespace WPF_Europa_MVVM.ViewModels
             App.Messenger.Register("DeleteUser", (Action)(() => DeleteUser()));
             App.Messenger.Register("SaveUser", (Action<UserVM>)(param => SaveUser(param)));
         }
+
+
+        private readonly RelayCommand _listBoxCommand;
+        public ICommand ListBoxCommand
+        {
+            get { return _listBoxCommand; }
+        }
+
+        private void SelectionHasChanged()
+        {
+            Messenger messenger = App.Messenger;
+            if (_selectedUser != null)
+                Call_UserWindow();
+            messenger.NotifyColleagues("UserSelectionChanged", _selectedUser);
+        }
+
+        #region DoubleClick Custom Command
+        private RelayCommand _mouseDoubleClickCommand;
+        public ICommand MouseDoubleClickCommand
+        {
+            get
+            {
+                return _mouseDoubleClickCommand ?? (_mouseDoubleClickCommand = new RelayCommand(() => SelectionHasChanged()));
+            }
+        }
+        #endregion
+
+        #region Mouse Double Click Command
+        private RelayCommand _doubleClickCommand;
+        public ICommand DoubleClickCommand
+        {
+            get
+            {
+                return _doubleClickCommand ?? (_doubleClickCommand = new RelayCommand(() => SelectionHasChanged()));
+            }
+        }
+        #endregion
 
         private void GetUsers()
         {
@@ -37,21 +74,21 @@ namespace WPF_Europa_MVVM.ViewModels
 
         private void SaveUser(UserVM p)
         {
-            dataItems.Add(p);
+            _dataItems.Add(p);
         }
 
 
         private void UpdateUser(UserVM p)
         {
-            int index = dataItems.IndexOf(selectedUser);
-            dataItems.ReplaceItem(index, p);
+            int index = _dataItems.IndexOf(_selectedUser);
+            _dataItems.ReplaceItem(index, p);
             SelectedUser = p;
         }
 
 
         private void DeleteUser()
         {
-            dataItems.Remove(selectedUser);
+            _dataItems.Remove(_selectedUser);
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
@@ -61,29 +98,29 @@ namespace WPF_Europa_MVVM.ViewModels
                 PropertyChanged(this, e);
         }
 
-        private UserObservableCollection<UserVM> dataItems;
+        private UserObservableCollection<UserVM> _dataItems;
         public UserObservableCollection<UserVM> DataItems
         {
-            get { return dataItems; }
+            get { return _dataItems; }
             //If dataItems replaced by new collection, WPF must be told
-            set { dataItems = value; OnPropertyChanged(new PropertyChangedEventArgs("DataItems")); }
+            set { _dataItems = value; OnPropertyChanged(new PropertyChangedEventArgs("DataItems")); }
         }
 
-        private UserVM selectedUser;
+        private UserVM _selectedUser;
         public UserVM SelectedUser
         {
-            get { return selectedUser; }
-            set { selectedUser = value; OnPropertyChanged(new PropertyChangedEventArgs("SelectedUser")); }
+            get { return _selectedUser; }
+            set { _selectedUser = value; OnPropertyChanged(new PropertyChangedEventArgs("SelectedUser")); }
         }
         
 
-        private RelayCommand addNewUserCommand;
+        private RelayCommand _addNewUserCommand;
         public ICommand AddNewUserCommand
         {
-            get { return addNewUserCommand ?? (addNewUserCommand = new RelayCommand(() => AddNewUserDisplay())); }
+            get { return _addNewUserCommand ?? (_addNewUserCommand = new RelayCommand(() => Call_UserWindow())); }
         }
 
-        private void AddNewUserDisplay()
+        private void Call_UserWindow()
         {
             GlobalServices.ModalService.NavigateTo(new UserDisplay(), delegate(bool returnValue)
             {
@@ -92,26 +129,14 @@ namespace WPF_Europa_MVVM.ViewModels
             });
         }
 
-        private RelayCommand listBoxCommand;
-        public ICommand ListBoxCommand
-        {
-            get { return listBoxCommand; }
-        }
-
-        private void SelectionHasChanged()
-        {
-            Messenger messenger = App.Messenger;
-            messenger.NotifyColleagues("UserSelectionChanged", selectedUser);
-        }
-
-        
+       
 
         #region Close App
         //Two Differents Ways to closing the app
-        private RelayCommand closeAppCommand;
+        private RelayCommand _closeAppCommand;
         public ICommand CloseAppCommand
         {
-            get { return closeAppCommand ?? (closeAppCommand = new RelayCommand(() => CloseApp())); }
+            get { return _closeAppCommand ?? (_closeAppCommand = new RelayCommand(() => CloseApp())); }
         }
 
         private void CloseApp()

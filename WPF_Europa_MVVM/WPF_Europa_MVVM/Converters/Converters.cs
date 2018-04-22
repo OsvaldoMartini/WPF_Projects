@@ -45,24 +45,19 @@ namespace WPF_Europa_MVVM.Converters
         {
             if (value is bool)
             {
-                if ((bool)value == true)
-                    return "Yes";
-                else
-                    return "No";
+                return (bool) value ? "Yes" : "No";
             }
             return "No";
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
         {
-            if (value is bool)
-            {
-                if ((bool)value == true)
-                    return "Yes";
-                else
-                    return "No";
-            }
-            return "No";
+            var s = (string) value;
+            if (s.Equals("Yes",StringComparison.CurrentCultureIgnoreCase))
+                return true;
+            if (s.Equals("No", StringComparison.CurrentCultureIgnoreCase))
+                return false;
+            throw new Exception(string.Format("Cannot convert, unknown value {0}", value));
         }
     }
 
