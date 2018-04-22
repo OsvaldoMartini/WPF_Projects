@@ -5,9 +5,9 @@ using System.Text;
 
 namespace WPF_Europa_MVVM.Model
 {
-    public class Department
+    public class RoleModel
     {
         public int id { get; set; }
-        public string DeptoName { get; set; }
+        public string RoleName { get; set; }
     }
 }

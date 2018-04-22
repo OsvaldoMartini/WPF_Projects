@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using WPF_Europa_MVVM.Controls;
 using WPF_Europa_MVVM.ViewModels;
 
@@ -78,6 +79,45 @@ namespace WPF_Europa_MVVM.Model
 
             return products;
         }//GetUsersByXML
+
+
+        public List<RoleModel> GetRoles()
+        {
+            hasError = false;
+            List<RoleModel> roles= new List<RoleModel>();
+            try
+            {
+                //True: Check if File Exist
+                roles = DBUtility.MockRoles();
+
+            } //try
+            catch (Exception ex)
+            {
+                errorMessage = "GetRoles() error, " + ex.Message;
+                hasError = true;
+            }
+
+            return roles;
+        }//GetRoles
+
+        public List<DeptoModel> GetDepartments()
+        {
+            hasError = false;
+            List<DeptoModel> departments = new List<DeptoModel>();
+            try
+            {
+                departments = DBUtility.MockDepartment();
+
+            } //try
+            catch (Exception ex)
+            {
+                errorMessage = "GetDepartments() error, " + ex.Message;
+                hasError = true;
+            }
+
+            return departments;
+        }//GetDepartments
+
 
     }
 } 

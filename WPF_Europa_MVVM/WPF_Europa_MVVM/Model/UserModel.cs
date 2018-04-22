@@ -14,8 +14,8 @@ namespace WPF_Europa_MVVM.Model
         public string Forename { get; set; }
         public string Surname { get; set; }
         public DateTime StartDate { get; set; }
-        public Role Role { get; set; }
-        public Department Depto { get; set; }
+        public RoleModel _Role { get; set; }
+        public DeptoModel Depto { get; set; }
         public bool Leaver { get; set; }
         public DateTime? LeavingDate { get; set; }
 
@@ -85,8 +85,8 @@ namespace WPF_Europa_MVVM.Model
             if (this.checkFileFirst)
                 if (!File.Exists(filePath))
                 {
-                    DBUtility.CreateFile<Department>(DBUtility.MockDepartment());
-                    DBUtility.CreateFile<Role>(DBUtility.MockRoles());
+                    DBUtility.CreateFile<DeptoModel>(DBUtility.MockDepartment());
+                    DBUtility.CreateFile<RoleModel>(DBUtility.MockRoles());
                     list = DBUtility.CreateFile<UserModel>(DBUtility.MockUserModel());
                 }
                 else
@@ -102,7 +102,7 @@ namespace WPF_Europa_MVVM.Model
         }
 
         public UserModel(Guid id,int userId, string userName, string forename,
-            string surname, DateTime startDate, Role role, Department dpto, bool leaver, DateTime? leavingDate)
+            string surname, DateTime startDate, RoleModel role, DeptoModel dpto, bool leaver, DateTime? leavingDate)
         {
             Guid = id;
             UserId = userId;
@@ -110,7 +110,7 @@ namespace WPF_Europa_MVVM.Model
             Forename = forename;
             Surname = surname;
             StartDate = startDate;
-            Role = role;
+            _Role = role;
             Depto = Depto;
             Leaver = leaver;
             LeavingDate = leavingDate;
@@ -126,7 +126,7 @@ namespace WPF_Europa_MVVM.Model
             Forename = p.Forename;
             Surname = p.Surname;
             StartDate = p.StartDate;
-            Role = p.Role;
+            _Role = p._Role;
             Depto = p.Depto;
             Leaver = p.Leaver;
             LeavingDate = p.LeavingDate;
@@ -134,7 +134,7 @@ namespace WPF_Europa_MVVM.Model
 
         public UserVM UserModel2User()
         {
-            return new UserVM(Guid,UserId, UserName, Forename, Surname, StartDate,Role,Depto,Leaver,LeavingDate );
+            return new UserVM(Guid,UserId, UserName, Forename, Surname, StartDate,_Role,Depto,Leaver,LeavingDate );
         } //UserModel2User()
 
 

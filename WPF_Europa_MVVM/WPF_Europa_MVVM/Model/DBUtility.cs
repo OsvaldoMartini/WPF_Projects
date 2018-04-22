@@ -73,8 +73,8 @@ namespace WPF_Europa_MVVM.Model
                     Forename = "Joe",
                     Surname = "Bloggs",
                     StartDate = new DateTime(2014, 3, 1),
-                    Role = new Role {id = 1, RoleName = "Software Developer"},
-                    Depto = new Department {id = 1, DeptoName = "Software Developer"},
+                    _Role = new RoleModel {id = 1, RoleName = "Software Developer"},
+                    Depto = new DeptoModel {id = 1, DeptoName = "Software Developer"},
                     Leaver = false
                 },
                 new UserModel
@@ -85,8 +85,8 @@ namespace WPF_Europa_MVVM.Model
                     Forename = "John",
                     Surname = "Smith",
                     StartDate = new DateTime(2005, 11, 13),
-                    Role = new Role {id = 2, RoleName = "Development Manager"},
-                    Depto = new Department {id = 1, DeptoName = "Software Developer"},
+                    _Role = new RoleModel {id = 2, RoleName = "Development Manager"},
+                    Depto = new DeptoModel {id = 1, DeptoName = "Software Developer"},
                     Leaver = false
                 },
                 new UserModel
@@ -97,8 +97,8 @@ namespace WPF_Europa_MVVM.Model
                     Forename = "Dan",
                     Surname = "Vogle",
                     StartDate = new DateTime(2009, 05, 17),
-                    Role = new Role {id = 1, RoleName = "Software Developer"},
-                    Depto = new Department {id = 1, DeptoName = "Software Developer"},
+                    _Role = new RoleModel {id = 1, RoleName = "Software Developer"},
+                    Depto = new DeptoModel {id = 1, DeptoName = "Software Developer"},
                     Leaver = true,
                     LeavingDate = new DateTime(2011, 9, 23)
                 },
@@ -110,8 +110,8 @@ namespace WPF_Europa_MVVM.Model
                     Forename = "Jane",
                     Surname = "Doe",
                     StartDate = new DateTime(2001, 10, 11),
-                    Role = new Role {id = 3, RoleName = "IT Director"},
-                    Depto = new Department {id = 2, DeptoName = "Group"},
+                    _Role = new RoleModel {id = 3, RoleName = "IT Director"},
+                    Depto = new DeptoModel {id = 2, DeptoName = "Group"},
                     Leaver = false
                 }
             };
@@ -120,26 +120,26 @@ namespace WPF_Europa_MVVM.Model
 
         }
 
-        public static List<Role> MockRoles()
+        public static List<RoleModel> MockRoles()
         {
-            List<Role> roles = new List<Role>()
+            List<RoleModel> roles = new List<RoleModel>()
             {
-                    new Role {id = 1, RoleName = "Software Developer"},
-                    new Role {id = 2, RoleName = "Development Manager"},
-                    new Role {id = 3, RoleName = "IT Director"},
+                    new RoleModel {id = 1, RoleName = "Software Developer"},
+                    new RoleModel {id = 2, RoleName = "Development Manager"},
+                    new RoleModel {id = 3, RoleName = "IT Director"},
             };
 
             return roles;
 
         }
 
-        public static List<Department> MockDepartment()
+        public static List<DeptoModel> MockDepartment()
         {
-            List<Department> dptos = new List<Department>()
+            List<DeptoModel> dptos = new List<DeptoModel>()
             {
                 
-                new Department {id = 1, DeptoName = "Software Developer"},
-               new Department {id = 2, DeptoName = "Group"},
+                new DeptoModel {id = 1, DeptoName = "Software Developer"},
+               new DeptoModel {id = 2, DeptoName = "Group"},
             };
 
             return dptos;
@@ -224,7 +224,7 @@ namespace WPF_Europa_MVVM.Model
         public static bool DeleteByXML(int p, string xmlFilename)
         {
             XDocument xdoc = XDocument.Load(xmlFilename);
-            xdoc.Element("ArrayOfProductModel")
+            xdoc.Element("ArrayOfUserModel")
                 .Elements("UserModel")
                 .Where(x => (string)x.Element("UserId") == p.ToString())
                 .Remove();
@@ -254,7 +254,7 @@ namespace WPF_Europa_MVVM.Model
             var lstDic = objGenericPropertyFinder.ReturTModelPropertyAndValue(p);
 
             XDocument xdoc = XDocument.Load(xmlFilename);
-            var elements = xdoc.Element("ArrayOfProductModel").Elements();
+            var elements = xdoc.Element("ArrayOfUserModel").Elements();
 
             var valueProdID = (from x in lstDic
                                where x.Key.Contains("Guid")

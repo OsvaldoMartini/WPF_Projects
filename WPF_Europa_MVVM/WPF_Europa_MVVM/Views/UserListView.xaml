@@ -92,40 +92,7 @@
                             <Border.BitmapEffect>
                                 <DropShadowBitmapEffect Color="Black" Opacity="0.5" Direction="270" ShadowDepth="0.7" />
                             </Border.BitmapEffect>
-                            <!--<ListBox Grid.Row="0" Margin="10" Background="LightSkyBlue"
-                                     ItemsSource="{Binding DataItems}" 
-                                     DisplayMemberPath="Forename"
-                                     SelectedItem="{Binding SelectedUser}"
-                                     foundation:CommandBehavior.RoutedEventName="SelectionChanged"
-                                     foundation:CommandBehavior.TheCommandToRun="{Binding Path=ListBoxCommand}"/>-->
-                            <!--<ListView ItemsSource="{Binding DataItems}">
-                                <ListView.View>
-                                    <GridView AllowsColumnReorder="true"
-                                              ColumnHeaderToolTip="User Information">
-
-                                        <GridViewColumn DisplayMemberBinding=
-                                                        "{Binding Path=UserName}" 
-                                                        Header="User Name" Width="50"/>
-
-
-                                        <GridViewColumn DisplayMemberBinding=
-                                                        "{Binding Path=Forename}" 
-                                                        Header="Forename" Width="50"/>
-
-                                        <GridViewColumn DisplayMemberBinding=
-                                                        "{Binding Path=Surname}" 
-                                                        Header="Surname" Width="50"/>
-
-                                        <GridViewColumn DisplayMemberBinding=
-                                                        "{Binding Path=StartDate}" Width="50">
-                                            <GridViewColumnHeader>Start Date
-                                            </GridViewColumnHeader>
-                                        </GridViewColumn>
-
-                                    </GridView>
-
-                                </ListView.View>
-                            </ListView>-->
+                           
                             <DataGrid Name="GridUsers"
                                       Margin="10"
                                       HorizontalAlignment="Left"
@@ -170,11 +137,11 @@
                                                         Binding="{Binding StartDate, Converter={StaticResource DateShortDate}}"
                                                         Header="Start Date" />
                                     <DataGridTextColumn Width="120"
-                                                        Binding="{Binding Role}"
+                                                        Binding="{Binding _Role.RoleName}"
                                                         Header="Role" />
                                     <DataGridTextColumn Width="120"
-                                                        Binding="{Binding Depto}"
-                                                        Header="Departmen" />
+                                                        Binding="{Binding Depto.DeptoName}"
+                                                        Header="Department" />
                                     <DataGridTextColumn Width="120"
                                                         Binding="{Binding Leaver, Converter={StaticResource BooleanToYesNo}}"
                                                         Header="Leaver?" />

@@ -82,18 +82,29 @@
                                          Text="{Binding Path=UserToDisplay.StartDate, UpdateSourceTrigger=PropertyChanged}"></TextBox>
 
                                 <TextBlock Margin="7" Grid.Row="4" Grid.Column="0" >Role:</TextBlock>
-                                <TextBox Margin="5" Grid.Row="4" Grid.Column="1"  BorderBrush="{Binding Path=Stat.RoleBrush}" BorderThickness="1"
-                                         Text="{Binding Path=UserToDisplay.Role.RoleName, UpdateSourceTrigger=PropertyChanged}"></TextBox>
-
+                                <!--<TextBox Margin="5" Grid.Row="4" Grid.Column="1"  BorderBrush="{Binding Path=Stat.RoleBrush}" BorderThickness="1"
+                                         Text="{Binding Path=UserToDisplay.Role.RoleName, UpdateSourceTrigger=PropertyChanged}"></TextBox>-->
+                                <ComboBox Name="Roles" ItemsSource="{Binding Path=Roles, UpdateSourceTrigger=PropertyChanged}"
+                                          DisplayMemberPath="RoleName"
+                                          SelectedValuePath="id"
+                                          SelectedValue="{Binding Path=UserToDisplay._Role.id}"
+                                          Margin="5" Grid.Row="4" Grid.Column="1"  
+                                          BorderBrush="{Binding Path=Stat.RoleBrush}" BorderThickness="1">
+                                </ComboBox>
                                 <TextBlock Margin="7" Grid.Row="5" Grid.Column="0" >Department:</TextBlock>
-                                <TextBox Margin="5" Grid.Row="5" Grid.Column="1"  BorderBrush="{Binding Path=Stat.DeptoBrush}" BorderThickness="1"
-                                         Text="{Binding Path=UserToDisplay.Depto.DeptoName, UpdateSourceTrigger=PropertyChanged}"></TextBox>
+                                <ComboBox Name="Deptos" ItemsSource="{Binding Path=Departments, UpdateSourceTrigger=PropertyChanged}"
+                                          DisplayMemberPath="DeptoName"
+                                          SelectedValuePath="id"
+                                          SelectedValue="{Binding Path=UserToDisplay.Depto.id}"
+                                          Margin="5" Grid.Row="5" Grid.Column="1"  
+                                          BorderBrush="{Binding Path=Stat.DeptoBrush}" BorderThickness="1">
+                                </ComboBox>
 
                                 <TextBlock Margin="7" Grid.Row="6" Grid.Column="0" >Leaver:</TextBlock>
                                 <CheckBox Margin="5" Grid.Row="6" Grid.Column="1"   IsChecked="{Binding Path=UserToDisplay.Leaver, UpdateSourceTrigger=PropertyChanged}" BorderThickness="1"/>
 
 
-<TextBlock Grid.Row="7" Margin="7" Grid.Column="0" >Leaving Date:</TextBlock>
+                                <TextBlock Grid.Row="7" Margin="7" Grid.Column="0" >Leaving Date:</TextBlock>
                                 <TextBox Margin="5" Grid.Row="7" Grid.Column="1" BorderBrush="{Binding Path=Stat.LeavingDateBrush}" BorderThickness="1"
                                          Text="{Binding Path=UserToDisplay.LeavingDate, UpdateSourceTrigger=PropertyChanged}"></TextBox>
 

@@ -5,7 +5,7 @@ using WPF_Europa_MVVM.Foundation;
 namespace WPF_Europa_MVVM.Views
 {
     /// <summary>
-    /// Interaction logic for ProductDisplay.xaml
+    /// Interaction logic for UserDisplay.xaml
     /// </summary>
     public partial class UserDisplay : UserControl
     {

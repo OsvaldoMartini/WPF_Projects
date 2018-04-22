@@ -1,7 +1,9 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.Windows.Input;
 using WPF_Europa_MVVM.Foundation;
+using WPF_Europa_MVVM.Model;
 
 namespace WPF_Europa_MVVM.ViewModels
 {
@@ -10,9 +12,15 @@ namespace WPF_Europa_MVVM.ViewModels
         
         
         private bool isSelected = false;
+        private List<RoleModel> _roles; 
+        private List<DeptoModel> _departments; 
+     
         //Messegers
         public UserDisplayModel()
         {
+            Roles = App.StoreXML.GetRoles(); 
+            Departments = App.StoreXML.GetDepartments(); 
+
             Messenger messenger = App.Messenger;
             messenger.Register("UserSelectionChanged", (Action<UserVM>)(param => UserToProcess(param)));
             messenger.Register("SetStatus", (Action<String>)(param => stat.Status = param));
@@ -26,8 +34,8 @@ namespace WPF_Europa_MVVM.ViewModels
                 PropertyChanged(this, e);
         }
         //data checks and status indicators done in another class
-        private readonly ProductDisplayModelStatus stat = new ProductDisplayModelStatus();
-        public ProductDisplayModelStatus Stat { get { return stat; } }
+        private readonly UserDisplayModelStatus stat = new UserDisplayModelStatus();
+        public UserDisplayModelStatus Stat { get { return stat; } }
 
         private UserVM userToDisplay = new UserVM();
         public UserVM UserToDisplay
@@ -91,7 +99,7 @@ namespace WPF_Europa_MVVM.ViewModels
 
         private void UpdateUser()
         {
-            if (!stat.ChkProductForUpdate(UserToDisplay)) return;
+            if (!stat.ChkUserForUpdate(UserToDisplay)) return;
                 if(!App.StoreXML.UpdateUser(UserToDisplay))
                 {
                     stat.Status = App.StoreXML.errorMessage;
@@ -127,9 +135,21 @@ namespace WPF_Europa_MVVM.ViewModels
             get { return saveCommand ?? (saveCommand = new RelayCommand(() => SaveUser(), () => !isSelected)); }
         }
 
+        public List<RoleModel> Roles
+        {
+            get { return _roles; }
+            set { _roles = value; }
+        }
+
+        public List<DeptoModel> Departments
+        {
+            get { return _departments; }
+            set { _departments = value; }
+        }
+
         private void SaveUser()
         {
-            if (!stat.ChkProductForAdd(UserToDisplay)) return;
+            if (!stat.ChkUserForAdd(UserToDisplay)) return;
             if (!App.StoreXML.SaveUser(UserToDisplay))
             {
                 stat.Status = App.StoreXML.errorMessage;

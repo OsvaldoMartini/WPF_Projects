@@ -54,15 +54,15 @@ namespace WPF_Europa_MVVM.ViewModels
             set { startDate = value; OnPropertyChanged(new PropertyChangedEventArgs("StartDate")); }
         }
 
-        private Role role;
-        public Role Role
+        private RoleModel role;
+        public RoleModel _Role
         {
             get { return role; }
-            set { role = value; OnPropertyChanged(new PropertyChangedEventArgs("Role")); }
+            set { role = value; OnPropertyChanged(new PropertyChangedEventArgs("_Role")); }
         }
 
-        private Department depto;
-        public Department Depto
+        private DeptoModel depto;
+        public DeptoModel Depto
         {
             get { return depto; }
             set { depto = value; OnPropertyChanged(new PropertyChangedEventArgs("Depto")); }
@@ -89,7 +89,7 @@ namespace WPF_Europa_MVVM.ViewModels
         }
 
         public UserVM(Guid id, int userId, string userName, string forename,
-                       string surname, DateTime startDate, Role role,Department depto, bool leaver, DateTime? leavingDate)
+                       string surname, DateTime startDate, RoleModel role,DeptoModel depto, bool leaver, DateTime? leavingDate)
         {
             this._guiid = id;
             this._userId = userId;
@@ -97,7 +97,7 @@ namespace WPF_Europa_MVVM.ViewModels
             Forename = forename;
             Surname = surname;
             StartDate = startDate;
-            Role = role;
+            _Role = role;
             Depto = depto;
             Leaver = leaver;
             LeavingDate = leavingDate;
@@ -110,8 +110,9 @@ namespace WPF_Europa_MVVM.ViewModels
             this._userId = p._UserId;
             this.UserName = p.UserName;
             this.Forename = p.Forename;
+            this.Surname = p.Surname;
             this.StartDate = p.StartDate;
-            this.Role = p.Role;
+            this._Role = p._Role;
             this.Depto = p.Depto;
             this.Leaver = p.Leaver;
             this.LeavingDate = p.LeavingDate;

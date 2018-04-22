@@ -5,8 +5,8 @@ using System.Windows.Media;
 namespace WPF_Europa_MVVM.ViewModels
 {
     //UserVM Error detection, error display and status msg
-    //Note, a Delete may be performed without checking any Productt fields
-    public class ProductDisplayModelStatus : INotifyPropertyChanged
+    //Note, a Delete may be performed without checking any Usert fields
+    public class UserDisplayModelStatus : INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler PropertyChanged;
         public void OnPropertyChanged(PropertyChangedEventArgs e)
@@ -91,7 +91,7 @@ namespace WPF_Europa_MVVM.ViewModels
         } //NoError()
 
 
-        public ProductDisplayModelStatus()
+        public UserDisplayModelStatus()
         {
             NoError();
         } //ctor
@@ -121,7 +121,7 @@ namespace WPF_Europa_MVVM.ViewModels
 
 
         //check all userVM fields for validity
-        public bool ChkProductForAdd(UserVM p)
+        public bool ChkUserForAdd(UserVM p)
         {
             int errCnt = 0;
             if (String.IsNullOrEmpty(p.UserName))
@@ -152,7 +152,7 @@ namespace WPF_Europa_MVVM.ViewModels
             }
             else StartDateBrush = okBrush;
 
-            if ((p.Role== null) || ( p.Role.id == 0))
+            if ((p._Role== null) || ( p._Role.id == 0))
             {
                 errCnt++;
                 RoleBrush = errorBrush;
@@ -183,11 +183,11 @@ namespace WPF_Europa_MVVM.ViewModels
 
             if (errCnt == 0) { Status = "OK"; return true; }
             else { Status = "ADD, missing or invalid fields."; return false; }
-        } //ChkProductForAdd()
+        } //ChkUserForAdd()
 
 
         //check all userVM fields for validity
-        public bool ChkProductForUpdate(UserVM p)
+        public bool ChkUserForUpdate(UserVM p)
         {
             int errCnt = 0;
             
@@ -220,7 +220,7 @@ namespace WPF_Europa_MVVM.ViewModels
             else StartDateBrush = okBrush;
 
 
-            if ((p.Role == null) || (p.Role.id == 0))
+            if ((p._Role == null) || (p._Role.id == 0))
             {
                 errCnt++;
                 RoleBrush = errorBrush;
@@ -251,7 +251,7 @@ namespace WPF_Europa_MVVM.ViewModels
             
             if (errCnt == 0) { Status = "OK"; return true; }
             else { Status = "Update, missing or invalid fields."; return false; }
-        } //ChkProductForUpdate()
+        } //ChkUserForUpdate()
 
-    } //class ProductDisplayModelStatus
-}  //NS: ProductMvvm.ViewModels
+    } //class UserDisplayModelStatus
+}  //NS: UserMvvm.ViewModels

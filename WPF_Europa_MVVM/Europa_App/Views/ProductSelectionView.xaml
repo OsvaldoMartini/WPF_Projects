@@ -16,5 +16,39 @@
             foundation:CommandBehavior.RoutedEventName="SelectionChanged"
             foundation:CommandBehavior.TheCommandToRun="{Binding Path=ListBoxCommand}">
         </ListBox>
+        <!--<ListBox Grid.Row="0" Margin="10" Background="LightSkyBlue"
+                                     ItemsSource="{Binding DataItems}" 
+                                     DisplayMemberPath="Forename"
+                                     SelectedItem="{Binding SelectedUser}"
+                                     foundation:CommandBehavior.RoutedEventName="SelectionChanged"
+                                     foundation:CommandBehavior.TheCommandToRun="{Binding Path=ListBoxCommand}"/>-->
+        <!--<ListView ItemsSource="{Binding DataItems}">
+                                <ListView.View>
+                                    <GridView AllowsColumnReorder="true"
+                                              ColumnHeaderToolTip="User Information">
+
+                                        <GridViewColumn DisplayMemberBinding=
+                                                        "{Binding Path=UserName}" 
+                                                        Header="User Name" Width="50"/>
+
+
+                                        <GridViewColumn DisplayMemberBinding=
+                                                        "{Binding Path=Forename}" 
+                                                        Header="Forename" Width="50"/>
+
+                                        <GridViewColumn DisplayMemberBinding=
+                                                        "{Binding Path=Surname}" 
+                                                        Header="Surname" Width="50"/>
+
+                                        <GridViewColumn DisplayMemberBinding=
+                                                        "{Binding Path=StartDate}" Width="50">
+                                            <GridViewColumnHeader>Start Date
+                                            </GridViewColumnHeader>
+                                        </GridViewColumn>
+
+                                    </GridView>
+
+                                </ListView.View>
+                            </ListView>-->
     </Grid>
 </UserControl>

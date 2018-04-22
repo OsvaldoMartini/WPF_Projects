@@ -59,8 +59,8 @@
     <Compile Include="Foundation\GlobalServices.cs" />
     <Compile Include="Foundation\IModalService.cs" />
     <Compile Include="Model\DBUtility.cs" />
-    <Compile Include="Model\Department.cs" />
-    <Compile Include="Model\Role.cs" />
+    <Compile Include="Model\DeptoModel.cs" />
+    <Compile Include="Model\RoleModel.cs" />
     <Compile Include="ViewModels\UserVM.cs" />
     <Compile Include="ViewModels\UserDisplayModel.cs" />
     <Compile Include="ViewModels\ProductDisplayModelStatus.cs" />
