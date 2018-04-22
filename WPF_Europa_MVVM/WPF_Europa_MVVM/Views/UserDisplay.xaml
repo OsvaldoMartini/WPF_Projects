@@ -1,4 +1,4 @@
-﻿<UserControl x:Class="WPF_Europa_MVVM.Views.ProductDisplay"
+﻿<UserControl x:Class="WPF_Europa_MVVM.Views.UserDisplay"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:viewModels="clr-namespace:WPF_Europa_MVVM.ViewModels"
@@ -9,7 +9,7 @@
         <Style x:Key="DesignerItemStyle" TargetType="ContentControl" />
     </UserControl.Resources>
     <UserControl.DataContext>
-        <viewModels:ProductDisplayModel />
+        <viewModels:UserDisplayModel />
     </UserControl.DataContext>
 
 
@@ -64,24 +64,24 @@
                                 </Grid.RowDefinitions>
 
                                 <TextBlock Grid.Row="0" Grid.Column="0" Margin="7">Model Number:</TextBlock>
-                                <TextBox Grid.Row="0" Grid.Column="1" Margin="5"  BorderBrush="{Binding Path=Stat.ModelNumberBrush}" BorderThickness="1"
-                     Text="{Binding Path=DisplayedProduct.ModelNumber, UpdateSourceTrigger=PropertyChanged}"></TextBox>
+                                <TextBox Grid.Row="0" Grid.Column="1" Margin="5"  BorderBrush="{Binding Path=Stat.UserBrush}" BorderThickness="1"
+                     Text="{Binding Path=UserToDisplay.UserName, UpdateSourceTrigger=PropertyChanged}"></TextBox>
 
                                 <TextBlock Margin="7" Grid.Row="1" Grid.Column="0" >Model Name:</TextBlock>
-                                <TextBox Margin="5" Grid.Row="1" Grid.Column="1" BorderBrush="{Binding Path=Stat.ModelNameBrush}" BorderThickness="1"
-                     Text="{Binding Path=DisplayedProduct.ModelName, UpdateSourceTrigger=PropertyChanged}"></TextBox>
+                                <TextBox Margin="5" Grid.Row="1" Grid.Column="1" BorderBrush="{Binding Path=Stat.ForenameBrush}" BorderThickness="1"
+                     Text="{Binding Path=UserToDisplay.Forename, UpdateSourceTrigger=PropertyChanged}"></TextBox>
 
                                 <TextBlock Margin="7" Grid.Row="2" Grid.Column="0" >Unit Cost:</TextBlock>
-                                <TextBox Margin="5" Grid.Row="2" Grid.Column="1"   BorderBrush="{Binding Path=Stat.UnitCostBrush}" BorderThickness="1"
-                     Text="{Binding Path=DisplayedProduct.UnitCost, UpdateSourceTrigger=PropertyChanged}"></TextBox>
+                                <TextBox Margin="5" Grid.Row="2" Grid.Column="1"   BorderBrush="{Binding Path=Stat.LeaverBrush}" BorderThickness="1"
+                     Text="{Binding Path=UserToDisplay.Leaver, UpdateSourceTrigger=PropertyChanged}"></TextBox>
 
                                 <TextBlock Margin="7" Grid.Row="3" Grid.Column="0" >Category:</TextBlock>
-                                <TextBox Margin="5" Grid.Row="3" Grid.Column="1"  BorderBrush="{Binding Path=Stat.CategoryNameBrush}" BorderThickness="1"
-                     Text="{Binding Path=DisplayedProduct.CategoryName, UpdateSourceTrigger=PropertyChanged}"></TextBox>
+                                <TextBox Margin="5" Grid.Row="3" Grid.Column="1"  BorderBrush="{Binding Path=Stat.StartDateBrush}" BorderThickness="1"
+                     Text="{Binding Path=UserToDisplay.StartDate, UpdateSourceTrigger=PropertyChanged}"></TextBox>
 
-                                <TextBlock Margin="7,7,7,0" Grid.Row="4" Grid.Column="0" >Description:</TextBlock>
+                                <TextBlock Margin="7,7,7,0" Grid.Row="4" Grid.Column="0" >Surname:</TextBlock>
                                 <TextBox Margin="7" Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="2" 
-                 TextWrapping="Wrap" VerticalScrollBarVisibility="Visible" Text="{Binding Path=DisplayedProduct.Description}"></TextBox>
+                 TextWrapping="Wrap" VerticalScrollBarVisibility="Visible" Text="{Binding Path=UserToDisplay.Surname}"></TextBox>
 
                                 <TextBlock Margin="7,25,15,0" Grid.Row="6" Grid.Column="0" >Status:</TextBlock>
                                 <TextBox Margin="7" Grid.Row="7" Grid.Column="0" Grid.ColumnSpan="2" 
@@ -100,7 +100,7 @@
                         <Button Margin="2,5,0,0"  Padding="2"  Height="35" Width="50"
                     Command="{Binding DeleteCommand}">Delete</Button>
                         <Button Margin="2,5,0,0"   Height="35" Width="50" Command="{Binding SaveCommand}" Padding="2">Save</Button>
-                        <Button Command="{Binding CancelCommand}" Margin="2,5,0,0"  Padding="5"  Height="35" Width="70">Cancel</Button>
+                        <Button Command="{Binding CancelCommand}" Margin="2,0,0,0"  Padding="5"  Height="35" Width="70" VerticalAlignment="Bottom">Cancel</Button>
 
                     </StackPanel>
                 </Grid>

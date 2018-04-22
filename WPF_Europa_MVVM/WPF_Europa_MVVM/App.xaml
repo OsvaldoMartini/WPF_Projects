@@ -3,12 +3,13 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              StartupUri="MainWindow.xaml">
     <Application.Resources>
-
-        <LinearGradientBrush x:Key="FrameBackground" StartPoint="0,0" EndPoint="0,1">
-            <GradientStop Offset="1.0" Color="SlateGray" />
-            <GradientStop Offset="0.0" Color="LightSlateGray" />
-        </LinearGradientBrush>
-
-
+            <ResourceDictionary>
+                <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/WPF_Europa_MVVM;component/Resources/BackgroundColor.xaml" />
+                <ResourceDictionary Source="/WPF_Europa_MVVM;component/Resources/DataGridStyle.xaml" />
+                </ResourceDictionary.MergedDictionaries>
+            </ResourceDictionary>
+        
     </Application.Resources>
 </Application>
+

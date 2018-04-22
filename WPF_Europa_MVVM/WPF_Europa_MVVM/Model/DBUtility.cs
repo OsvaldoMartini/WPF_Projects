@@ -61,36 +61,39 @@ namespace WPF_Europa_MVVM.Model
             return customers;
         }
 
-        public static List<ProductModel> MockProductModel()
+        public static List<UserModel> MockUserModel()
         {
 
-            List<ProductModel> products = new List<ProductModel>()
+            List<UserModel> users = new List<UserModel>()
             {
-                new ProductModel
+                new UserModel
                 {
                     Guid = Guid.NewGuid(),
-                    ProductId = 1,
-                    CategoryName = "Category Descents",
-                    Description = "Bla Bla Bla",
-                    ModelName = "ModelName",
-                    ModelNumber = "ABL1235",
-                    UnitCost = Convert.ToDecimal("105.00")
-
-                },
-                new ProductModel
-                {
-                    Guid = Guid.NewGuid(),
-                    ProductId = 2,
-                    CategoryName = "Category Vehicles",
-                    Description = "Tom Tom Tom",
-                    ModelName = "Toyota",
-                    ModelNumber = "FFhTR65",
-                    UnitCost = Convert.ToDecimal("3105.55")
-
+                    UserId = 1,
+                    UserName = "ABL1235",
+                    Forename = "Forename",
+                    Surname = "Bla Bla Bla",
+                    StartDate = new DateTime(2014, 3, 1),
+                    //new Role{id = Guid.NewGuid(), RoleName = "Software Developer"},
+                    //new Department{id= Guid.NewGuid(),DptoName = "Software Developer"},
+                    //Leaver = False
+                    
                 }
+                //,
+                //new UserModel
+                //{
+                //    Guid = Guid.NewGuid(),
+                //    UserId = 2,
+                //    UserName = "jssmith",
+                //    Forename = "John",
+                //    Surname = "Smith",
+                //    StartDate = New DateTime(2005,11,13),
+                //    Leaver = Convert.ToDecimal("3105.55")
+
+                //}
             };
 
-            return products;
+            return users;
 
         }
 
@@ -134,20 +137,20 @@ namespace WPF_Europa_MVVM.Model
 
         }
 
-        public static bool AddByXML(ProductModel p, string xmlFilename)
+        public static bool AddByXML(UserModel p, string xmlFilename)
         {
 
             XDocument xdoc = XDocument.Load(xmlFilename);
 
-            if (p.ProductId <= 0)
-                p.ProductId = xdoc.Root.Elements().Count()+1;
+            if (p.UserId <= 0)
+                p.UserId = xdoc.Root.Elements().Count()+1;
             p.Guid = Guid.NewGuid();
 
-            GenericPropertyFinder<ProductModel> objGenericPropertyFinder = new GenericPropertyFinder<ProductModel>();
+            GenericPropertyFinder<UserModel> objGenericPropertyFinder = new GenericPropertyFinder<UserModel>();
             objGenericPropertyFinder.PrintTModelPropertyAndValue(p);
             var lstDic = objGenericPropertyFinder.ReturTModelPropertyAndValue(p);
 
-            XElement ele = new XElement("ProductModel", null);
+            XElement ele = new XElement("UserModel", null);
 
             foreach (var item in lstDic)
             {
@@ -173,8 +176,8 @@ namespace WPF_Europa_MVVM.Model
         {
             XDocument xdoc = XDocument.Load(xmlFilename);
             xdoc.Element("ArrayOfProductModel")
-                .Elements("ProductModel")
-                .Where(x => (string)x.Element("ProductId") == p.ToString())
+                .Elements("UserModel")
+                .Where(x => (string)x.Element("UserId") == p.ToString())
                 .Remove();
             xdoc.Save(xmlFilename);
 
@@ -194,10 +197,10 @@ namespace WPF_Europa_MVVM.Model
         }
 
 
-        public static bool UpdateByXML(ProductModel p, string xmlFilename)
+        public static bool UpdateByXML(UserModel p, string xmlFilename)
         {
 
-            GenericPropertyFinder<ProductModel> objGenericPropertyFinder = new GenericPropertyFinder<ProductModel>();
+            GenericPropertyFinder<UserModel> objGenericPropertyFinder = new GenericPropertyFinder<UserModel>();
             objGenericPropertyFinder.PrintTModelPropertyAndValue(p);
             var lstDic = objGenericPropertyFinder.ReturTModelPropertyAndValue(p);
 
@@ -349,7 +352,6 @@ namespace WPF_Europa_MVVM.Model
             }
             return returnObject;
         }
-
 
     }
 }

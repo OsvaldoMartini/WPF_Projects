@@ -5,9 +5,18 @@ using WPF_Europa_MVVM.Foundation;
 
 namespace WPF_Europa_MVVM.ViewModels
 {
-    public class ProductDisplayModel : INotifyPropertyChanged
+    public class UserDisplayModel : INotifyPropertyChanged
     {
+        
+        
         private bool isSelected = false;
+        //Messegers
+        public UserDisplayModel()
+        {
+            Messenger messenger = App.Messenger;
+            messenger.Register("UserSelectionChanged", (Action<UserVM>)(param => UserToProcess(param)));
+            messenger.Register("SetStatus", (Action<String>)(param => stat.Status = param));
+        } //Constructor
 
 
         public event PropertyChangedEventHandler PropertyChanged;
@@ -20,11 +29,11 @@ namespace WPF_Europa_MVVM.ViewModels
         private readonly ProductDisplayModelStatus stat = new ProductDisplayModelStatus();
         public ProductDisplayModelStatus Stat { get { return stat; } }
 
-        private Product displayedProduct = new Product();
-        public Product DisplayedProduct
+        private UserVM userToDisplay = new UserVM();
+        public UserVM UserToDisplay
         {
-            get { return displayedProduct; }
-            set { displayedProduct = value; OnPropertyChanged(new PropertyChangedEventArgs("DisplayedProduct")); }
+            get { return userToDisplay; }
+            set { userToDisplay = value; OnPropertyChanged(new PropertyChangedEventArgs("UserToDisplay")); }
         }
 
 
@@ -38,38 +47,22 @@ namespace WPF_Europa_MVVM.ViewModels
         {
             isSelected = false;
             stat.NoError();
-            DisplayedProduct = new Product();
+            UserToDisplay = new UserVM();
             App.Messenger.NotifyColleagues("GetUsers");
         }
 
-        private RelayCommand closeAppCommand;
-        public ICommand CloseAppCommand
+        #region CancelCommand
+        private RelayCommand cancelCommand;
+        public ICommand CancelCommand
         {
-            get { return closeAppCommand ?? (closeAppCommand = new RelayCommand(() => CloseApp()/*, ()=>isSelected*/)); }
+            get { return cancelCommand ?? (cancelCommand = new RelayCommand(() => CancelOperation()/*, ()=>isSelected*/)); }
         }
 
-        private void CloseApp()
+        private void CancelOperation()
         {
-            isSelected = false;
-            stat.NoError();
-            DisplayedProduct = new Product();
+            GlobalServices.ModalService.GoBackward(false);
             App.Messenger.NotifyColleagues("UserCleared");
-        } //ClearProductDisplay()
-
-        #region AddNewUserCommand
-        private RelayCommand addNewUserCommand;
-        public ICommand AddNewUserCommand
-        {
-            get { return addNewUserCommand ?? (addNewUserCommand = new RelayCommand(() => AddNewUserDisplay()/*, ()=>isSelected*/)); }
-        }
-
-        private void AddNewUserDisplay()
-        {
-            isSelected = false;
-            stat.NoError();
-            DisplayedProduct = new Product();
-            App.Messenger.NotifyColleagues("UserCleared");
-        } //AddNewUserDisplay()
+        } //CancelOperation()
         #endregion
 
 
@@ -84,7 +77,7 @@ namespace WPF_Europa_MVVM.ViewModels
         {
             isSelected = false;
             stat.NoError();
-            DisplayedProduct = new Product();
+            UserToDisplay = new UserVM();
             App.Messenger.NotifyColleagues("UserCleared");
         } //ClearUserDisplay()
         #endregion
@@ -98,13 +91,13 @@ namespace WPF_Europa_MVVM.ViewModels
 
         private void UpdateUser()
         {
-            if (!stat.ChkProductForUpdate(DisplayedProduct)) return;
-                if(!App.StoreXML.UpdateUser(DisplayedProduct))
+            if (!stat.ChkProductForUpdate(UserToDisplay)) return;
+                if(!App.StoreXML.UpdateUser(UserToDisplay))
                 {
                     stat.Status = App.StoreXML.errorMessage;
                     return;
                 }
-                App.Messenger.NotifyColleagues("UpdateUser", DisplayedProduct);
+                App.Messenger.NotifyColleagues("UpdateUser", UserToDisplay);
         } //UpdateUser()
         #endregion
 
@@ -117,7 +110,7 @@ namespace WPF_Europa_MVVM.ViewModels
 
         private void DeleteUser()
         {
-            if (!App.StoreXML.DeleteUser(DisplayedProduct._ProductId))
+            if (!App.StoreXML.DeleteUser(UserToDisplay._UserId))
             {
                 stat.Status = App.StoreXML.errorMessage;
                 return;
@@ -136,29 +129,24 @@ namespace WPF_Europa_MVVM.ViewModels
 
         private void SaveUser()
         {
-            if (!stat.ChkProductForAdd(DisplayedProduct)) return;
-            if (!App.StoreXML.SaveUser(DisplayedProduct))
+            if (!stat.ChkProductForAdd(UserToDisplay)) return;
+            if (!App.StoreXML.SaveUser(UserToDisplay))
             {
                 stat.Status = App.StoreXML.errorMessage;
                 return;
             }
-            App.Messenger.NotifyColleagues("SaveUser", DisplayedProduct);
+            App.Messenger.NotifyColleagues("SaveUser", UserToDisplay);
         } //SaveUser()
         #endregion
 
-        public ProductDisplayModel()
-        {
-            Messenger messenger = App.Messenger;
-            messenger.Register("UserSelectionChanged", (Action<Product>)(param => ProcessUser(param)));
-            messenger.Register("SetStatus", (Action<String>)(param => stat.Status = param));
-        } //ctor
 
-        public void ProcessUser(Product p)
+
+        public void UserToProcess(UserVM p)
         {
-            if (p == null) { /*DisplayedProduct = null;*/  isSelected = false;  return; }
-            Product temp = new Product();
-            temp.CopyProduct(p);
-            DisplayedProduct = temp;
+            if (p == null) { /*UserToDisplay = null;*/  isSelected = false;  return; }
+            UserVM temp = new UserVM();
+            temp.CopyUser(p);
+            UserToDisplay = temp;
             isSelected = true;
             stat.NoError();
         } // ProcessUser()

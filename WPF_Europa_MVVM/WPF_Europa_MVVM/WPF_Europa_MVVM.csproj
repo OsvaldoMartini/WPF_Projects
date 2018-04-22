@@ -34,6 +34,15 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="PresentationFramework.Aero" />
+    <Reference Include="quickfix_net, Version=1.0.4396.265, Culture=neutral, processorArchitecture=x86">
+      <HintPath>..\packages\QuickFix.1.13.3\lib\net40\quickfix_net.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="quickfix_net_messages, Version=1.0.4396.310, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\QuickFix.1.13.3\lib\net40\quickfix_net_messages.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
@@ -57,15 +66,17 @@
     <Compile Include="Foundation\GlobalServices.cs" />
     <Compile Include="Foundation\IModalService.cs" />
     <Compile Include="Model\DBUtility.cs" />
-    <Compile Include="ViewModels\Product.cs" />
-    <Compile Include="ViewModels\ProductDisplayModel.cs" />
+    <Compile Include="Model\Department.cs" />
+    <Compile Include="Model\Role.cs" />
+    <Compile Include="ViewModels\UserVM.cs" />
+    <Compile Include="ViewModels\UserDisplayModel.cs" />
     <Compile Include="ViewModels\ProductDisplayModelStatus.cs" />
-    <Compile Include="ViewModels\ProductSelectionModel.cs" />
-    <Compile Include="Views\ProductDisplay.xaml.cs">
-      <DependentUpon>ProductDisplay.xaml</DependentUpon>
+    <Compile Include="ViewModels\UserSelectActionsModel.cs" />
+    <Compile Include="Views\UserDisplay.xaml.cs">
+      <DependentUpon>UserDisplay.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\ProductSelectionView.xaml.cs">
-      <DependentUpon>ProductSelectionView.xaml</DependentUpon>
+    <Compile Include="Views\UserListView.xaml.cs">
+      <DependentUpon>UserListView.xaml</DependentUpon>
     </Compile>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -76,7 +87,7 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Controls\ObservedCollection.cs" />
-    <Compile Include="Controls\ProductObservableCollection.cs" />
+    <Compile Include="Controls\UserObservableCollection.cs" />
     <Compile Include="Foundation\CommandBehavior.cs" />
     <Compile Include="Foundation\GenericPropertyFinder.cs" />
     <Compile Include="Foundation\Messenger.cs" />
@@ -85,6 +96,14 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="Resources\BackgroundColor.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Resources\DataGridStyle.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Resources\DesignerItem.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -93,11 +112,11 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\ProductDisplay.xaml">
+    <Page Include="Views\UserDisplay.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Views\ProductSelectionView.xaml">
+    <Page Include="Views\UserListView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -105,7 +124,7 @@
   <ItemGroup>
     <Compile Include="Model\CustomerModel.cs" />
     <Compile Include="Model\IDBUtility.cs" />
-    <Compile Include="Model\ProductModel.cs" />
+    <Compile Include="Model\UserModel.cs" />
     <Compile Include="Model\StoreXML.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
@@ -124,6 +143,7 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>

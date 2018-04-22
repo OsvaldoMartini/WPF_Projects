@@ -7,35 +7,23 @@ using WPF_Europa_MVVM.Views;
 
 namespace WPF_Europa_MVVM.ViewModels
 {
-    public class ProductSelectionModel : INotifyPropertyChanged
+    public class UserSelectActionsModel : INotifyPropertyChanged
     {
 
-        public ProductSelectionModel()
+        public UserSelectActionsModel()
         {
-            dataItems = new ProductObservableCollection<Product>();
+            dataItems = new UserObservableCollection<UserVM>();
 
             DataItems = App.StoreXML.GetUsers();
 
             listBoxCommand = new RelayCommand(() => SelectionHasChanged());
-            addNewUserCommand = new RelayCommand(() => AddNewUserDisplay());
-             
-
-            //By XML
+            
+            //Messengers / messages
             App.Messenger.Register("UserCleared", (Action)(() => SelectedUser = null));
             App.Messenger.Register("GetUsers", (Action)(() => GetUsers()));
-            App.Messenger.Register("UpdateUser", (Action<Product>)(param => UpdateUser(param)));
+            App.Messenger.Register("UpdateUser", (Action<UserVM>)(param => UpdateUser(param)));
             App.Messenger.Register("DeleteUser", (Action)(() => DeleteUser()));
-            App.Messenger.Register("SaveUser", (Action<Product>)(param => SaveUser(param)));
-            App.Messenger.Register("AddNewUser", (Action)(() => AddNewUserDisplay()));
-            App.Messenger.Register("Cancel", (Action)(() => CancelWindow()));
-
-        }
-
-        
-
-        private void CancelWindow()
-        {
-            GlobalServices.ModalService.GoBackward(false);
+            App.Messenger.Register("SaveUser", (Action<UserVM>)(param => SaveUser(param)));
         }
 
         private void GetUsers()
@@ -47,13 +35,13 @@ namespace WPF_Europa_MVVM.ViewModels
         }
 
 
-        private void SaveUser(Product p)
+        private void SaveUser(UserVM p)
         {
             dataItems.Add(p);
         }
 
 
-        private void UpdateUser(Product p)
+        private void UpdateUser(UserVM p)
         {
             int index = dataItems.IndexOf(selectedUser);
             dataItems.ReplaceItem(index, p);
@@ -73,37 +61,34 @@ namespace WPF_Europa_MVVM.ViewModels
                 PropertyChanged(this, e);
         }
 
-        private ProductObservableCollection<Product> dataItems;
-        public ProductObservableCollection<Product> DataItems
+        private UserObservableCollection<UserVM> dataItems;
+        public UserObservableCollection<UserVM> DataItems
         {
             get { return dataItems; }
             //If dataItems replaced by new collection, WPF must be told
             set { dataItems = value; OnPropertyChanged(new PropertyChangedEventArgs("DataItems")); }
         }
 
-        private Product selectedUser;
-        public Product SelectedUser
+        private UserVM selectedUser;
+        public UserVM SelectedUser
         {
             get { return selectedUser; }
             set { selectedUser = value; OnPropertyChanged(new PropertyChangedEventArgs("SelectedUser")); }
         }
-
-
-
+        
 
         private RelayCommand addNewUserCommand;
         public ICommand AddNewUserCommand
         {
-            get { return addNewUserCommand; }
+            get { return addNewUserCommand ?? (addNewUserCommand = new RelayCommand(() => AddNewUserDisplay())); }
         }
+
         private void AddNewUserDisplay()
         {
-            GlobalServices.ModalService.NavigateTo(new ProductDisplay(), delegate(bool returnValue)
+            GlobalServices.ModalService.NavigateTo(new UserDisplay(), delegate(bool returnValue)
             {
                 if (returnValue)
                     GetUsers();
-                //else
-                // MessageBox.Show("Return value == false");
             });
         }
 
@@ -119,6 +104,23 @@ namespace WPF_Europa_MVVM.ViewModels
             messenger.NotifyColleagues("UserSelectionChanged", selectedUser);
         }
 
+        
+
+        #region Close App
+        //Two Differents Ways to closing the app
+        private RelayCommand closeAppCommand;
+        public ICommand CloseAppCommand
+        {
+            get { return closeAppCommand ?? (closeAppCommand = new RelayCommand(() => CloseApp())); }
+        }
+
+        private void CloseApp()
+        {
+            new ApplicationCloseCommand().Execute(this);
+        } //CloseApp()
+        #endregion
+
+
         #region ApplicationCloseCommand
         private static readonly ICommand appCloseCmd = new ApplicationCloseCommand();
         public static ICommand ApplicationCloseCommand
@@ -127,7 +129,7 @@ namespace WPF_Europa_MVVM.ViewModels
         }
         #endregion
 
-    }//class ProductSelectionModel
+    }//class UserSelectActionsModel
 
 
 

@@ -82,6 +82,13 @@ namespace WPF_Europa_MVVM.Foundation
     /// </summary>
     public class RelayCommand : ICommand
     {
+        #region Fields
+
+        readonly Action _execute;
+        readonly Func<bool> _canExecute;
+
+        #endregion // Fields
+
         #region Constructors
 
         /// <summary>
@@ -138,11 +145,6 @@ namespace WPF_Europa_MVVM.Foundation
 
         #endregion // ICommand Members
 
-        #region Fields
 
-        readonly Action _execute;
-        readonly Func<bool> _canExecute;
-
-        #endregion // Fields
     }
 }

@@ -13,7 +13,7 @@ namespace WPF_Europa_MVVM.Model
         {
             try
             {
-                return new ProductModel().WhitProductId(p).DeleteByXML();
+                return new UserModel().WhitUserId(p).DeleteByXML();
 
             }
             catch (Exception ex)
@@ -26,11 +26,11 @@ namespace WPF_Europa_MVVM.Model
         }//DeleteUserByXML
 
 
-        public bool SaveUser(Product DisplayedProduct)
+        public bool SaveUser(UserVM UserToDisplay)
         {
             try
             {
-                return new ProductModel(DisplayedProduct).AddByXML();
+                return new UserModel(UserToDisplay).AddByXML();
 
             }
             catch (Exception ex)
@@ -42,12 +42,12 @@ namespace WPF_Europa_MVVM.Model
             return (!hasError);
         }//SaveUserByXML
 
-        public bool UpdateUser(Product displayP)
+        public bool UpdateUser(UserVM displayP)
         {
 
             try
             {
-                return new ProductModel(displayP).UpdateByXML();
+                return new UserModel(displayP).UpdateByXML();
 
             }
             catch (Exception ex)
@@ -60,14 +60,14 @@ namespace WPF_Europa_MVVM.Model
         }//UpdateUserByXML
 
 
-        public ProductObservableCollection<Product> GetUsers()
+        public UserObservableCollection<UserVM> GetUsers()
         {
             hasError = false;
-            ProductObservableCollection<Product> products = new ProductObservableCollection<Product>();
+            UserObservableCollection<UserVM> products = new UserObservableCollection<UserVM>();
             try
             {
                 //True: Check if File Exist
-                products = new ProductModel().WhitCheckFileFirst(true);
+                products = new UserModel().WhitCheckFileFirst(true);
 
             } //try
             catch (Exception ex)

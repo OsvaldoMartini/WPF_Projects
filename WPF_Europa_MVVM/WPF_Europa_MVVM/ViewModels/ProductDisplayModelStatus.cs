@@ -4,7 +4,7 @@ using System.Windows.Media;
 
 namespace WPF_Europa_MVVM.ViewModels
 {
-    //Product Error detection, error display and status msg
+    //UserVM Error detection, error display and status msg
     //Note, a Delete may be performed without checking any Productt fields
     public class ProductDisplayModelStatus : INotifyPropertyChanged
     {
@@ -15,7 +15,7 @@ namespace WPF_Europa_MVVM.ViewModels
                 PropertyChanged(this, e);
         }
 
-        //Error status msg and field Brushes to indicate product field errors
+        //Error status msg and field Brushes to indicate userVM field errors
         private string status;
         public string Status
         {
@@ -25,39 +25,68 @@ namespace WPF_Europa_MVVM.ViewModels
         private static SolidColorBrush errorBrush = new SolidColorBrush(Colors.Red);
         private static SolidColorBrush okBrush = new SolidColorBrush(Colors.Black);
 
-        private SolidColorBrush modelNumberBrush = okBrush;
-        public SolidColorBrush ModelNumberBrush
+        private SolidColorBrush userNameBrush = okBrush;
+        public SolidColorBrush UserNameBrush
         {
-            get { return modelNumberBrush; }
-            set { modelNumberBrush = value; OnPropertyChanged(new PropertyChangedEventArgs("ModelNumberBrush")); }
+            get { return userNameBrush; }
+            set { userNameBrush = value; OnPropertyChanged(new PropertyChangedEventArgs("UserNameBrush")); }
         }
 
-        private SolidColorBrush modelNameBrush = okBrush;
-        public SolidColorBrush ModelNameBrush
+        private SolidColorBrush forenameBrush = okBrush;
+        public SolidColorBrush ForenameBrush
         {
-            get { return modelNameBrush; }
-            set { modelNameBrush = value; OnPropertyChanged(new PropertyChangedEventArgs("ModelNameBrush")); }
+            get { return forenameBrush; }
+            set { forenameBrush = value; OnPropertyChanged(new PropertyChangedEventArgs("ForenameBrush")); }
         }
 
-        private SolidColorBrush categoryNameBrush = okBrush;
-        public SolidColorBrush CategoryNameBrush
+        private SolidColorBrush surnameBrush = okBrush;
+        public SolidColorBrush SurnameBrush 
         {
-            get { return categoryNameBrush; }
-            set { categoryNameBrush = value; OnPropertyChanged(new PropertyChangedEventArgs("CategoryNameBrush")); }
+            get { return surnameBrush; }
+            set { surnameBrush = value; OnPropertyChanged(new PropertyChangedEventArgs("SurnameBrush ")); }
         }
 
-        private SolidColorBrush unitCostBrush = okBrush;
-        public SolidColorBrush UnitCostBrush
+
+        private SolidColorBrush startDateBrush = okBrush;
+        public SolidColorBrush StartDateBrush
         {
-            get { return unitCostBrush; }
-            set { unitCostBrush = value; OnPropertyChanged(new PropertyChangedEventArgs("UnitCostBrush")); }
+            get { return startDateBrush; }
+            set { startDateBrush = value; OnPropertyChanged(new PropertyChangedEventArgs("StartDateBrush")); }
+        }
+        
+        private SolidColorBrush roleBrush = okBrush;
+        public SolidColorBrush RoleBrush
+        {
+            get { return roleBrush; }
+            set { roleBrush = value; OnPropertyChanged(new PropertyChangedEventArgs("RoleBrush")); }
         }
 
+
+        private SolidColorBrush deptoBrush = okBrush;
+        public SolidColorBrush DeptoBrush
+        {
+            get { return deptoBrush; }
+            set { deptoBrush = value; OnPropertyChanged(new PropertyChangedEventArgs("DptoBrush")); }
+        }
+        
+        private SolidColorBrush leaverBrush = okBrush;
+        public SolidColorBrush LeaverBrush
+        {
+            get { return leaverBrush; }
+            set { leaverBrush = value; OnPropertyChanged(new PropertyChangedEventArgs("LeaverBrush")); }
+        }
+
+        private SolidColorBrush leavingDateBrush = okBrush;
+        public SolidColorBrush LeavingDateBrush 
+        {
+            get { return leavingDateBrush; }
+            set { leavingDateBrush = value; OnPropertyChanged(new PropertyChangedEventArgs("LeavingDateBrush ")); }
+        }
 
         //set error field brushes to OKBrush and status msg to OK
         public void NoError()
         {
-            ModelNumberBrush = ModelNameBrush = CategoryNameBrush = UnitCostBrush = okBrush;
+            UserNameBrush = ForenameBrush = SurnameBrush = StartDateBrush = RoleBrush = DeptoBrush = leavingDateBrush = okBrush;
             Status = "OK";
         } //NoError()
 
@@ -68,69 +97,143 @@ namespace WPF_Europa_MVVM.ViewModels
         } //ctor
 
 
-        //verify the Product's unitcost is a decimal number > 0
+        //verify the UserVM's unitcost is a decimal number > 0
         private bool ChkUnitCost(string costString)
         {
             if (String.IsNullOrEmpty(costString))
                 return false;
             else
             {
-                decimal unitCost;
+                decimal leaver;
                 try
                 {
-                    unitCost = Decimal.Parse(costString);
+                    leaver = Decimal.Parse(costString);
                 }
                 catch
                 {
                     return false;
                 }
-                if (unitCost < 0)
+                if (leaver < 0)
                     return false;
                 else return true;
             }
         } //ChkUnitCost()
 
 
-        //check all product fields for validity
-        public bool ChkProductForAdd(Product p)
+        //check all userVM fields for validity
+        public bool ChkProductForAdd(UserVM p)
         {
             int errCnt = 0;
-            if (String.IsNullOrEmpty(p.ModelNumber))
-            { errCnt++; ModelNumberBrush = errorBrush; }
-            else ModelNumberBrush = okBrush;
-            if (String.IsNullOrEmpty(p.ModelName))
-            { errCnt++; ModelNameBrush = errorBrush; }
-            else ModelNameBrush = okBrush;
-            if (String.IsNullOrEmpty(p.CategoryName))
-            { errCnt++; CategoryNameBrush = errorBrush; }
-            else CategoryNameBrush = okBrush;
+            if (String.IsNullOrEmpty(p.UserName))
+            {
+                errCnt++;
+                UserNameBrush = errorBrush;
+            }
+            else UserNameBrush = okBrush;
 
-            if (!ChkUnitCost(p.UnitCost))
-            { errCnt++; UnitCostBrush = errorBrush; }
+            if (String.IsNullOrEmpty(p.Forename))
+            {
+                errCnt++;
+                ForenameBrush = errorBrush;
+            }
+            else ForenameBrush = okBrush;
+
+            if ((p.StartDate == DateTime.MinValue))
+            {
+                errCnt++;
+                StartDateBrush = errorBrush;
+            }
+            else StartDateBrush = okBrush;
+
+            if (p.Role.id == Guid.Empty)
+            {
+                errCnt++;
+                RoleBrush = errorBrush;
+            }
+            else RoleBrush = okBrush;
+
+            if (p.Depto.id == Guid.Empty)
+            {
+                errCnt++;
+                DeptoBrush = errorBrush;
+            }
+            else DeptoBrush = okBrush;
+
+            if (p.Leaver)
+            {
+                if ((p.LeavingDate == DateTime.MinValue) || p.LeavingDate < p.StartDate)
+                { errCnt++; }
+                LeavingDateBrush = errorBrush;
+            }
+            else LeavingDateBrush = okBrush;
+
+            if (p.Leaver)
+            {
+                errCnt++;
+                LeaverBrush = errorBrush;
+            }
+            else LeaverBrush = okBrush;
 
             if (errCnt == 0) { Status = "OK"; return true; }
             else { Status = "ADD, missing or invalid fields."; return false; }
         } //ChkProductForAdd()
 
 
-        //check all product fields for validity
-        public bool ChkProductForUpdate(Product p)
+        //check all userVM fields for validity
+        public bool ChkProductForUpdate(UserVM p)
         {
             int errCnt = 0;
-            if (String.IsNullOrEmpty(p.ModelNumber))
-            { errCnt++; ModelNumberBrush = errorBrush; }
-            else ModelNumberBrush = okBrush;
-            if (String.IsNullOrEmpty(p.ModelName))
-            { errCnt++; ModelNameBrush = errorBrush; }
-            else ModelNameBrush = okBrush;
-            if (String.IsNullOrEmpty(p.CategoryName))
-            { errCnt++; CategoryNameBrush = errorBrush; }
-            else CategoryNameBrush = okBrush;
+            
+            if (String.IsNullOrEmpty(p.UserName))
+            {
+                errCnt++;
+                UserNameBrush = errorBrush;
+            }
+            else UserNameBrush = okBrush;
+            
+            if (String.IsNullOrEmpty(p.Forename))
+            {
+                errCnt++;
+                ForenameBrush = errorBrush;
+            }
+            else ForenameBrush = okBrush;
+            
+            if ((p.StartDate == DateTime.MinValue))
+            {
+                errCnt++;
+                StartDateBrush = errorBrush;
+            }
+            else StartDateBrush = okBrush;
 
-            if (!ChkUnitCost(p.UnitCost))
-            { errCnt++; UnitCostBrush = errorBrush; }
-            else UnitCostBrush = okBrush;
+            if (p.Role.id == Guid.Empty)
+            {
+                errCnt++;
+                RoleBrush = errorBrush;
+            }
+            else RoleBrush = okBrush;
 
+            if (p.Depto.id == Guid.Empty)
+            {
+                errCnt++;
+                DeptoBrush = errorBrush;
+            }
+            else DeptoBrush = okBrush;
+
+            if (p.Leaver)
+            {
+               if ((p.LeavingDate == DateTime.MinValue) || p.LeavingDate < p.StartDate)
+                {errCnt++;}
+                LeavingDateBrush = errorBrush;
+            }
+            else LeavingDateBrush = okBrush;
+
+            if (p.Leaver)
+            {
+                errCnt++;
+                LeaverBrush = errorBrush;
+            }
+            else LeaverBrush = okBrush;
+            
             if (errCnt == 0) { Status = "OK"; return true; }
             else { Status = "Update, missing or invalid fields."; return false; }
         } //ChkProductForUpdate()

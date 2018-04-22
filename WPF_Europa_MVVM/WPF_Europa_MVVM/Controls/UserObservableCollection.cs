@@ -3,7 +3,7 @@ using System.Collections.Specialized;
 
 namespace WPF_Europa_MVVM.Controls
 {
-    public class ProductObservableCollection<Product> : ObservableCollection<Product>
+    public class UserObservableCollection<UserVM> : ObservableCollection<UserVM>
     {
         public void UpdateCollection()
         {
@@ -12,7 +12,7 @@ namespace WPF_Europa_MVVM.Controls
         }
 
 
-        public void ReplaceItem(int index, Product item)
+        public void ReplaceItem(int index, UserVM item)
         {
             base.SetItem(index, item);
         }

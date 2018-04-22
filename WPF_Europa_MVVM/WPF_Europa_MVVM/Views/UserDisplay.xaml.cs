@@ -7,9 +7,9 @@ namespace WPF_Europa_MVVM.Views
     /// <summary>
     /// Interaction logic for ProductDisplay.xaml
     /// </summary>
-    public partial class ProductDisplay : UserControl
+    public partial class UserDisplay : UserControl
     {
-        public ProductDisplay()
+        public UserDisplay()
         {
             InitializeComponent();
         }
