@@ -2,8 +2,13 @@
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:viewModels="clr-namespace:WPF_Europa_MVVM.ViewModels"
+    xmlns:loc="clr-namespace:WPF_Europa_MVVM.Converters"
     xmlns:foundation="clr-namespace:WPF_Europa_MVVM.Foundation">
     <UserControl.Resources>
+        <loc:DateTimeToShortDate x:Key="DateShortDate"/>
+        <loc:BooleanToYesNoConverter x:Key="BooleanToYesNo"/>
+        <loc:ToLowerCaseConverter x:Key="LowerCase"/>
+        
         <Style x:Key="DesignerItemStyle" TargetType="ContentControl" />
         <DataTemplate x:Key="RowDetailTemplate">
             <Grid x:Name="RowDetailGrid"
@@ -141,7 +146,7 @@
                                 </DataGrid.RowHeaderTemplate>
                                 <DataGrid.Columns>
                                     <DataGridTextColumn Width="120"
-                                                        Binding="{Binding Forename}"
+                                                        Binding="{Binding UserName, Converter={StaticResource LowerCase}}"
                                                         Header="User Name" />
                                     <DataGridTextColumn Width="120"
                                                         Binding="{Binding Forename}"
@@ -150,19 +155,19 @@
                                                         Binding="{Binding Surname}"
                                                         Header="Surname" />
                                     <DataGridTextColumn Width="120"
-                                                        Binding="{Binding StartDate}"
+                                                        Binding="{Binding StartDate, Converter={StaticResource DateShortDate}}"
                                                         Header="Start Date" />
                                     <DataGridTextColumn Width="120"
                                                         Binding="{Binding Role}"
                                                         Header="Role" />
                                     <DataGridTextColumn Width="120"
-                                                        Binding="{Binding Departmen}"
+                                                        Binding="{Binding Depto}"
                                                         Header="Departmen" />
                                     <DataGridTextColumn Width="120"
-                                                        Binding="{Binding Leaver}"
+                                                        Binding="{Binding Leaver, Converter={StaticResource BooleanToYesNo}}"
                                                         Header="Leaver?" />
                                     <DataGridTextColumn Width="120"
-                                                        Binding="{Binding LeavingDate}"
+                                                        Binding="{Binding LeavingDate, Converter={StaticResource DateShortDate}}"
                                                         Header="Leaving Date" />
 
                                 </DataGrid.Columns>

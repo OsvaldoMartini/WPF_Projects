@@ -89,7 +89,7 @@ namespace WPF_Europa_MVVM.ViewModels
         }
 
         public UserVM(Guid id, int userId, string userName, string forename,
-                       string surname, DateTime startDate, Role role,Department dpto, bool leaver, DateTime? leavingDate)
+                       string surname, DateTime startDate, Role role,Department depto, bool leaver, DateTime? leavingDate)
         {
             this._guiid = id;
             this._userId = userId;

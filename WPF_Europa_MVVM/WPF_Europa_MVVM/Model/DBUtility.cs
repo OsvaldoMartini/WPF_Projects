@@ -63,37 +63,86 @@ namespace WPF_Europa_MVVM.Model
 
         public static List<UserModel> MockUserModel()
         {
-
             List<UserModel> users = new List<UserModel>()
             {
                 new UserModel
                 {
                     Guid = Guid.NewGuid(),
                     UserId = 1,
-                    UserName = "ABL1235",
-                    Forename = "Forename",
-                    Surname = "Bla Bla Bla",
+                    UserName = "jbloggs",
+                    Forename = "Joe",
+                    Surname = "Bloggs",
                     StartDate = new DateTime(2014, 3, 1),
-                    //new Role{id = Guid.NewGuid(), RoleName = "Software Developer"},
-                    //new Department{id= Guid.NewGuid(),DptoName = "Software Developer"},
-                    //Leaver = False
-                    
+                    Role = new Role {id = 1, RoleName = "Software Developer"},
+                    Depto = new Department {id = 1, DeptoName = "Software Developer"},
+                    Leaver = false
+                },
+                new UserModel
+                {
+                    Guid = Guid.NewGuid(),
+                    UserId = 2,
+                    UserName = "jsmith",
+                    Forename = "John",
+                    Surname = "Smith",
+                    StartDate = new DateTime(2005, 11, 13),
+                    Role = new Role {id = 2, RoleName = "Development Manager"},
+                    Depto = new Department {id = 1, DeptoName = "Software Developer"},
+                    Leaver = false
+                },
+                new UserModel
+                {
+                    Guid = Guid.NewGuid(),
+                    UserId = 3,
+                    UserName = "dvogle",
+                    Forename = "Dan",
+                    Surname = "Vogle",
+                    StartDate = new DateTime(2009, 05, 17),
+                    Role = new Role {id = 1, RoleName = "Software Developer"},
+                    Depto = new Department {id = 1, DeptoName = "Software Developer"},
+                    Leaver = true,
+                    LeavingDate = new DateTime(2011, 9, 23)
+                },
+                new UserModel
+                {
+                    Guid = Guid.NewGuid(),
+                    UserId = 4,
+                    UserName = "jdoe",
+                    Forename = "Jane",
+                    Surname = "Doe",
+                    StartDate = new DateTime(2001, 10, 11),
+                    Role = new Role {id = 3, RoleName = "IT Director"},
+                    Depto = new Department {id = 2, DeptoName = "Group"},
+                    Leaver = false
                 }
-                //,
-                //new UserModel
-                //{
-                //    Guid = Guid.NewGuid(),
-                //    UserId = 2,
-                //    UserName = "jssmith",
-                //    Forename = "John",
-                //    Surname = "Smith",
-                //    StartDate = New DateTime(2005,11,13),
-                //    Leaver = Convert.ToDecimal("3105.55")
-
-                //}
             };
 
             return users;
+
+        }
+
+        public static List<Role> MockRoles()
+        {
+            List<Role> roles = new List<Role>()
+            {
+                    new Role {id = 1, RoleName = "Software Developer"},
+                    new Role {id = 2, RoleName = "Development Manager"},
+                    new Role {id = 3, RoleName = "IT Director"},
+            };
+
+            return roles;
+
+        }
+
+        public static List<Department> MockDepartment()
+        {
+            List<Department> dptos = new List<Department>()
+            {
+                
+                new Department {id = 1, DeptoName = "Software Developer"},
+               new Department {id = 2, DeptoName = "Group"},
+            };
+
+            return dptos;
 
         }
 
@@ -143,7 +192,7 @@ namespace WPF_Europa_MVVM.Model
             XDocument xdoc = XDocument.Load(xmlFilename);
 
             if (p.UserId <= 0)
-                p.UserId = xdoc.Root.Elements().Count()+1;
+                p.UserId = xdoc.Root.Elements().Count() + 1;
             p.Guid = Guid.NewGuid();
 
             GenericPropertyFinder<UserModel> objGenericPropertyFinder = new GenericPropertyFinder<UserModel>();
@@ -155,8 +204,8 @@ namespace WPF_Europa_MVVM.Model
             foreach (var item in lstDic)
             {
                 var valueOf = (from x in lstDic
-                    where x.Key.Contains(item.Key)
-                    select x.Value).FirstOrDefault();
+                               where x.Key.Contains(item.Key)
+                               select x.Value).FirstOrDefault();
 
                 ele.SetElementValue(item.Key, valueOf);
                 //item.SetAttributeValue(item.Name, valueOf);
@@ -192,7 +241,7 @@ namespace WPF_Europa_MVVM.Model
             //        xdoc.Save(writer);
             //    }
             //}
-            
+
             return true;
         }
 

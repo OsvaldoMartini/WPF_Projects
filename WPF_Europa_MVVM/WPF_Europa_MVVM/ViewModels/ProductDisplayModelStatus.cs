@@ -43,7 +43,7 @@ namespace WPF_Europa_MVVM.ViewModels
         public SolidColorBrush SurnameBrush 
         {
             get { return surnameBrush; }
-            set { surnameBrush = value; OnPropertyChanged(new PropertyChangedEventArgs("SurnameBrush ")); }
+            set { surnameBrush = value; OnPropertyChanged(new PropertyChangedEventArgs("SurnameBrush")); }
         }
 
 
@@ -66,7 +66,7 @@ namespace WPF_Europa_MVVM.ViewModels
         public SolidColorBrush DeptoBrush
         {
             get { return deptoBrush; }
-            set { deptoBrush = value; OnPropertyChanged(new PropertyChangedEventArgs("DptoBrush")); }
+            set { deptoBrush = value; OnPropertyChanged(new PropertyChangedEventArgs("DeptoBrush")); }
         }
         
         private SolidColorBrush leaverBrush = okBrush;
@@ -138,6 +138,13 @@ namespace WPF_Europa_MVVM.ViewModels
             }
             else ForenameBrush = okBrush;
 
+            if (String.IsNullOrEmpty(p.Surname))
+            {
+                errCnt++;
+                SurnameBrush = errorBrush;
+            }
+            else SurnameBrush = okBrush;
+
             if ((p.StartDate == DateTime.MinValue))
             {
                 errCnt++;
@@ -145,14 +152,14 @@ namespace WPF_Europa_MVVM.ViewModels
             }
             else StartDateBrush = okBrush;
 
-            if (p.Role.id == Guid.Empty)
+            if ((p.Role== null) || ( p.Role.id == 0))
             {
                 errCnt++;
                 RoleBrush = errorBrush;
             }
             else RoleBrush = okBrush;
 
-            if (p.Depto.id == Guid.Empty)
+            if ((p.Depto == null) || (p.Depto.id == 0))
             {
                 errCnt++;
                 DeptoBrush = errorBrush;
@@ -197,7 +204,14 @@ namespace WPF_Europa_MVVM.ViewModels
                 ForenameBrush = errorBrush;
             }
             else ForenameBrush = okBrush;
-            
+
+            if (String.IsNullOrEmpty(p.Surname))
+            {
+                errCnt++;
+                SurnameBrush = errorBrush;
+            }
+            else SurnameBrush = okBrush;
+
             if ((p.StartDate == DateTime.MinValue))
             {
                 errCnt++;
@@ -205,14 +219,15 @@ namespace WPF_Europa_MVVM.ViewModels
             }
             else StartDateBrush = okBrush;
 
-            if (p.Role.id == Guid.Empty)
+
+            if ((p.Role == null) || (p.Role.id == 0))
             {
                 errCnt++;
                 RoleBrush = errorBrush;
             }
             else RoleBrush = okBrush;
 
-            if (p.Depto.id == Guid.Empty)
+            if ((p.Depto == null) || (p.Depto.id == 0))
             {
                 errCnt++;
                 DeptoBrush = errorBrush;

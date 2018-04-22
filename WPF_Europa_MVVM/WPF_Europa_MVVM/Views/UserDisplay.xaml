@@ -58,34 +58,47 @@
                                     <RowDefinition Height="Auto"></RowDefinition>
                                     <RowDefinition Height="Auto"></RowDefinition>
                                     <RowDefinition Height="Auto"></RowDefinition>
-                                    <RowDefinition Height="*"></RowDefinition>
+                                    <RowDefinition Height="Auto"></RowDefinition>
+                                    <RowDefinition Height="Auto"></RowDefinition>
+                                    <RowDefinition Height="Auto"></RowDefinition>
                                     <RowDefinition Height="Auto"></RowDefinition>
                                     <RowDefinition Height="Auto"></RowDefinition>
                                 </Grid.RowDefinitions>
 
-                                <TextBlock Grid.Row="0" Grid.Column="0" Margin="7">Model Number:</TextBlock>
-                                <TextBox Grid.Row="0" Grid.Column="1" Margin="5"  BorderBrush="{Binding Path=Stat.UserBrush}" BorderThickness="1"
+                                <TextBlock Grid.Row="0" Grid.Column="0" Margin="7">Username:</TextBlock>
+                                <TextBox Grid.Row="0" Grid.Column="1" Margin="5"  BorderBrush="{Binding Path=Stat.UserNameBrush}" BorderThickness="1"
                      Text="{Binding Path=UserToDisplay.UserName, UpdateSourceTrigger=PropertyChanged}"></TextBox>
 
-                                <TextBlock Margin="7" Grid.Row="1" Grid.Column="0" >Model Name:</TextBlock>
+                                <TextBlock Grid.Row="1" Margin="7" Grid.Column="0" >Forename:</TextBlock>
                                 <TextBox Margin="5" Grid.Row="1" Grid.Column="1" BorderBrush="{Binding Path=Stat.ForenameBrush}" BorderThickness="1"
                      Text="{Binding Path=UserToDisplay.Forename, UpdateSourceTrigger=PropertyChanged}"></TextBox>
 
-                                <TextBlock Margin="7" Grid.Row="2" Grid.Column="0" >Unit Cost:</TextBlock>
-                                <TextBox Margin="5" Grid.Row="2" Grid.Column="1"   BorderBrush="{Binding Path=Stat.LeaverBrush}" BorderThickness="1"
-                     Text="{Binding Path=UserToDisplay.Leaver, UpdateSourceTrigger=PropertyChanged}"></TextBox>
+                                <TextBlock Grid.Row="2" Margin="7" Grid.Column="0" >Surname:</TextBlock>
+                                <TextBox Margin="5" Grid.Row="2" Grid.Column="1" BorderBrush="{Binding Path=Stat.SurnameBrush}" BorderThickness="1"
+                                         Text="{Binding Path=UserToDisplay.Surname , UpdateSourceTrigger=PropertyChanged}"></TextBox>
 
-                                <TextBlock Margin="7" Grid.Row="3" Grid.Column="0" >Category:</TextBlock>
+                                <TextBlock Margin="7" Grid.Row="3" Grid.Column="0" >Start Date:</TextBlock>
                                 <TextBox Margin="5" Grid.Row="3" Grid.Column="1"  BorderBrush="{Binding Path=Stat.StartDateBrush}" BorderThickness="1"
-                     Text="{Binding Path=UserToDisplay.StartDate, UpdateSourceTrigger=PropertyChanged}"></TextBox>
+                                         Text="{Binding Path=UserToDisplay.StartDate, UpdateSourceTrigger=PropertyChanged}"></TextBox>
 
-                                <TextBlock Margin="7,7,7,0" Grid.Row="4" Grid.Column="0" >Surname:</TextBlock>
-                                <TextBox Margin="7" Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="2" 
-                 TextWrapping="Wrap" VerticalScrollBarVisibility="Visible" Text="{Binding Path=UserToDisplay.Surname}"></TextBox>
+                                <TextBlock Margin="7" Grid.Row="4" Grid.Column="0" >Role:</TextBlock>
+                                <TextBox Margin="5" Grid.Row="4" Grid.Column="1"  BorderBrush="{Binding Path=Stat.RoleBrush}" BorderThickness="1"
+                                         Text="{Binding Path=UserToDisplay.Role.RoleName, UpdateSourceTrigger=PropertyChanged}"></TextBox>
 
-                                <TextBlock Margin="7,25,15,0" Grid.Row="6" Grid.Column="0" >Status:</TextBlock>
-                                <TextBox Margin="7" Grid.Row="7" Grid.Column="0" Grid.ColumnSpan="2" 
-                 Text="{Binding Path=Stat.Status}"></TextBox>
+                                <TextBlock Margin="7" Grid.Row="5" Grid.Column="0" >Department:</TextBlock>
+                                <TextBox Margin="5" Grid.Row="5" Grid.Column="1"  BorderBrush="{Binding Path=Stat.DeptoBrush}" BorderThickness="1"
+                                         Text="{Binding Path=UserToDisplay.Depto.DeptoName, UpdateSourceTrigger=PropertyChanged}"></TextBox>
+
+                                <TextBlock Margin="7" Grid.Row="6" Grid.Column="0" >Leaver:</TextBlock>
+                                <CheckBox Margin="5" Grid.Row="6" Grid.Column="1"   IsChecked="{Binding Path=UserToDisplay.Leaver, UpdateSourceTrigger=PropertyChanged}" BorderThickness="1"/>
+
+
+<TextBlock Grid.Row="7" Margin="7" Grid.Column="0" >Leaving Date:</TextBlock>
+                                <TextBox Margin="5" Grid.Row="7" Grid.Column="1" BorderBrush="{Binding Path=Stat.LeavingDateBrush}" BorderThickness="1"
+                                         Text="{Binding Path=UserToDisplay.LeavingDate, UpdateSourceTrigger=PropertyChanged}"></TextBox>
+
+                                <TextBlock Margin="7,25,15,0" Grid.Row="8" Grid.Column="0" >Status:</TextBlock>
+                                <TextBox Margin="7" Grid.Row="9" Grid.Column="0" Grid.ColumnSpan="2" Text="{Binding Path=Stat.Status}"></TextBox>
                             </Grid>
 
                         </Border>

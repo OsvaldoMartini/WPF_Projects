@@ -7,7 +7,7 @@ namespace WPF_Europa_MVVM.Model
 {
     public class Department
     {
-        public Guid id { get; set; }
-        public string DptoName { get; set; }
+        public int id { get; set; }
+        public string DeptoName { get; set; }
     }
 }

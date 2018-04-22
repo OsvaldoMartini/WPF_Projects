@@ -62,6 +62,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Converters\Converters.cs" />
     <Compile Include="Foundation\ApplicationCloseCommand.cs" />
     <Compile Include="Foundation\GlobalServices.cs" />
     <Compile Include="Foundation\IModalService.cs" />

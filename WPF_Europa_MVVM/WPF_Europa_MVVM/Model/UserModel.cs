@@ -85,6 +85,8 @@ namespace WPF_Europa_MVVM.Model
             if (this.checkFileFirst)
                 if (!File.Exists(filePath))
                 {
+                    DBUtility.CreateFile<Department>(DBUtility.MockDepartment());
+                    DBUtility.CreateFile<Role>(DBUtility.MockRoles());
                     list = DBUtility.CreateFile<UserModel>(DBUtility.MockUserModel());
                 }
                 else
