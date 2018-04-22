@@ -10,8 +10,14 @@ namespace LoadXML.ByAttachedP.Helpers
     public class FrameDataContextInherit
     {
         // Inherit
-        public static bool GetInherit(Frame frame) { return (bool)frame.GetValue(InheritProperty); }
-        public static void SetInherit(Frame frame, bool value) { frame.SetValue(InheritProperty, value); }
+        public static bool GetInherit(Frame frame)
+        {
+            return (bool)frame.GetValue(InheritProperty);
+        }
+        public static void SetInherit(Frame frame, bool value)
+        {
+            frame.SetValue(InheritProperty, value);
+        }
         public static readonly DependencyProperty InheritProperty = DependencyProperty.RegisterAttached("Inherit", typeof(bool), typeof(FrameDataContextInherit), new PropertyMetadata(false, OnInheritChanged));
 
         private static void OnInheritChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
