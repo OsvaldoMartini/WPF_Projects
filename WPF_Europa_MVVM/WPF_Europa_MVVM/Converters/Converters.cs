@@ -72,7 +72,34 @@ namespace WPF_Europa_MVVM.Converters
         public object ConvertBack(object value, Type targetType, object parameter,
             System.Globalization.CultureInfo culture)
         {
-            return value.ToString().ToLower();
+            return DependencyProperty.UnsetValue;
+        }
+      
+    }
+
+    [ValueConversion(typeof(string), typeof(String))]
+
+    public class IsNotDateFilledConverter : IValueConverter
+    {
+        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            
+            if (value is DateTime)
+            {
+                DateTime dt = (DateTime)value;
+                if (dt > DateTime.MinValue)
+                    return false;
+                else
+                    return true;
+            }
+
+            return true;
+        }
+
+
+        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            return DependencyProperty.UnsetValue;
         }
     }
 }
