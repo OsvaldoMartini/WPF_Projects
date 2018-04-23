@@ -10,14 +10,9 @@ namespace WPF_Europa_MVVM.ViewModels
     //It is assigned by the DB when it creates a new user.  It is used
     //to identify a user and must not be modified by the GUI.
 
-    public class UserVM
+    public class UserVM : ViewModelBase
     {
-        public event PropertyChangedEventHandler PropertyChanged;
-        public void OnPropertyChanged(PropertyChangedEventArgs e)
-        {
-            if (PropertyChanged != null)
-                PropertyChanged(this, e);
-        }
+       
         //For DB use only!
         private Guid _guiid;
         public Guid _Guid{ get { return _guiid; } }

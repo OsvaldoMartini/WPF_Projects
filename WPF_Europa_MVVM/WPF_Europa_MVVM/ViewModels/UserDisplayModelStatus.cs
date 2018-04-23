@@ -5,9 +5,8 @@ using WPF_Europa_MVVM.Foundation;
 
 namespace WPF_Europa_MVVM.ViewModels
 {
-    //UserVM Error detection, error display and status msg
-    //Note, a Delete may be performed without checking any Usert fields
-    public class UserDisplayModelStatus : INotifyPropertyChanged
+    //For Error Detection and Messages Display
+    public class UserDisplayModelStatus : ViewModelBase
     {
         public UserDisplayModelStatus()
         {
@@ -17,13 +16,6 @@ namespace WPF_Europa_MVVM.ViewModels
             NoError();
         } //constructor
         
-        public event PropertyChangedEventHandler PropertyChanged;
-        public void OnPropertyChanged(PropertyChangedEventArgs e)
-        {
-            if (PropertyChanged != null)
-                PropertyChanged(this, e);
-        }
-
         private bool _userExist;
         public bool UserExist
         {

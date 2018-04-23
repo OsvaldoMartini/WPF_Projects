@@ -8,7 +8,7 @@ using WPF_Europa_MVVM.Views;
 
 namespace WPF_Europa_MVVM.ViewModels
 {
-    public class UserSelectActionsModel : INotifyPropertyChanged
+    public class UserSelectActionsModel : ViewModelBase
     {
 
         public UserSelectActionsModel()
@@ -71,7 +71,7 @@ namespace WPF_Europa_MVVM.ViewModels
 
         private void CheckUserExist(UserVM p)
         {
-            bool exist = _dataItems.Any(item => item.UserName != p.UserName);
+            bool exist = _dataItems.Any(item => item.UserName == p.UserName);
             App.Messenger.NotifyColleagues("UserExist", exist);
         }
 
@@ -86,13 +86,6 @@ namespace WPF_Europa_MVVM.ViewModels
         private void DeleteUser()
         {
             _dataItems.Remove(_selectedUser);
-        }
-
-        public event PropertyChangedEventHandler PropertyChanged;
-        public void OnPropertyChanged(PropertyChangedEventArgs e)
-        {
-            if (PropertyChanged != null)
-                PropertyChanged(this, e);
         }
 
         private UserObservableCollection<UserVM> _dataItems;

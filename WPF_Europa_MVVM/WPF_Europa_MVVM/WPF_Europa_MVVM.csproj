@@ -65,6 +65,7 @@
     <Compile Include="ViewModels\UserDisplayModel.cs" />
     <Compile Include="ViewModels\UserDisplayModelStatus.cs" />
     <Compile Include="ViewModels\UserSelectActionsModel.cs" />
+    <Compile Include="ViewModels\ViewModelBase.cs" />
     <Compile Include="Views\UserDisplay.xaml.cs">
       <DependentUpon>UserDisplay.xaml</DependentUpon>
     </Compile>

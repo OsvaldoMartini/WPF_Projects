@@ -7,7 +7,7 @@ using WPF_Europa_MVVM.Model;
 
 namespace WPF_Europa_MVVM.ViewModels
 {
-    public class UserDisplayModel : INotifyPropertyChanged
+    public class UserDisplayModel : ViewModelBase
     {
 
 
@@ -27,14 +27,6 @@ namespace WPF_Europa_MVVM.ViewModels
             messenger.Register("SetStatus", (Action<String>) (param => stat.Status = param));
         } //Constructor
 
-
-        public event PropertyChangedEventHandler PropertyChanged;
-
-        public void OnPropertyChanged(PropertyChangedEventArgs e)
-        {
-            if (PropertyChanged != null)
-                PropertyChanged(this, e);
-        }
 
         //data checks and status indicators done in another class
         private readonly UserDisplayModelStatus stat = new UserDisplayModelStatus();
@@ -147,7 +139,7 @@ namespace WPF_Europa_MVVM.ViewModels
 
         private void UpdateUser()
         {
-            if (!stat.CheckIfUserExist(UserToDisplay)) return;
+            if ((!isSelected) && (!stat.CheckIfUserExist(UserToDisplay))) return;
 
             if (!stat.ChkUserForUpdate(UserToDisplay)) return;
                 if(!App.StoreXML.UpdateUser(UserToDisplay))
