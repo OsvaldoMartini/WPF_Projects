@@ -67,6 +67,8 @@ namespace WPF_Europa_MVVM.ViewModels
         private void SaveUser(UserVM p)
         {
             _dataItems.Add(p);
+            App.Messenger.NotifyColleagues("ClearUserDisplay");
+            
         }
 
         private void CheckUserExist(UserVM p)

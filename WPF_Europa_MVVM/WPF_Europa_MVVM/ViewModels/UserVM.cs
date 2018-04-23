@@ -24,43 +24,42 @@ namespace WPF_Europa_MVVM.ViewModels
         public string UserName
         {
             get { return userName; }
-            set { userName = value; OnPropertyChanged(new PropertyChangedEventArgs("UserName"));
-                }
+            set { userName = value; }
         }
 
         private string forename;
         public string Forename
         {
             get { return forename; }
-            set { forename = value; OnPropertyChanged(new PropertyChangedEventArgs("Forename")); }
+            set { forename = value; }
         }
 
         private string surname;
         public string Surname
         {
             get { return surname; }
-            set { surname = value; OnPropertyChanged(new PropertyChangedEventArgs("Surname")); }
+            set { surname = value; }
         }
 
         private DateTime startDate;
         public DateTime StartDate
         {
             get { return startDate; }
-            set { startDate = value; OnPropertyChanged(new PropertyChangedEventArgs("StartDate")); }
+            set { startDate = value; }
         }
 
         private RoleModel role;
         public RoleModel _Role
         {
             get { return role; }
-            set { role = value; OnPropertyChanged(new PropertyChangedEventArgs("_Role")); }
+            set { role = value; }
         }
 
         private DeptoModel depto;
         public DeptoModel Depto
         {
             get { return depto; }
-            set { depto = value; OnPropertyChanged(new PropertyChangedEventArgs("Depto")); }
+            set { depto = value;}
         }
 
 
@@ -68,14 +67,16 @@ namespace WPF_Europa_MVVM.ViewModels
         public bool Leaver
         {
             get { return leaver; }
-            set { leaver = value; OnPropertyChanged(new PropertyChangedEventArgs("Leaver")); }
+            set { leaver = value;
+                OnPropertyChanged(new PropertyChangedEventArgs("Leaver"));
+            }
         }
 
         private DateTime? leavingDate;
         public DateTime? LeavingDate
         {
             get { return leavingDate; }
-            set { leavingDate = value; OnPropertyChanged(new PropertyChangedEventArgs("LeavingDate")); }
+            set { leavingDate = value; }
         }
 
         public UserVM()

@@ -149,7 +149,7 @@ namespace WPF_Europa_MVVM.ViewModels
 
             if (p.Leaver)
             {
-                if ((p.LeavingDate == DateTime.MinValue) || p.LeavingDate < p.StartDate)
+                if (p.LeavingDate == null || (p.LeavingDate == DateTime.MinValue) || p.LeavingDate < p.StartDate)
                 {
                     errCnt++;
                     LeavingDateBrush = errorBrush;
@@ -212,7 +212,7 @@ namespace WPF_Europa_MVVM.ViewModels
 
             if (p.Leaver)
             {
-                if ((p.LeavingDate == DateTime.MinValue) || p.LeavingDate < p.StartDate)
+                if (p.LeavingDate ==null || (p.LeavingDate == DateTime.MinValue) || p.LeavingDate < p.StartDate)
                 {
                     {
                         errCnt++;

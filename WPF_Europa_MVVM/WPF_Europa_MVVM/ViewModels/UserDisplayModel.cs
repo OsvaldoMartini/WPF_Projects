@@ -24,6 +24,7 @@ namespace WPF_Europa_MVVM.ViewModels
 
             Messenger messenger = App.Messenger;
             messenger.Register("UserSelectionChanged", (Action<UserVM>) (param => UserToProcess(param)));
+            messenger.Register("ClearUserDisplay", (Action)(() => ClearUserDisplay()));
             messenger.Register("SetStatus", (Action<String>) (param => stat.Status = param));
         } //Constructor
 
