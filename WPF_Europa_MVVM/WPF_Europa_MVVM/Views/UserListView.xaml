@@ -7,8 +7,7 @@
     <UserControl.Resources>
         <loc:DateTimeToShortDate x:Key="DateShortDate"/>
         <loc:BooleanToYesNoConverter x:Key="BooleanToYesNo"/>
-        <loc:ToLowerCaseConverter x:Key="LowerCase"/>
-
+        
         <Style x:Key="DesignerItemStyle" TargetType="ContentControl" />
         <DataTemplate x:Key="RowDetailTemplate">
             <Grid x:Name="RowDetailGrid"
@@ -125,7 +124,7 @@
                                 </DataGrid.RowHeaderTemplate>
                                 <DataGrid.Columns>
                                     <DataGridTextColumn Width="120"
-                                                        Binding="{Binding UserName, Converter={StaticResource LowerCase}}"
+                                                        Binding="{Binding UserName}"
                                                         Header="User Name" />
                                     <DataGridTextColumn Width="120"
                                                         Binding="{Binding Forename}"

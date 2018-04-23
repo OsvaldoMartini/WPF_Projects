@@ -1,10 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Globalization;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Data;
 
 namespace WPF_Europa_MVVM.Converters
@@ -16,10 +13,14 @@ namespace WPF_Europa_MVVM.Converters
         {
             if (value is DateTime)
             {
-                DateTime dt = (DateTime)value;
-                string date = dt.ToShortDateString();
-                //string date = dt.ToString("d/M/yyyy");
-                return date;
+                DateTime dt = (DateTime) value;
+                if (dt == DateTime.MinValue)
+                    return string.Empty;
+                {
+                    //string date = dt.ToString("d/M/yyyy");
+                    string date = dt.ToShortDateString();
+                    return date;
+                }
             }
 
             return string.Empty;
@@ -62,15 +63,30 @@ namespace WPF_Europa_MVVM.Converters
     }
 
 
-    public class ToLowerCaseConverter: IValueConverter
+    public class ToLowerUpperConverter: IValueConverter
     {
-        public object Convert(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
+        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            return value.ToString().ToLower();
+            var s = value as string;
+            if (s == null)
+                return value;
+
+            CharacterCasing casing;
+            if (!Enum.TryParse(parameter as string, out casing))
+                casing = CharacterCasing.Upper;
+
+            switch (casing)
+            {
+                case CharacterCasing.Lower:
+                    return s.ToLower(culture);
+                case CharacterCasing.Upper:
+                    return s.ToUpper(culture);
+                default:
+                    return s;
+            }
         }
 
-        public object ConvertBack(object value, Type targetType, object parameter,
-            System.Globalization.CultureInfo culture)
+        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
         {
             return DependencyProperty.UnsetValue;
         }

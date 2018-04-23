@@ -9,7 +9,9 @@
     <UserControl.Resources>
         <loc:IsNotDateFilledConverter x:Key="IsFilled"/>
         <loc:DateTimeToShortDate x:Key="DateShortDate"/>
-        <Style x:Key="DesignerItemStyle" TargetType="ContentControl" />
+        <loc:ToLowerUpperConverter x:Key="LowerCase"/>
+
+<Style x:Key="DesignerItemStyle" TargetType="ContentControl" />
     </UserControl.Resources>
     <UserControl.DataContext>
         <viewModels:UserDisplayModel />
@@ -69,7 +71,7 @@
                                 </Grid.RowDefinitions>
 
                                 <TextBlock Grid.Row="0" Grid.Column="0" Margin="7">Username:</TextBlock>
-                                <TextBox Grid.Row="0" Grid.Column="1" Margin="5"  BorderBrush="{Binding Path=Stat.UserNameBrush}" BorderThickness="1"
+                                <TextBox Grid.Row="0" Grid.Column="1" Margin="5"  BorderBrush="{Binding Path=Stat.UserNameBrush}" BorderThickness="1"  CharacterCasing="Lower"
                      Text="{Binding Path=UserToDisplay.UserName, UpdateSourceTrigger=PropertyChanged}"></TextBox>
 
                                 <TextBlock Grid.Row="1" Margin="7" Grid.Column="0" >Forename:</TextBlock>

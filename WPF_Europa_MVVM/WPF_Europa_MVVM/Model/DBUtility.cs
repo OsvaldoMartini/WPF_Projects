@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Xml;
@@ -12,6 +13,7 @@ namespace WPF_Europa_MVVM.Model
     public class DBUtility
     {
         public const string FilePath = "DBFiles";
+
         public static List<CustomerModel> MockCustomerModel()
         {
 
@@ -124,9 +126,9 @@ namespace WPF_Europa_MVVM.Model
         {
             List<RoleModel> roles = new List<RoleModel>()
             {
-                    new RoleModel {id = 1, RoleName = "Software Developer"},
-                    new RoleModel {id = 2, RoleName = "Development Manager"},
-                    new RoleModel {id = 3, RoleName = "IT Director"},
+                new RoleModel {id = 1, RoleName = "Software Developer"},
+                new RoleModel {id = 2, RoleName = "Development Manager"},
+                new RoleModel {id = 3, RoleName = "IT Director"},
             };
 
             return roles;
@@ -137,9 +139,9 @@ namespace WPF_Europa_MVVM.Model
         {
             List<DeptoModel> dptos = new List<DeptoModel>()
             {
-                
+
                 new DeptoModel {id = 1, DeptoName = "Software Developer"},
-               new DeptoModel {id = 2, DeptoName = "Group"},
+                new DeptoModel {id = 2, DeptoName = "Group"},
             };
 
             return dptos;
@@ -204,8 +206,8 @@ namespace WPF_Europa_MVVM.Model
             foreach (var item in lstDic)
             {
                 var valueOf = (from x in lstDic
-                               where x.Key.Contains(item.Key)
-                               select x.Value).FirstOrDefault();
+                    where x.Key.Contains(item.Key)
+                    select x.Value).FirstOrDefault();
 
                 ele.SetElementValue(item.Key, valueOf);
                 //item.SetAttributeValue(item.Name, valueOf);
@@ -226,7 +228,7 @@ namespace WPF_Europa_MVVM.Model
             XDocument xdoc = XDocument.Load(xmlFilename);
             xdoc.Element("ArrayOfUserModel")
                 .Elements("UserModel")
-                .Where(x => (string)x.Element("UserId") == p.ToString())
+                .Where(x => (string) x.Element("UserId") == p.ToString())
                 .Remove();
             xdoc.Save(xmlFilename);
 
@@ -257,8 +259,8 @@ namespace WPF_Europa_MVVM.Model
             var elements = xdoc.Element("ArrayOfUserModel").Elements();
 
             var valueProdID = (from x in lstDic
-                               where x.Key.Contains("Guid")
-                               select x.Value).FirstOrDefault();
+                where x.Key.Contains("Guid")
+                select x.Value).FirstOrDefault();
 
             foreach (var child in elements)
             {
@@ -267,11 +269,27 @@ namespace WPF_Europa_MVVM.Model
                 {
                     foreach (var item in child.Elements())
                     {
-                        var valueOf = (from x in lstDic
-                                       where x.Key.Contains(item.Name.ToString())
-                                       select x.Value).FirstOrDefault();
-                        if (valueOf != null)
-                            item.SetValue(valueOf);
+
+
+                        if ((item.Name == "_Role") || (item.Name == "Depto"))
+                        {
+                            foreach (var subItem in item.Elements())
+                            {
+                                var valueSubItem = subItem.Value;
+
+                                subItem.SetValue(valueSubItem);
+                            }
+                        }
+                        else
+                        {
+                            var valueOf = (from x in lstDic
+                                where x.Key.Contains(item.Name.ToString())
+                                select x.Value).FirstOrDefault();
+
+                            if (valueOf != null)
+                                item.SetValue(valueOf);
+
+                        }
                     }
                 }
                 else
@@ -313,11 +331,13 @@ namespace WPF_Europa_MVVM.Model
                 {
                     xmlReader.Close();
                 }
+
                 if (strReader != null)
                 {
                     strReader.Close();
                 }
             }
+
             return obj;
         }
 
@@ -343,6 +363,7 @@ namespace WPF_Europa_MVVM.Model
                     tw.Close();
                 }
             }
+
             return sw.ToString();
         }
 
@@ -359,7 +380,7 @@ namespace WPF_Europa_MVVM.Model
 
                 System.Xml.XmlReader reader = xdoc.CreateReader();
 
-                result = (List<T>)serializer.Deserialize(reader);
+                result = (List<T>) serializer.Deserialize(reader);
                 reader.Close();
             }
             finally
@@ -367,6 +388,7 @@ namespace WPF_Europa_MVVM.Model
 
 
             }
+
             return result;
 
         }
@@ -374,7 +396,8 @@ namespace WPF_Europa_MVVM.Model
 
         public static void SerializeParams<T>(XDocument doc, List<T> paramList)
         {
-            System.Xml.Serialization.XmlSerializer serializer = new System.Xml.Serialization.XmlSerializer(paramList.GetType());
+            System.Xml.Serialization.XmlSerializer serializer =
+                new System.Xml.Serialization.XmlSerializer(paramList.GetType());
 
             System.Xml.XmlWriter writer = doc.CreateWriter();
 
@@ -393,14 +416,16 @@ namespace WPF_Europa_MVVM.Model
             {
                 StreamReader xmlStream = new StreamReader(XmlFilename);
                 XmlSerializer serializer = new XmlSerializer(typeof(T));
-                returnObject = (T)serializer.Deserialize(xmlStream);
+                returnObject = (T) serializer.Deserialize(xmlStream);
             }
             catch (Exception ex)
             {
                 //ExceptionLogger.WriteExceptionToConsole(ex, DateTime.Now);
             }
+
             return returnObject;
         }
 
     }
+
 }

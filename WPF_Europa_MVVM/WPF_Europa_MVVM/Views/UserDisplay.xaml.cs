@@ -13,14 +13,5 @@ namespace WPF_Europa_MVVM.Views
         {
             InitializeComponent();
         }
-
-        private void OkButton_Click(object sender, RoutedEventArgs args)
-        {
-            GlobalServices.ModalService.GoBackward(true);
-        }
-        private void CancelButton_Click(object sender, RoutedEventArgs args)
-        {
-            GlobalServices.ModalService.GoBackward(false);
-        }
     }
 }

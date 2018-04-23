@@ -23,7 +23,7 @@ namespace WPF_Europa_MVVM.Foundation
             {
 
                 Debug.WriteLine("Name of Property is\t:\t" + property.Name);
-                Debug.WriteLine("Value of Property is\t:\t" + property.GetValue(tmodelObj).ToString());
+                Debug.WriteLine("Value of Property is\t:\t" + (property.GetValue(tmodelObj) == null ? string.Empty:property.GetValue(tmodelObj).ToString()));
                 Debug.WriteLine(Environment.NewLine);
             }
         }
@@ -39,11 +39,16 @@ namespace WPF_Europa_MVVM.Foundation
             Dictionary<string, string> myDict = new Dictionary<string, string>();
             //Now we will loop in all properties one by one to get value
             foreach (PropertyInfo property in arrayPropertyInfos)
-                myDict.Add(property.Name, property.GetValue(tmodelObj).ToString());
+            {
+                Debug.Write(property.GetType());
+
+                myDict.Add(property.Name,
+                    property.GetValue(tmodelObj) != null ? property.GetValue(tmodelObj).ToString(): null);
+            }
 
             return myDict;
         }
-
+      
         //public System.Collections.IDictionaryEnumerator returnList<T>(T list)
         //{
         //    IEnumerator<T> ide = list.GetEnumerator();

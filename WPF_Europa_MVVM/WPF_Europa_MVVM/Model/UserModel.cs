@@ -1,6 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
+using System.Globalization;
 using System.IO;
+using System.Xml.Serialization;
 using WPF_Europa_MVVM.Controls;
 using WPF_Europa_MVVM.ViewModels;
 
@@ -13,13 +16,59 @@ namespace WPF_Europa_MVVM.Model
         public string UserName { get; set; }
         public string Forename { get; set; }
         public string Surname { get; set; }
+        [XmlIgnore]
         public DateTime StartDate { get; set; }
         public RoleModel _Role { get; set; }
         public DeptoModel Depto { get; set; }
+        [XmlIgnore]
         public bool Leaver { get; set; }
+        [XmlIgnore]
         public DateTime? LeavingDate { get; set; }
 
+        [XmlElement("StartDate")]
+        public string DumpStartDateXML
+        {
+            get { return this.StartDate.ToString("yyyy-MM-dd HH:mm:ss"); }
+            set { this.StartDate = DateTime.Parse(value); }
+        }
 
+        
+        [XmlElement("Leaver")]
+        public string DumpXMLBoolean
+        {
+            get { return this.Leaver.ToString().ToLower(); }
+            set { this.Leaver = Boolean.Parse(value); }
+        }
+
+        [XmlElement("LeavingDate")]
+        public string DumpLeavingDataXML
+        {
+            get
+            {
+                if (this.LeavingDate != null)
+                {
+                    try
+                    {
+                        return DateTime.ParseExact(this.LeavingDate.ToString(), "d/MM/yyyy 00:00:00",
+                                CultureInfo.InvariantCulture,
+                                DateTimeStyles.AllowWhiteSpaces | DateTimeStyles.AssumeUniversal)
+                            .ToString("yyyy-MM-dd HH:mm:ss");
+                    }
+                    catch (Exception e)
+                    {
+                        Debug.WriteLine(e);
+                        throw;
+                    }
+
+                }
+
+                return DateTime.MinValue.ToString("yyyy-MM-dd HH:mm:ss");
+            }
+            set
+            {
+                this.LeavingDate = DateTime.Parse(value);
+            }
+        }
 
         #region Builder Fields
         private bool checkFileFirst = true;
@@ -76,7 +125,7 @@ namespace WPF_Europa_MVVM.Model
 
         public UserObservableCollection<UserVM> Build()
         {
-            UserObservableCollection<UserVM> products = new UserObservableCollection<UserVM>();
+            UserObservableCollection<UserVM> users = new UserObservableCollection<UserVM>();
 
             var filePath = String.Format("{0}{1}\\UserModel.xml", AppDomain.CurrentDomain.BaseDirectory,
                 DBUtility.FilePath);
@@ -93,12 +142,14 @@ namespace WPF_Europa_MVVM.Model
 
                     list = DBUtility.DeserializeParamsListOf<UserModel>(filePath);
 
+                    //list = DBUtility.DeserializeXMLFileOf <List<UserModel>>(filePath);
+
             if (list != null)
                 foreach (UserModel sp in list)
-                    products.Add(sp.UserModel2User());
+                    users.Add(sp.UserModel2User());
 
 
-            return products;
+            return users;
         }
 
         public UserModel(Guid id,int userId, string userName, string forename,
@@ -134,10 +185,10 @@ namespace WPF_Europa_MVVM.Model
 
         public UserVM UserModel2User()
         {
-            return new UserVM(Guid,UserId, UserName, Forename, Surname, StartDate,_Role,Depto,Leaver,LeavingDate );
+            return new UserVM(Guid,UserId, UserName, Forename, Surname, StartDate,_Role,Depto,Leaver,LeavingDate);
         } //UserModel2User()
 
-
+        
 
     }
 }

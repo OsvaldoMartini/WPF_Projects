@@ -169,17 +169,12 @@ namespace WPF_Europa_MVVM.ViewModels
             if (p.Leaver)
             {
                 if ((p.LeavingDate == DateTime.MinValue) || p.LeavingDate < p.StartDate)
-                { errCnt++; }
-                LeavingDateBrush = errorBrush;
+                {
+                    errCnt++;
+                    LeavingDateBrush = errorBrush;
+                }
             }
             else LeavingDateBrush = okBrush;
-
-            if (p.Leaver)
-            {
-                errCnt++;
-                LeaverBrush = errorBrush;
-            }
-            else LeaverBrush = okBrush;
 
             if (errCnt == 0) { Status = "OK"; return true; }
             else { Status = "ADD, missing or invalid fields."; return false; }
@@ -236,18 +231,15 @@ namespace WPF_Europa_MVVM.ViewModels
 
             if (p.Leaver)
             {
-               if ((p.LeavingDate == DateTime.MinValue) || p.LeavingDate < p.StartDate)
-                {errCnt++;}
-                LeavingDateBrush = errorBrush;
+                if ((p.LeavingDate == DateTime.MinValue) || p.LeavingDate < p.StartDate)
+                {
+                    {
+                        errCnt++;
+                    }
+                    LeavingDateBrush = errorBrush;
+                }
             }
             else LeavingDateBrush = okBrush;
-
-            if (p.Leaver)
-            {
-                errCnt++;
-                LeaverBrush = errorBrush;
-            }
-            else LeaverBrush = okBrush;
             
             if (errCnt == 0) { Status = "OK"; return true; }
             else { Status = "Update, missing or invalid fields."; return false; }

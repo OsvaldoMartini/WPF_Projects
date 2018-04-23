@@ -83,12 +83,6 @@ namespace WPF_Europa_MVVM.ViewModels
             set { leavingDate = value; OnPropertyChanged(new PropertyChangedEventArgs("LeavingDate")); }
         }
 
-        public object DateInitial
-        {
-            get { return DateTime.Now.AddYears(-5); }
-        }
-
-
         public UserVM()
         {
         }
@@ -105,7 +99,7 @@ namespace WPF_Europa_MVVM.ViewModels
             _Role = role;
             Depto = depto;
             Leaver = leaver;
-            LeavingDate = leavingDate;
+            LeavingDate = leavingDate==DateTime.MinValue?null:leavingDate;
 
         }
 
@@ -131,8 +125,6 @@ namespace WPF_Europa_MVVM.ViewModels
         }
 
     } //class User
-
-
 
     //Communiction to/from SQL uses this class for user
     //It has a decimal, not string, definition for Leaver

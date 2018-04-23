@@ -71,7 +71,7 @@
     <Compile Include="Model\RoleModel.cs" />
     <Compile Include="ViewModels\UserVM.cs" />
     <Compile Include="ViewModels\UserDisplayModel.cs" />
-    <Compile Include="ViewModels\ProductDisplayModelStatus.cs" />
+    <Compile Include="ViewModels\UserDisplayModelStatus.cs" />
     <Compile Include="ViewModels\UserSelectActionsModel.cs" />
     <Compile Include="Views\UserDisplay.xaml.cs">
       <DependentUpon>UserDisplay.xaml</DependentUpon>
@@ -153,10 +153,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="DLLs\vhCalendar.dll" />
-    <Content Include="DLLs\vhDatePicker.dll" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -64,11 +64,11 @@ namespace WPF_Europa_MVVM.Model
         public UserObservableCollection<UserVM> GetUsers()
         {
             hasError = false;
-            UserObservableCollection<UserVM> products = new UserObservableCollection<UserVM>();
+            UserObservableCollection<UserVM> users = new UserObservableCollection<UserVM>();
             try
             {
                 //True: Check if File Exist
-                products = new UserModel().WhitCheckFileFirst(true);
+                users = new UserModel().WhitCheckFileFirst(true);
 
             } //try
             catch (Exception ex)
@@ -77,7 +77,7 @@ namespace WPF_Europa_MVVM.Model
                 hasError = true;
             }
 
-            return products;
+            return users;
         }//GetUsersByXML
 
 
