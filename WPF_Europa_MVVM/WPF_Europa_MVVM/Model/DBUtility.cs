@@ -270,14 +270,33 @@ namespace WPF_Europa_MVVM.Model
                     foreach (var item in child.Elements())
                     {
 
-
-                        if ((item.Name == "_Role") || (item.Name == "Depto"))
+                        if (item.Name == "_Role")
                         {
+                            GenericPropertyFinder<RoleModel> objRole= new GenericPropertyFinder<RoleModel>();
+                            
+                            var pItems = objRole.ReturTModelPropertyAndValue(p._Role);
+                            
                             foreach (var subItem in item.Elements())
                             {
-                                var valueSubItem = subItem.Value;
+                                var valueOf = (from x in pItems
+                                    where x.Key.Contains(subItem.Name.ToString())
+                                    select x.Value).FirstOrDefault();
+                                
+                                subItem.SetValue(valueOf);
+                            }
+                        }else if (item.Name == "Depto")
+                        {
+                            GenericPropertyFinder<DeptoModel> objDepto= new GenericPropertyFinder<DeptoModel>();
+                            
+                            var pItems = objDepto.ReturTModelPropertyAndValue(p.Depto);
 
-                                subItem.SetValue(valueSubItem);
+                            foreach (var subItem in item.Elements())
+                            {
+                                var valueOf = (from x in pItems
+                                    where x.Key.Contains(subItem.Name.ToString())
+                                    select x.Value).FirstOrDefault();
+
+                                subItem.SetValue(valueOf);
                             }
                         }
                         else

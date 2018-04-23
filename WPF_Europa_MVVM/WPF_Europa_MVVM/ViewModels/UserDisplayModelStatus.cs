@@ -1,6 +1,7 @@
 ﻿using System;
 using System.ComponentModel;
 using System.Windows.Media;
+using WPF_Europa_MVVM.Foundation;
 
 namespace WPF_Europa_MVVM.ViewModels
 {
@@ -8,12 +9,28 @@ namespace WPF_Europa_MVVM.ViewModels
     //Note, a Delete may be performed without checking any Usert fields
     public class UserDisplayModelStatus : INotifyPropertyChanged
     {
+        public UserDisplayModelStatus()
+        {
+            Messenger messenger = App.Messenger;
+            messenger.Register("UserExist", (Action<Boolean>)(param => UserExist = param));
+        
+            NoError();
+        } //constructor
+        
         public event PropertyChangedEventHandler PropertyChanged;
         public void OnPropertyChanged(PropertyChangedEventArgs e)
         {
             if (PropertyChanged != null)
                 PropertyChanged(this, e);
         }
+
+        private bool _userExist;
+        public bool UserExist
+        {
+            get { return _userExist; }
+            set { _userExist = value; OnPropertyChanged(new PropertyChangedEventArgs("UserExist")); }
+        }
+
 
         //Error status msg and field Brushes to indicate userVM field errors
         private string status;
@@ -90,34 +107,6 @@ namespace WPF_Europa_MVVM.ViewModels
             Status = "OK";
         } //NoError()
 
-
-        public UserDisplayModelStatus()
-        {
-            NoError();
-        } //ctor
-
-
-        //verify the UserVM's unitcost is a decimal number > 0
-        private bool ChkUnitCost(string costString)
-        {
-            if (String.IsNullOrEmpty(costString))
-                return false;
-            else
-            {
-                decimal leaver;
-                try
-                {
-                    leaver = Decimal.Parse(costString);
-                }
-                catch
-                {
-                    return false;
-                }
-                if (leaver < 0)
-                    return false;
-                else return true;
-            }
-        } //ChkUnitCost()
 
 
         //check all userVM fields for validity
@@ -245,5 +234,21 @@ namespace WPF_Europa_MVVM.ViewModels
             else { Status = "Update, missing or invalid fields."; return false; }
         } //ChkUserForUpdate()
 
+
+        public bool CheckIfUserExist(UserVM p)
+        {
+            App.Messenger.NotifyColleagues("CheckUserExist", p);
+
+            int errCnt = 0;
+            if (UserExist)
+            {
+                errCnt++;
+                UserNameBrush = errorBrush;
+            }
+            else UserNameBrush = okBrush;
+
+            if (errCnt == 0) { return true; }
+            else { Status = "Username has been taken!"; return false; }
+        }
     } //class UserDisplayModelStatus
 }  //NS: UserMvvm.ViewModels

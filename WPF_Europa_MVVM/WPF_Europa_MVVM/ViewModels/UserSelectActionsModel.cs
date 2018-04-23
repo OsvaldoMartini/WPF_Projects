@@ -1,5 +1,6 @@
 ﻿using System;
 using System.ComponentModel;
+using System.Linq;
 using System.Windows.Input;
 using WPF_Europa_MVVM.Controls;
 using WPF_Europa_MVVM.Foundation;
@@ -24,6 +25,8 @@ namespace WPF_Europa_MVVM.ViewModels
             App.Messenger.Register("UpdateUser", (Action<UserVM>)(param => UpdateUser(param)));
             App.Messenger.Register("DeleteUser", (Action)(() => DeleteUser()));
             App.Messenger.Register("SaveUser", (Action<UserVM>)(param => SaveUser(param)));
+            App.Messenger.Register("CheckUserExist", (Action<UserVM>)(param => CheckUserExist(param)));
+
         }
 
 
@@ -66,6 +69,11 @@ namespace WPF_Europa_MVVM.ViewModels
             _dataItems.Add(p);
         }
 
+        private void CheckUserExist(UserVM p)
+        {
+            bool exist = _dataItems.Any(item => item.UserName != p.UserName);
+            App.Messenger.NotifyColleagues("UserExist", exist);
+        }
 
         private void UpdateUser(UserVM p)
         {

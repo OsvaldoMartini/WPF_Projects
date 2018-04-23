@@ -94,20 +94,24 @@
                                 <TextBlock Margin="7" Grid.Row="4" Grid.Column="0" >Role:</TextBlock>
                                 <!--<TextBox Margin="5" Grid.Row="4" Grid.Column="1"  BorderBrush="{Binding Path=Stat.RoleBrush}" BorderThickness="1"
                                          Text="{Binding Path=UserToDisplay.Role.RoleName, UpdateSourceTrigger=PropertyChanged}"></TextBox>-->
-                                <ComboBox Name="Roles" ItemsSource="{Binding Path=Roles, UpdateSourceTrigger=PropertyChanged}"
+                                <ComboBox Name="Roles" ItemsSource="{Binding Path=Roles}"
                                           DisplayMemberPath="RoleName"
                                           SelectedValuePath="id"
                                           SelectedValue="{Binding Path=UserToDisplay._Role.id}"
                                           Margin="5" Grid.Row="4" Grid.Column="1"  
-                                          BorderBrush="{Binding Path=Stat.RoleBrush}" BorderThickness="1">
+                                          BorderBrush="{Binding Stat.RoleBrush}" BorderThickness="1"
+                                          SelectedItem="{Binding RoleItemSelected, UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}">
+
                                 </ComboBox>
+                                
                                 <TextBlock Margin="7" Grid.Row="5" Grid.Column="0" >Department:</TextBlock>
-                                <ComboBox Name="Deptos" ItemsSource="{Binding Path=Departments, UpdateSourceTrigger=PropertyChanged}"
+                                <ComboBox Name="Deptos" ItemsSource="{Binding Path=Deptos, UpdateSourceTrigger=PropertyChanged}"
                                           DisplayMemberPath="DeptoName"
                                           SelectedValuePath="id"
                                           SelectedValue="{Binding Path=UserToDisplay.Depto.id}"
                                           Margin="5" Grid.Row="5" Grid.Column="1"  
-                                          BorderBrush="{Binding Path=Stat.DeptoBrush}" BorderThickness="1">
+                                          BorderBrush="{Binding Path=Stat.DeptoBrush}" BorderThickness="1"
+                                          SelectedItem="{Binding DeptoItemSelected, UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}">
                                 </ComboBox>
 
                                 <TextBlock Margin="7" Grid.Row="6" Grid.Column="0" >Leaver:</TextBlock>

@@ -9,40 +9,87 @@ namespace WPF_Europa_MVVM.ViewModels
 {
     public class UserDisplayModel : INotifyPropertyChanged
     {
-        
-        
+
+
         private bool isSelected = false;
 
-        private List<RoleModel> _roles; 
-        private List<DeptoModel> _departments; 
-     
+        private List<RoleModel> _roles;
+        private List<DeptoModel> _deptos;
+
         //Messegers
         public UserDisplayModel()
         {
-            Roles = App.StoreXML.GetRoles(); 
-            Departments = App.StoreXML.GetDepartments(); 
+            Roles = App.StoreXML.GetRoles();
+            Deptos = App.StoreXML.GetDepartments();
 
             Messenger messenger = App.Messenger;
-            messenger.Register("UserSelectionChanged", (Action<UserVM>)(param => UserToProcess(param)));
-            messenger.Register("SetStatus", (Action<String>)(param => stat.Status = param));
+            messenger.Register("UserSelectionChanged", (Action<UserVM>) (param => UserToProcess(param)));
+            messenger.Register("SetStatus", (Action<String>) (param => stat.Status = param));
         } //Constructor
 
 
         public event PropertyChangedEventHandler PropertyChanged;
+
         public void OnPropertyChanged(PropertyChangedEventArgs e)
         {
             if (PropertyChanged != null)
                 PropertyChanged(this, e);
         }
+
         //data checks and status indicators done in another class
         private readonly UserDisplayModelStatus stat = new UserDisplayModelStatus();
-        public UserDisplayModelStatus Stat { get { return stat; } }
+
+        public UserDisplayModelStatus Stat
+        {
+            get { return stat; }
+        }
 
         private UserVM userToDisplay = new UserVM();
+
         public UserVM UserToDisplay
         {
             get { return userToDisplay; }
-            set { userToDisplay = value; OnPropertyChanged(new PropertyChangedEventArgs("UserToDisplay")); }
+            set
+            {
+                userToDisplay = value;
+                OnPropertyChanged(new PropertyChangedEventArgs("UserToDisplay"));
+            }
+        }
+
+        private RoleModel _roleItem;
+        public RoleModel RoleItemSelected
+        {
+            get { return _roleItem; }
+            set
+            {
+                _roleItem = value;
+                OnPropertyChanged(new PropertyChangedEventArgs("RoleItemSelected"));
+                UpdateRoleUser(_roleItem);
+            }
+        }
+
+
+        private DeptoModel _deptoItemSelected;
+        public DeptoModel DeptoItemSelected
+        {
+            get { return _deptoItemSelected; }
+            set
+            {
+                _deptoItemSelected = value;
+                OnPropertyChanged(new PropertyChangedEventArgs("RoleItemSelected"));
+                UpdateDeptoUser(_deptoItemSelected);
+            }
+        }
+        private void UpdateRoleUser(RoleModel r)
+        {
+            int index = _roles.IndexOf(r);
+            UserToDisplay._Role = _roles[index];
+        }
+
+        private void UpdateDeptoUser(DeptoModel d)
+        {
+            int index = _deptos.IndexOf(d);
+            UserToDisplay.Depto = _deptos[index];
         }
 
 
@@ -100,6 +147,8 @@ namespace WPF_Europa_MVVM.ViewModels
 
         private void UpdateUser()
         {
+            if (!stat.CheckIfUserExist(UserToDisplay)) return;
+
             if (!stat.ChkUserForUpdate(UserToDisplay)) return;
                 if(!App.StoreXML.UpdateUser(UserToDisplay))
                 {
@@ -142,15 +191,18 @@ namespace WPF_Europa_MVVM.ViewModels
             set { _roles = value; }
         }
 
-        public List<DeptoModel> Departments
+        public List<DeptoModel> Deptos
         {
-            get { return _departments; }
-            set { _departments = value; }
+            get { return _deptos; }
+            set { _deptos = value; }
         }
 
         private void SaveUser()
         {
+            if (!stat.CheckIfUserExist(UserToDisplay)) return;
+            
             if (!stat.ChkUserForAdd(UserToDisplay)) return;
+
             if (!App.StoreXML.SaveUser(UserToDisplay))
             {
                 stat.Status = App.StoreXML.errorMessage;
@@ -159,7 +211,6 @@ namespace WPF_Europa_MVVM.ViewModels
             App.Messenger.NotifyColleagues("SaveUser", UserToDisplay);
         } //SaveUser()
         #endregion
-
 
 
         public void UserToProcess(UserVM p)
