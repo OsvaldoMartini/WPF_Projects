@@ -83,6 +83,11 @@ namespace WPF_Europa_MVVM.ViewModels
             set { leavingDate = value; OnPropertyChanged(new PropertyChangedEventArgs("LeavingDate")); }
         }
 
+        public object DateInitial
+        {
+            get { return DateTime.Now.AddYears(-5); }
+        }
+
 
         public UserVM()
         {

@@ -12,6 +12,7 @@ namespace WPF_Europa_MVVM.ViewModels
         
         
         private bool isSelected = false;
+
         private List<RoleModel> _roles; 
         private List<DeptoModel> _departments; 
      
