@@ -1,6 +1,4 @@
-﻿using System.Windows;
-using System.Windows.Controls;
-using WPF_Europa_MVVM.Foundation;
+﻿using System.Windows.Controls;
 
 namespace WPF_Europa_MVVM.Views
 {
