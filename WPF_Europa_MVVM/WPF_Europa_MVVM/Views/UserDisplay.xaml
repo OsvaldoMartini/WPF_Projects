@@ -72,7 +72,7 @@
 
                                 <TextBlock Grid.Row="0" Grid.Column="0" Margin="7">Username:</TextBlock>
                                 <TextBox Grid.Row="0" Grid.Column="1" Margin="5"  BorderBrush="{Binding Path=Stat.UserNameBrush}" BorderThickness="1"  CharacterCasing="Lower"
-                     Text="{Binding Path=UserToDisplay.UserName, UpdateSourceTrigger=PropertyChanged}"></TextBox>
+                     Text="{Binding Path=UserToDisplay.UserName, UpdateSourceTrigger=LostFocus}"></TextBox>
 
                                 <TextBlock Grid.Row="1" Margin="7" Grid.Column="0" >Forename:</TextBlock>
                                 <TextBox Margin="5" Grid.Row="1" Grid.Column="1" BorderBrush="{Binding Path=Stat.ForenameBrush}" BorderThickness="1"
