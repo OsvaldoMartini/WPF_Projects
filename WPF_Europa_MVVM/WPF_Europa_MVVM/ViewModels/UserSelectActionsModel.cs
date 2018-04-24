@@ -127,11 +127,6 @@ namespace WPF_Europa_MVVM.ViewModels
 
         private void Call_Hierarch()
         {
-            GlobalServices.ModalService.NavigateTo(new UserHierarchy(), delegate(bool returnValue)
-            {
-                if (returnValue)
-                    GetUsers();
-            });
         }
 
 
