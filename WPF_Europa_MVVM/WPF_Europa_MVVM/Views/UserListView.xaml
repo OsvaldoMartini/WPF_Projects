@@ -2,14 +2,15 @@
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:viewModels="clr-namespace:WPF_Europa_MVVM.ViewModels"
-    xmlns:loc="clr-namespace:WPF_Europa_MVVM.Converters">
+    xmlns:loc="clr-namespace:WPF_Europa_MVVM.Converters"
+    xmlns:views="clr-namespace:WPF_Europa_MVVM.Views">
     <UserControl.DataContext>
         <viewModels:UserSelectActionsModel />
     </UserControl.DataContext>
     <UserControl.Resources>
         <loc:DateTimeToShortDate x:Key="DateShortDate"/>
         <loc:BooleanToYesNoConverter x:Key="BooleanToYesNo"/>
-        
+
         <Style x:Key="DesignerItemStyle" TargetType="ContentControl" />
         <DataTemplate x:Key="RowDetailTemplate">
             <Grid x:Name="RowDetailGrid"
@@ -30,6 +31,7 @@
                     <Grid>
                         <Grid.RowDefinitions>
                             <RowDefinition Height="Auto" />
+                            <RowDefinition Height="*" />
                             <RowDefinition Height="*" />
                         </Grid.RowDefinitions>
                         <TextBlock Grid.Row="0"
@@ -56,12 +58,11 @@
             </Grid>
         </DataTemplate>
     </UserControl.Resources>
-    <ContentControl Width="Auto"
+    <ContentControl 
+        Width="Auto"
                     Height="Auto"
                     Padding="2"
-                    Canvas.Left="360"
-                    Canvas.Top="60"
-                    Style="{StaticResource DesignerItemStyle}" Margin="196,0,274.6,-0.4">
+                    Style="{StaticResource DesignerItemStyle}">
         <Grid>
             <Border CornerRadius="5"
                     IsHitTestVisible="False"
@@ -89,7 +90,7 @@
                             <Border.BitmapEffect>
                                 <DropShadowBitmapEffect Color="Black" Opacity="0.5" Direction="270" ShadowDepth="0.7" />
                             </Border.BitmapEffect>
-                           
+
                             <DataGrid Name="GridUsers"
                                       Margin="10"
                                       HorizontalAlignment="Left"
@@ -157,6 +158,8 @@
                                 Command="{Binding CloseAppCommand}">Close</Button>
                         <Button Margin="0,5,0,2"  Padding="2" Height="35" Width="60"
                                 Command="{Binding AddNewUserCommand}" >Add User</Button>
+                        <Button Margin="0,5,0,2"  Padding="2" Height="35" Width="60"
+                                Command="{Binding HierarchCommand}" >Users Hierarch</Button>
                     </DockPanel>
                 </Grid>
             </Border>

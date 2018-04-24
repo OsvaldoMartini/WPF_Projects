@@ -119,6 +119,22 @@ namespace WPF_Europa_MVVM.ViewModels
             get { return _addNewUserCommand ?? (_addNewUserCommand = new RelayCommand(() => Call_UserWindow())); }
         }
 
+        private RelayCommand _hierarchCommand;
+        public ICommand HierarchCommand
+        {
+            get { return _hierarchCommand ?? (_hierarchCommand = new RelayCommand(() => Call_Hierarch())); }
+        }
+
+        private void Call_Hierarch()
+        {
+            GlobalServices.ModalService.NavigateTo(new UserHierarchy(), delegate(bool returnValue)
+            {
+                if (returnValue)
+                    GetUsers();
+            });
+        }
+
+
         private void Call_UserWindow()
         {
             GlobalServices.ModalService.NavigateTo(new UserDisplay(), delegate(bool returnValue)

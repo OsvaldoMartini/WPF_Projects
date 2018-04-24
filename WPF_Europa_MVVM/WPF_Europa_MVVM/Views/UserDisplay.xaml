@@ -19,12 +19,11 @@
 
 
     <!--TextBox-->
-    <ContentControl x:Name="UserDetail" Width="Auto"
+    <ContentControl x:Name="UserDetail" 
+                    Width="Auto"
                     Height="Auto"
                     Padding="2"
-                    Canvas.Left="360"
-                    Canvas.Top="60"
-                    Style="{StaticResource DesignerItemStyle}" Margin="196,0,274.6,-0.4">
+                    Style="{StaticResource DesignerItemStyle}">
         <Grid>
             <Border CornerRadius="5"
                     IsHitTestVisible="False"
