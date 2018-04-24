@@ -227,9 +227,9 @@ namespace WPF_Europa_MVVM.ViewModels
         } //ChkUserForUpdate()
 
 
-        public bool CheckIfUserExist(UserVM p)
+        public bool CheckIfUserExist(string username)
         {
-            App.Messenger.NotifyColleagues("CheckUserExist", p);
+            App.Messenger.NotifyColleagues("CheckUserExist", username);
 
             int errCnt = 0;
             if (UserExist)
@@ -239,8 +239,10 @@ namespace WPF_Europa_MVVM.ViewModels
             }
             else UserNameBrush = okBrush;
 
-            if (errCnt == 0) { return true; }
-            else { Status = "Username has been taken!"; return false; }
+            if (errCnt == 0)
+            {
+                Status = "OK"; return true; }
+            else { Status = string.Format("Username: {0} has been taken!",username); return false; }
         }
     } //class UserDisplayModelStatus
 }  //NS: UserMvvm.ViewModels

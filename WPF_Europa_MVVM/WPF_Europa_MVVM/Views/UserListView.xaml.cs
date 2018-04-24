@@ -13,6 +13,7 @@ namespace WPF_Europa_MVVM.Views
         public UserListView()
         {
             InitializeComponent();
+
         }
 
 

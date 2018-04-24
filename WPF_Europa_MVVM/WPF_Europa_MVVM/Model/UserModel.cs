@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Globalization;
 using System.IO;
 using System.Xml.Serialization;
@@ -56,8 +55,7 @@ namespace WPF_Europa_MVVM.Model
                     }
                     catch (Exception e)
                     {
-                        Debug.WriteLine(e);
-                        throw;
+                        return DateTime.MinValue.ToString("yyyy-MM-dd HH:mm:ss");
                     }
 
                 }

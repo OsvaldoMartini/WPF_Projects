@@ -37,6 +37,7 @@
     <Reference Include="PresentationFramework.Aero" />
     <Reference Include="System" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Windows.Interactivity, Version=4.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
@@ -58,9 +59,29 @@
     <Compile Include="Foundation\ApplicationCloseCommand.cs" />
     <Compile Include="Foundation\GlobalServices.cs" />
     <Compile Include="Foundation\IModalService.cs" />
+    <Compile Include="HierarchyViews\DetailView.xaml.cs">
+      <DependentUpon>DetailView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="HierarchyViews\NavigationView.xaml.cs">
+      <DependentUpon>NavigationView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="HierarchyViews\NestedView.xaml.cs">
+      <DependentUpon>NestedView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="HierarchyViews\TreeView.xaml.cs">
+      <DependentUpon>TreeView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Model\DBUtility.cs" />
     <Compile Include="Model\DeptoModel.cs" />
+    <Compile Include="Model\HierarchyOrganization.cs" />
     <Compile Include="Model\RoleModel.cs" />
+    <Compile Include="NotifyProp\CancelPropertyNotificationEventArgs.cs" />
+    <Compile Include="NotifyProp\IPropertyNotification.cs" />
+    <Compile Include="NotifyProp\PropertyNotificationEventArgs.cs" />
+    <Compile Include="NotifyProp\PropertyNotificationObject.cs" />
+    <Compile Include="ViewModels\IntermediateMsgVM.cs" />
+    <Compile Include="ViewModels\OrgElementViewModel.cs" />
+    <Compile Include="ViewModels\OrgTreeViewModel.cs" />
     <Compile Include="ViewModels\UserVM.cs" />
     <Compile Include="ViewModels\UserDisplayModel.cs" />
     <Compile Include="ViewModels\UserDisplayModelStatus.cs" />
@@ -69,9 +90,31 @@
     <Compile Include="Views\UserDisplay.xaml.cs">
       <DependentUpon>UserDisplay.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\UserHierarchy.xaml.cs">
+      <DependentUpon>UserHierarchy.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\UserListView.xaml.cs">
       <DependentUpon>UserListView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\YesOrNoMessage.xaml.cs">
+      <DependentUpon>YesOrNoMessage.xaml</DependentUpon>
+    </Compile>
+    <Page Include="HierarchyViews\DetailView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="HierarchyViews\NavigationView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="HierarchyViews\NestedView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="HierarchyViews\TreeView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -94,6 +137,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Resources\ButtonHierarchyChart.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Resources\DataGridStyle.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -110,9 +157,17 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="Views\UserHierarchy.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\UserListView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\YesOrNoMessage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
   </ItemGroup>
   <ItemGroup>
@@ -149,6 +204,28 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Images\BrushedLight.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Interfaces\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Dll\System.Windows.Interactivity.dll" />
+    <Resource Include="Images\1.png" />
+    <Resource Include="Images\10.png" />
+    <Resource Include="Images\11.png" />
+    <Resource Include="Images\12.png" />
+    <Resource Include="Images\13.png" />
+    <Resource Include="Images\14.png" />
+    <Resource Include="Images\15.png" />
+    <Resource Include="Images\16.png" />
+    <Resource Include="Images\2.png" />
+    <Resource Include="Images\3.png" />
+    <Resource Include="Images\4.png" />
+    <Resource Include="Images\5.png" />
+    <Resource Include="Images\6.png" />
+    <Resource Include="Images\7.png" />
+    <Resource Include="Images\8.png" />
+    <Resource Include="Images\9.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

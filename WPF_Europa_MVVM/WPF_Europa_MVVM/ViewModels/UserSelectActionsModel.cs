@@ -25,7 +25,7 @@ namespace WPF_Europa_MVVM.ViewModels
             App.Messenger.Register("UpdateUser", (Action<UserVM>)(param => UpdateUser(param)));
             App.Messenger.Register("DeleteUser", (Action)(() => DeleteUser()));
             App.Messenger.Register("SaveUser", (Action<UserVM>)(param => SaveUser(param)));
-            App.Messenger.Register("CheckUserExist", (Action<UserVM>)(param => CheckUserExist(param)));
+            App.Messenger.Register("CheckUserExist", (Action<string>)((param) => CheckUserExist(param)));
 
         }
 
@@ -71,10 +71,17 @@ namespace WPF_Europa_MVVM.ViewModels
             
         }
 
-        private void CheckUserExist(UserVM p)
+        private void CheckUserExist(string username)
         {
-            bool exist = _dataItems.Any(item => item.UserName == p.UserName);
-            App.Messenger.NotifyColleagues("UserExist", exist);
+            if (SelectedUser != null)
+            {
+                bool exist = _dataItems.Where(i => i._UserId != SelectedUser._UserId)
+                    .Any(item => item.UserName == username);
+
+                App.Messenger.NotifyColleagues("UserExist", exist);
+                // if (exist)
+               //     App.Messenger.NotifyColleagues("ReturnOriginalName", SelectedUser.UserName);
+            }
         }
 
         private void UpdateUser(UserVM p)

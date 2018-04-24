@@ -1,9 +1,13 @@
-﻿using System;
+﻿    using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Windows.Input;
+    using System.Windows;
+    using System.Windows.Input;
 using WPF_Europa_MVVM.Foundation;
-using WPF_Europa_MVVM.Model;
+    using WPF_Europa_MVVM.Model;
+using WPF_Europa_MVVM.NotifyProp;
+using WPF_Europa_MVVM.Views;
+using PropertyChangingEventHandler = WPF_Europa_MVVM.NotifyProp.PropertyChangingEventHandler;
 
 namespace WPF_Europa_MVVM.ViewModels
 {
@@ -12,9 +16,10 @@ namespace WPF_Europa_MVVM.ViewModels
 
 
         private bool isSelected = false;
-
+        private bool canProceed { get; set; }
         private List<RoleModel> _roles;
         private List<DeptoModel> _deptos;
+
 
         //Messegers
         public UserDisplayModel()
@@ -26,6 +31,8 @@ namespace WPF_Europa_MVVM.ViewModels
             messenger.Register("UserSelectionChanged", (Action<UserVM>) (param => UserToProcess(param)));
             messenger.Register("ClearUserDisplay", (Action)(() => ClearUserDisplay()));
             messenger.Register("SetStatus", (Action<String>) (param => stat.Status = param));
+            messenger.Register("AskToProceed", (Action<IntermediateMsgVM>)(param => CallYesOrNo(param)));
+  
         } //Constructor
 
 
@@ -49,6 +56,7 @@ namespace WPF_Europa_MVVM.ViewModels
             }
         }
 
+   
         private RoleModel _roleItem;
         public RoleModel RoleItemSelected
         {
@@ -140,15 +148,19 @@ namespace WPF_Europa_MVVM.ViewModels
 
         private void UpdateUser()
         {
-            if ((!isSelected) && (!stat.CheckIfUserExist(UserToDisplay))) return;
-
-            if (!stat.ChkUserForUpdate(UserToDisplay)) return;
-                if(!App.StoreXML.UpdateUser(UserToDisplay))
+            //if ((!isSelected) && (!stat.CheckIfUserExist(UserToDisplay.UserName))) return;
+            
+                if (!stat.ChkUserForUpdate(UserToDisplay)) return;
+                if (!App.StoreXML.UpdateUser(UserToDisplay))
                 {
                     stat.Status = App.StoreXML.errorMessage;
                     return;
                 }
+
                 App.Messenger.NotifyColleagues("UpdateUser", UserToDisplay);
+                var message = new IntermediateMsgVM { Flag = true, MessageId = 1, BtnCancelVisibility = Visibility.Hidden,MessageScreenTransfer = "Was was successfully updated !" };
+                CallYesOrNo(message);
+
         } //UpdateUser()
         #endregion
 
@@ -192,7 +204,7 @@ namespace WPF_Europa_MVVM.ViewModels
 
         private void SaveUser()
         {
-            if (!stat.CheckIfUserExist(UserToDisplay)) return;
+            //if (!stat.CheckIfUserExist(UserToDisplay.UserName)) return;
             
             if (!stat.ChkUserForAdd(UserToDisplay)) return;
 
@@ -205,15 +217,61 @@ namespace WPF_Europa_MVVM.ViewModels
         } //SaveUser()
         #endregion
 
+        private void CallYesOrNo(IntermediateMsgVM param)
+        {
+            GlobalServices.ModalService.NavigateTo(new YesOrNoMessage(param), delegate(bool returnValue)
+            {
+                this.canProceed = returnValue; 
+            });
+        }
+
 
         public void UserToProcess(UserVM p)
         {
             if (p == null) { /*UserToDisplay = null;*/  isSelected = false;  return; }
             UserVM temp = new UserVM();
             temp.CopyUser(p);
+            temp.PropertyChanged += new PropertyChangedEventHandler(userVM_PropertyChanged);
+            temp.PropertyChanging += new PropertyChangingEventHandler(userVM_PropertyChanging);
+
+
             UserToDisplay = temp;
             isSelected = true;
             stat.NoError();
         } // ProcessUser()
+
+
+        private void userVM_PropertyChanging(object sender, CancelPropertyNotificationEventArgs e)
+        {
+            var strOld = (null == e.OldValue) ? string.Empty : e.OldValue.ToString();
+            var strNew = (null == e.NewValue) ? string.Empty : e.NewValue.ToString();
+
+            if ((e.PropertyName == "UserName") && ((strNew + strOld).Length > 0))
+                e.Cancel = !stat.CheckIfUserExist(!isSelected ? strOld : strNew);
+            
+        }
+
+        private void userVM_PropertyChanged(object sender, PropertyChangedEventArgs e)
+        {
+            PropertyNotificationEventArgs e2 = e as PropertyNotificationEventArgs;
+            String text;
+            if (null != e2)
+            {
+                text = String.Format("The property '{0}' was changed from '{1}' to '{2}'.",
+                    e2.PropertyName,
+                    (null == e2.OldValue) ? "<null>" : e2.OldValue.ToString(),
+                    (null == e2.NewValue) ? "<null>" : e2.NewValue.ToString());
+            }
+            else
+            {
+                text = String.Format("The property '{0}' was changed.",
+                    e.PropertyName);
+            }
+
+            //MessageBox.Show(this, text, "Notify Test",
+            //    MessageBoxButtons.OK,
+            //    MessageBoxIcon.Information);
+        }
+
     }
 }

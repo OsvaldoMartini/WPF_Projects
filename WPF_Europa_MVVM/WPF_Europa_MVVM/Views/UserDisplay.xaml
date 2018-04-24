@@ -11,7 +11,7 @@
         <loc:DateTimeToShortDate x:Key="DateShortDate"/>
         <loc:ToLowerUpperConverter x:Key="LowerCase"/>
 
-<Style x:Key="DesignerItemStyle" TargetType="ContentControl" />
+        <Style x:Key="DesignerItemStyle" TargetType="ContentControl" />
     </UserControl.Resources>
     <UserControl.DataContext>
         <viewModels:UserDisplayModel />
@@ -19,7 +19,7 @@
 
 
     <!--TextBox-->
-    <ContentControl Width="Auto"
+    <ContentControl x:Name="UserDetail" Width="Auto"
                     Height="Auto"
                     Padding="2"
                     Canvas.Left="360"
@@ -72,7 +72,7 @@
 
                                 <TextBlock Grid.Row="0" Grid.Column="0" Margin="7">Username:</TextBlock>
                                 <TextBox Grid.Row="0" Grid.Column="1" Margin="5"  BorderBrush="{Binding Path=Stat.UserNameBrush}" BorderThickness="1"  CharacterCasing="Lower"
-                     Text="{Binding Path=UserToDisplay.UserName, UpdateSourceTrigger=LostFocus}"></TextBox>
+                     Text="{Binding Path=UserToDisplay.UserName, UpdateSourceTrigger=LostFocus, Mode=TwoWay}"></TextBox>
 
                                 <TextBlock Grid.Row="1" Margin="7" Grid.Column="0" >Forename:</TextBlock>
                                 <TextBox Margin="5" Grid.Row="1" Grid.Column="1" BorderBrush="{Binding Path=Stat.ForenameBrush}" BorderThickness="1"
@@ -103,7 +103,7 @@
                                           SelectedItem="{Binding RoleItemSelected, UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}">
 
                                 </ComboBox>
-                                
+
                                 <TextBlock Margin="7" Grid.Row="5" Grid.Column="0" >Department:</TextBlock>
                                 <ComboBox Name="Deptos" ItemsSource="{Binding Path=Deptos, UpdateSourceTrigger=PropertyChanged}"
                                           DisplayMemberPath="DeptoName"

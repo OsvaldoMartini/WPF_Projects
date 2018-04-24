@@ -19,6 +19,7 @@ namespace WPF_Europa_MVVM.Views
 
             //get 90% of MVVM.
             MessagesModel = model;
+            this.CancelButton.Visibility = model.BtnCancelVisibility;
             this.GridYesOrNo.DataContext = MessagesModel;
         }
 

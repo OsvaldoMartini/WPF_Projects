@@ -7,6 +7,7 @@
                 <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="/WPF_Europa_MVVM;component/Resources/BackgroundColor.xaml" />
                 <ResourceDictionary Source="/WPF_Europa_MVVM;component/Resources/DataGridStyle.xaml" />
+                <ResourceDictionary Source="/WPF_Europa_MVVM;component/Resources/ButtonHierarchyChart.xaml" />
                 </ResourceDictionary.MergedDictionaries>
             </ResourceDictionary>
         

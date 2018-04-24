@@ -13,6 +13,8 @@ namespace WPF_Europa_MVVM
         public MainWindow()
         {
             InitializeComponent();
+
+            this.SizeToContent = SizeToContent.WidthAndHeight;
         }
 
         #region IMainWindow Members

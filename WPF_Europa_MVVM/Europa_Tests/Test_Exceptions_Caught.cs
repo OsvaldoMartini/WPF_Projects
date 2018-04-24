@@ -6,15 +6,15 @@ using System.Linq;
 using System.Xml.Linq;
 using Europa_App.Model;
 using Europa_App.Util;
+using Moq;
 using NUnit.Framework;
+using WPF_Europa_MVVM.ViewModels;
 
 namespace Europa_Tests
 {
     [TestFixture]
     public class Test_Exceptions_Caught
     {
-
-
 
         [Test]
         public void Witch_Exception_Will_Fire_PathNotExist()
@@ -131,14 +131,23 @@ namespace Europa_Tests
                         }
                     }
                 }
-
-
-
-
                 //Debug.WriteLine(elemProduc);  
-
-
             }
         }
+
+        [Test]
+        public void Test_Name_Change()
+        {
+            //Mock<IHelperMock> mockBilling = new Mock<UserDisplayModel>();
+            //Mock<ICustomer> mockCustomer = new Mock<ICustomer>();
+            ////Arrange
+            //UserDisplayModel userModel = new UserDisplayModel{new UserVM{UserName = "martini"}};
+
+            ////Action
+            //userVm.UserName = "aa";
+
+        }
+
+
     }
 }

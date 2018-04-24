@@ -1,30 +1,39 @@
 ﻿using System;
-using System.ComponentModel;
 using WPF_Europa_MVVM.Model;
+using WPF_Europa_MVVM.NotifyProp;
 
 namespace WPF_Europa_MVVM.ViewModels
 {
+    //Communication to / from SQL uses this class for user
+    // Consversion routines UserModel <--> User provided
     //Class for the GUI to display and modify users.
     //All user properties the GUI can touch are strings.
     //A single integer property, UserId, is for database use only.
     //It is assigned by the DB when it creates a new user.  It is used
     //to identify a user and must not be modified by the GUI.
 
-    public class UserVM : ViewModelBase
+    public class UserVM : PropertyNotificationObject
     {
        
-        //For DB use only!
         private Guid _guiid;
-        public Guid _Guid{ get { return _guiid; } }
-        //For DB use only!
+        public Guid _Guid{ get { return _guiid; }
+            internal set { _guiid = value; }
+        }
+        public int ParentId { get; set; }
         private int _userId;
-        public int _UserId { get { return _userId; } }
 
+        public int _UserId
+        {
+            get { return _userId; }
+            internal set { _userId = value; }
+        }
+
+        
         private string userName;
         public string UserName
         {
             get { return userName; }
-            set { userName = value; }
+            set { SetProperty<string>("UserName", ref this.userName, value); }
         }
 
         private string forename;
@@ -62,13 +71,12 @@ namespace WPF_Europa_MVVM.ViewModels
             set { depto = value;}
         }
 
-
         private bool leaver;
         public bool Leaver
         {
-            get { return leaver; }
-            set { leaver = value;
-                OnPropertyChanged(new PropertyChangedEventArgs("Leaver"));
+            get { return this.leaver; }
+            set {
+                SetProperty<bool>("Leaver", ref this.leaver, value);
             }
         }
 
@@ -83,11 +91,12 @@ namespace WPF_Europa_MVVM.ViewModels
         {
         }
 
+     
         public UserVM(Guid id, int userId, string userName, string forename,
                        string surname, DateTime startDate, RoleModel role,DeptoModel depto, bool leaver, DateTime? leavingDate)
         {
-            this._guiid = id;
-            this._userId = userId;
+            this._Guid = id;
+            this._UserId = userId;
             UserName = userName;
             Forename = forename;
             Surname = surname;
@@ -101,8 +110,8 @@ namespace WPF_Europa_MVVM.ViewModels
 
         public void CopyUser(UserVM p)
         {
-            this._guiid = p._Guid;
-            this._userId = p._UserId;
+            this._Guid = p._Guid;
+            this._UserId = p._UserId;
             this.UserName = p.UserName;
             this.Forename = p.Forename;
             this.Surname = p.Surname;
@@ -117,15 +126,19 @@ namespace WPF_Europa_MVVM.ViewModels
         //Update the UserId from the value in the corresponding UserModel
         public void UserAdded2DB(UserModel userModel)
         {
-            this._userId = userModel.UserId;
+            this._UserId = userModel.UserId;
         }
 
-    } //class User
+        public override string ToString()
+        {
+            return string.Format("Username:{0}\nForename:{1}\nSurname{2}", this.UserName, this.Forename, this.Surname);
+        }
 
-    //Communiction to/from SQL uses this class for user
-    //It has a decimal, not string, definition for Leaver
-    //Consversion routines UserModel <--> User provided
+    }
 
+    //class User
+
+    
    
 
 }

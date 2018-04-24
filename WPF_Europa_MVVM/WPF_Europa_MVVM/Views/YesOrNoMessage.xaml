@@ -19,7 +19,7 @@
 
                     <UniformGrid Grid.Row="1" Margin="5" Columns="2" HorizontalAlignment="Center"
                                  VerticalAlignment="Bottom">
-                        <Button x:Name="OkButton" Click="OkButton_Click" Content="Ok" Margin="2"  />
+                        <Button x:Name="OkButton" Click="OkButton_Click" Content="Ok" Margin="2" />
                         <Button x:Name="CancelButton" Click="CancelButton_Click" Content="Cancel" Margin="2" />
                     </UniformGrid>
                 </Grid>

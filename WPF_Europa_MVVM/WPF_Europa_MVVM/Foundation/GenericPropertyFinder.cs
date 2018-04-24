@@ -23,7 +23,14 @@ namespace WPF_Europa_MVVM.Foundation
             {
 
                 Debug.WriteLine("Name of Property is\t:\t" + property.Name);
-                Debug.WriteLine("Value of Property is\t:\t" + (property.GetValue(tmodelObj) == null ? string.Empty:property.GetValue(tmodelObj).ToString()));
+                try
+                {
+                    Debug.WriteLine("Value of Property is\t:\t" + (property.GetValue(tmodelObj) == null
+                                        ? string.Empty
+                                        : property.GetValue(tmodelObj).ToString()));
+                }
+                catch { }
+
                 Debug.WriteLine(Environment.NewLine);
             }
         }

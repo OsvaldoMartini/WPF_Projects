@@ -1,12 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Diagnostics;
-using System.Linq;
+﻿using System.ComponentModel;
 using System.Text;
-using System.Threading.Tasks;
-using WPF_Europa_MVVM.Foundation;
-using WPF_Europa_MVVM.Views;
+using System.Windows;
 
 namespace WPF_Europa_MVVM.ViewModels
 {
@@ -15,6 +9,7 @@ namespace WPF_Europa_MVVM.ViewModels
         private int _messageId;
         private string _messageInternal;
         private string _messageScreenTransfer;
+        private Visibility _btnCancelVisibility;
         
         public IntermediateMsgVM()
         {
@@ -68,6 +63,12 @@ namespace WPF_Europa_MVVM.ViewModels
                     OnPropertyChanged(new PropertyChangedEventArgs("Flag"));
                 }
             }
+        }
+
+        public Visibility BtnCancelVisibility
+        {
+            get { return _btnCancelVisibility; }
+            set { _btnCancelVisibility = value; }
         }
 
         public override string ToString()
