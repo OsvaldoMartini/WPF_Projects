@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Configuration;
+using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Xml;
@@ -25,7 +26,7 @@ namespace Europa_Data.DB_Helper
                     UserName = "jbloggs",
                     Forename = "Joe",
                     Surname = "Bloggs",
-                    StartDate = new DateTime(2014, 3, 1),
+                    StartDate = new DateTime(2014, 3, 1),//.ToString("yyyy-MM-dd HH:mm:ss"),
                     _Role = new RoleModel {id = 1, RoleName = "Software Developer"},
                     Depto = new DeptoModel {id = 1, DeptoName = "Software Developer"},
                     Leaver = false
@@ -37,7 +38,7 @@ namespace Europa_Data.DB_Helper
                     UserName = "jsmith",
                     Forename = "John",
                     Surname = "Smith",
-                    StartDate = new DateTime(2005, 11, 13),
+                    StartDate = new DateTime(2005, 11, 13),//.ToString("yyyy-MM-dd HH:mm:ss"),
                     _Role = new RoleModel {id = 2, RoleName = "Development Manager"},
                     Depto = new DeptoModel {id = 1, DeptoName = "Software Developer"},
                     Leaver = false
@@ -49,11 +50,11 @@ namespace Europa_Data.DB_Helper
                     UserName = "dvogle",
                     Forename = "Dan",
                     Surname = "Vogle",
-                    StartDate = new DateTime(2009, 05, 17),
+                    StartDate = new DateTime(2009, 05, 17),//.ToString("yyyy-MM-dd HH:mm:ss"),
                     _Role = new RoleModel {id = 1, RoleName = "Software Developer"},
                     Depto = new DeptoModel {id = 1, DeptoName = "Software Developer"},
                     Leaver = true,
-                    LeavingDate = new DateTime(2011, 9, 23)
+                    LeavingDate = new DateTime(2011, 9, 23),//.ToString("yyyy-MM-dd HH:mm:ss")
                 },
                 new UserModel
                 {
@@ -62,7 +63,7 @@ namespace Europa_Data.DB_Helper
                     UserName = "jdoe",
                     Forename = "Jane",
                     Surname = "Doe",
-                    StartDate = new DateTime(2001, 10, 11),
+                    StartDate = new DateTime(2001, 10, 11),//.ToString("yyyy-MM-dd HH:mm:ss"),
                     _Role = new RoleModel {id = 3, RoleName = "IT Director"},
                     Depto = new DeptoModel {id = 2, DeptoName = "Group"},
                     Leaver = false
@@ -107,6 +108,7 @@ namespace Europa_Data.DB_Helper
             string directory =
                 Path.Combine(Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location),
                     FilePath);
+
             Directory.CreateDirectory(directory); // no need to check if it exists
 
             if (fileName == string.Empty)
@@ -122,6 +124,7 @@ namespace Europa_Data.DB_Helper
                 XDocument doc = new XDocument();
                 DBUtility.SerializeParams<T>(doc, list);
                 doc.Root.Name = "ArrayOf" + fileName;
+
                 doc.Save(filePath + ".xml");
 
             }
@@ -367,7 +370,7 @@ namespace Europa_Data.DB_Helper
             }
             catch (Exception ex)
             {
-                //ExceptionLogger.WriteExceptionToConsole(ex, DateTime.Now);
+                //ExceptionLogger.WriteExceptionToConsole(ex, string.Now);
             }
 
             return returnObject;

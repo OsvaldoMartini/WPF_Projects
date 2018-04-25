@@ -73,11 +73,11 @@
 
                                 <TextBlock Grid.Row="1" Margin="7" Grid.Column="0" >Forename:</TextBlock>
                                 <TextBox Margin="5" Grid.Row="1" Grid.Column="1" BorderBrush="{Binding Path=CheckStat.ForenameBrush}" BorderThickness="1"
-                     Text="{Binding Path=UserToDisplay.Forename, UpdateSourceTrigger=PropertyChanged}"></TextBox>
+                     Text="{Binding Path=UserToDisplay.Forename,UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"></TextBox>
 
                                 <TextBlock Grid.Row="2" Margin="7" Grid.Column="0" >Surname:</TextBlock>
                                 <TextBox Margin="5" Grid.Row="2" Grid.Column="1" BorderBrush="{Binding Path=CheckStat.SurnameBrush}" BorderThickness="1"
-                                         Text="{Binding Path=UserToDisplay.Surname , UpdateSourceTrigger=PropertyChanged}"></TextBox>
+                                         Text="{Binding Path=UserToDisplay.Surname , UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"></TextBox>
 
                                 <TextBlock Margin="7" Grid.Row="3" Grid.Column="0" >Start Date:</TextBlock>
                                 <DatePicker Name="DtStartDate" Height="25" Width="115"
@@ -110,7 +110,7 @@
                                 </ComboBox>
 
                                 <TextBlock Margin="7" Grid.Row="6" Grid.Column="0" >Leaver:</TextBlock>
-                                <CheckBox Margin="5" Grid.Row="6" Grid.Column="1" IsEnabled="{Binding Path=UserToDisplay.LeavingDate, Converter={StaticResource IsFilled}}"  IsChecked="{Binding Path=UserToDisplay.Leaver, UpdateSourceTrigger=PropertyChanged}" BorderThickness="1"/>
+                                <CheckBox Margin="5" Grid.Row="6" Grid.Column="1" IsEnabled="{Binding Path=UserToDisplay.LeavingDate, Converter={StaticResource IsFilled}}"  IsChecked="{Binding Path=UserToDisplay.Leaver, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" BorderThickness="1"/>
 
 
                                 <TextBlock Grid.Row="7" Margin="7" Grid.Column="0" >Leaving Date:</TextBlock>

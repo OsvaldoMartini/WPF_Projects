@@ -15,80 +15,13 @@ namespace Europa_Data.Model
         public string UserName { get; set; }
         public string Forename { get; set; }
         public string Surname { get; set; }
-        [XmlIgnore]
-        public DateTime? StartDate { get; set; }
+        //[XmlIgnore]
+        public DateTime StartDate { get; set; }
         public RoleModel _Role { get; set; }
         public DeptoModel Depto { get; set; }
-        [XmlIgnore]
         public bool Leaver { get; set; }
-        [XmlIgnore]
-        public DateTime? LeavingDate { get; set; }
-
-        [XmlElement("StartDate")]
-        public string DumpStartDateXML
-        {
-            get
-            {
-                if (this.LeavingDate != null)
-                {
-                    try
-                    {
-                        return DateTime.ParseExact(this.StartDate.ToString(), "d/MM/yyyy 00:00:00",
-                                CultureInfo.InvariantCulture,
-                                DateTimeStyles.AllowWhiteSpaces | DateTimeStyles.AssumeUniversal)
-                            .ToString("yyyy-MM-dd HH:mm:ss");
-                    }
-                    catch (Exception e)
-                    {
-                        return DateTime.MinValue.ToString("yyyy-MM-dd HH:mm:ss");
-                    }
-
-                }
-
-                return DateTime.MinValue.ToString("yyyy-MM-dd HH:mm:ss");
-            }
-            set
-            {
-                this.StartDate = DateTime.Parse(value);
-            }
-        }
-
-        
-        [XmlElement("Leaver")]
-        public string DumpXMLBoolean
-        {
-            get { return this.Leaver.ToString().ToLower(); }
-            set { this.Leaver = Boolean.Parse(value); }
-        }
-
-        [XmlElement("LeavingDate")]
-        public string DumpLeavingDataXML
-        {
-            get
-            {
-                if (this.LeavingDate != null)
-                {
-                    try
-                    {
-                        return DateTime.ParseExact(this.LeavingDate.ToString(), "d/MM/yyyy 00:00:00",
-                                CultureInfo.InvariantCulture,
-                                DateTimeStyles.AllowWhiteSpaces | DateTimeStyles.AssumeUniversal)
-                            .ToString("yyyy-MM-dd HH:mm:ss");
-                    }
-                    catch (Exception e)
-                    {
-                        return DateTime.MinValue.ToString("yyyy-MM-dd HH:mm:ss");
-                    }
-
-                }
-
-                return DateTime.MinValue.ToString("yyyy-MM-dd HH:mm:ss");
-            }
-            set
-            {
-                this.LeavingDate = DateTime.Parse(value);
-            }
-        }
+        //[XmlIgnore]
+        public DateTime LeavingDate { get; set; }
 
         private string _description;
         public string Description
@@ -181,7 +114,7 @@ namespace Europa_Data.Model
         }
 
         public UserModel(Guid id,int userId, string userName, string forename,
-            string surname, DateTime startDate, RoleModel role, DeptoModel dpto, bool leaver, DateTime? leavingDate)
+            string surname, DateTime startDate, RoleModel role, DeptoModel dpto, bool leaver, DateTime leavingDate)
         {
             Guid = id;
             UserId = userId;

@@ -167,6 +167,7 @@ namespace EuropaWPF_App.ViewModels
         public bool ChkUserForUpdate(UserVM p)
         {
             int errCnt = 0;
+            Status = string.Empty;
             
             if (String.IsNullOrEmpty(p.UserName))
             {
@@ -189,10 +190,12 @@ namespace EuropaWPF_App.ViewModels
             }
             else SurnameBrush = okBrush;
 
-            if ((p.StartDate == DateTime.MinValue))
+            if ((p.StartDate > DateTime.Now || p.StartDate < p.LeavingDate))
             {
                 errCnt++;
                 StartDateBrush = errorBrush;
+                Status = "Update, Sarte Date Bigger then today or equal at Less then Leaving Date!";
+
             }
             else StartDateBrush = okBrush;
 
@@ -213,18 +216,22 @@ namespace EuropaWPF_App.ViewModels
 
             if (p.Leaver)
             {
-                if (p.LeavingDate ==null || (p.LeavingDate == DateTime.MinValue) || p.LeavingDate < p.StartDate)
+                if (p.LeavingDate == DateTime.MinValue || p.LeavingDate <= p.StartDate)
                 {
-                    {
-                        errCnt++;
-                    }
+                    errCnt++;
+                    Status = "Update, Leaving Date Bigger or equal at Start Date!";
                     LeavingDateBrush = errorBrush;
                 }
             }
             else LeavingDateBrush = okBrush;
             
             if (errCnt == 0) { Status = "OK"; return true; }
-            else { Status = "Update, missing or invalid fields."; return false; }
+            else
+            {
+                if (String.IsNullOrEmpty(Status))
+                    Status = "Update, missing or invalid fields."; 
+                return false;
+            }
         } //ChkUserForUpdate()
 
 

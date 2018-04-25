@@ -330,9 +330,8 @@ namespace EuropaWPF_App.ViewModels
 
             if (UserToDisplay._UserId == 0)
             {
-                UserToDisplay.StartDate = null;
-                UserToDisplay.LeavingDate = null;
-
+                UserToDisplay.StartDate = DateTime.MinValue;
+                UserToDisplay.LeavingDate = DateTime.MinValue;
             }
             UserToDisplay = temp;
             if (this._mode == Mode.Add)
