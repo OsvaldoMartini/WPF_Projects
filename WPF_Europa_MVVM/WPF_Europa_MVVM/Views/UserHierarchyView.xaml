@@ -5,7 +5,8 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:hierarchyViews="clr-namespace:WPF_Europa_MVVM.HierarchyViews"
              mc:Ignorable="d" 
-             d:DesignHeight="300" d:DesignWidth="300">
+             d:DesignHeight="300" d:DesignWidth="300"
+            Title="Europa Logistics Chart">
     <Window.Resources>
         <DataTemplate x:Key="TreeViewTemplate">
             <hierarchyViews:TreeView/>

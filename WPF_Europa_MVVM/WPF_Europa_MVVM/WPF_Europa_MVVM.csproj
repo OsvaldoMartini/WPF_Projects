@@ -94,7 +94,7 @@
     <Compile Include="ViewModels\IntermediateMsgVM.cs" />
     <Compile Include="ViewModels\Modes.cs" />
     <Compile Include="ViewModels\OrgElementViewModel.cs" />
-    <Compile Include="ViewModels\OrgTreeViewModel.cs" />
+    <Compile Include="ViewModels\HierarchTreeViewModel.cs" />
     <Compile Include="ViewModels\UserVM.cs" />
     <Compile Include="ViewModels\UserDisplayModel.cs" />
     <Compile Include="ViewModels\UserDisplayModelStatus.cs" />

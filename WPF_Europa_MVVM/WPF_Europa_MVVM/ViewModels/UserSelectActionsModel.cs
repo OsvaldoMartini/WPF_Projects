@@ -129,7 +129,7 @@ namespace WPF_Europa_MVVM.ViewModels
 
         private void Call_Hierarch()
         {
-            var treeHierarchVM = OrgTreeViewModel.Instance();
+            var treeHierarchVM = HierarchTreeViewModel.Instance();
             treeHierarchVM.Mode = Mode.JustForView;
 
             IModalDialog dialog = ServiceProvider.Instance.Get<IModalDialog>();

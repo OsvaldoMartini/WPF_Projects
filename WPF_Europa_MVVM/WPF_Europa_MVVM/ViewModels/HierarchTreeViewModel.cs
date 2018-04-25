@@ -6,9 +6,9 @@ using WPF_Europa_MVVM.Model;
 
 namespace WPF_Europa_MVVM.ViewModels
 {
-    public class OrgTreeViewModel : ViewModelBase
+    public class HierarchTreeViewModel : ViewModelBase
     {
-        private static OrgTreeViewModel self;
+        private static HierarchTreeViewModel self;
 
         private List<OrgElementViewModel> root;
         private OrgElementViewModel selected;
@@ -99,12 +99,12 @@ namespace WPF_Europa_MVVM.ViewModels
             }
         }
 
-        private OrgTreeViewModel(){}
+        private HierarchTreeViewModel(){}
 
-        public static OrgTreeViewModel Instance()
+        public static HierarchTreeViewModel Instance()
         {
             if (self == null)
-                self = new OrgTreeViewModel();
+                self = new HierarchTreeViewModel();
             return self;
         }
 
