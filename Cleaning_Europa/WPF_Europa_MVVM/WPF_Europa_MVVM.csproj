@@ -90,9 +90,9 @@
     <Compile Include="ViewModels\UserDisplayModelStatus.cs" />
     <Compile Include="ViewModels\UserSelectActionsModel.cs" />
     <Compile Include="ViewModels\ViewModelBase.cs" />
-    <Compile Include="Views\HierarchViewDialog.cs" />
-    <Compile Include="Views\UserDisplay.xaml.cs">
-      <DependentUpon>UserDisplay.xaml</DependentUpon>
+    <Compile Include="Views\ViewDialogs\HierarchViewDialog.cs" />
+    <Compile Include="Views\UserDisplayView.xaml.cs">
+      <DependentUpon>UserDisplayView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\UserHierarchyView.xaml.cs">
       <DependentUpon>UserHierarchyView.xaml</DependentUpon>
@@ -100,6 +100,7 @@
     <Compile Include="Views\UserListView.xaml.cs">
       <DependentUpon>UserListView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\ViewDialogs\UserViewDialog.cs" />
     <Compile Include="Views\YesOrNoMessage.xaml.cs">
       <DependentUpon>YesOrNoMessage.xaml</DependentUpon>
     </Compile>
@@ -155,7 +156,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\UserDisplay.xaml">
+    <Page Include="Views\UserDisplayView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

@@ -1,15 +1,18 @@
-﻿using System.Windows.Controls;
+﻿using System.Windows;
+using System.Windows.Controls;
+using Europa_Data.Model;
 
 namespace WPF_Europa_MVVM.Views
 {
     /// <summary>
     /// Interaction logic for UserDisplay.xaml
     /// </summary>
-    public partial class UserDisplay : UserControl
+    public partial class UserDisplayView : Window
     {
-        public UserDisplay()
+        public UserDisplayView()
         {
             InitializeComponent();
         }
+
     }
 }

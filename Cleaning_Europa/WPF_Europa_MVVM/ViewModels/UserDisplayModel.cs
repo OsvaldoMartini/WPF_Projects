@@ -1,43 +1,59 @@
-﻿    using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-    using System.Windows;
-    using System.Windows.Input;
+using System.Windows;
+using System.Windows.Input;
 using WPF_Europa_MVVM.Foundation;
 using Europa_Data.INotifyChanging;
 using Europa_Data.Model;
-    using Europa_Data.ViewModel;
-    using WPF_Europa_MVVM.Views;
+using Europa_Data.ViewModel;
+using WPF_Europa_MVVM.Views;
 using PropertyChangingEventHandler = Europa_Data.INotifyChanging.PropertyChangingEventHandler;
 
 namespace WPF_Europa_MVVM.ViewModels
 {
     public class UserDisplayModel : ViewModelBase
     {
-
+        private static UserDisplayModel self;
 
         private bool isSelected = false;
         private bool canProceed { get; set; }
         private List<RoleModel> _roles;
         private List<DeptoModel> _deptos;
+        //data checks and status indicators done in another class
+        private readonly UserDisplayModelStatus stat = new UserDisplayModelStatus();
+        public static UserDisplayModel Instance()
+        {
+            if (self == null)
+                self = new UserDisplayModel();
+            return self;
+        }
 
-        //Messegers
+        /// <summary>
+        /// For determining wich Action to be made inside  of the view
+        /// </summary>
+        public Mode Mode
+        {
+            get;
+            set;
+        }
+
+        #region Constructor
         public UserDisplayModel()
         {
             Roles = App.StoreXML.GetRoles();
             Deptos = App.StoreXML.GetDepartments();
 
             Messenger messenger = App.Messenger;
-            messenger.Register("UserSelectionChanged", (Action<UserVM>) (param => UserToProcess(param)));
+            messenger.Register("UserSelectionChanged", (Action<UserVM>)(param => UserToProcess(param)));
             messenger.Register("ClearUserDisplay", (Action)(() => ClearUserDisplay()));
-            messenger.Register("SetStatus", (Action<String>) (param => stat.Status = param));
+            messenger.Register("SetStatus", (Action<String>)(param => stat.Status = param));
             messenger.Register("AskToProceed", (Action<IntermediateMsgVM>)(param => CallYesOrNo(param)));
-  
-        } //Constructor
+        }
+        #endregion
 
 
-        //data checks and status indicators done in another class
-        private readonly UserDisplayModelStatus stat = new UserDisplayModelStatus();
+
 
         public UserDisplayModelStatus Stat
         {
@@ -56,7 +72,7 @@ namespace WPF_Europa_MVVM.ViewModels
             }
         }
 
-   
+
         private RoleModel _roleItem;
         public RoleModel RoleItemSelected
         {
@@ -100,6 +116,7 @@ namespace WPF_Europa_MVVM.ViewModels
             get { return getUsersCommand ?? (getUsersCommand = new RelayCommand(() => GetUsers())); }
         }
 
+        #region GetUsers
         private void GetUsers()
         {
             isSelected = false;
@@ -107,6 +124,7 @@ namespace WPF_Europa_MVVM.ViewModels
             UserToDisplay = new UserVM();
             App.Messenger.NotifyColleagues("GetUsers");
         }
+        #endregion
 
         #region CancelCommand
         private RelayCommand cancelCommand;
@@ -121,7 +139,6 @@ namespace WPF_Europa_MVVM.ViewModels
             App.Messenger.NotifyColleagues("UserCleared");
         } //CancelOperation()
         #endregion
-
 
         #region ClearUserCommand
         private RelayCommand clearUserCommand;
@@ -149,17 +166,17 @@ namespace WPF_Europa_MVVM.ViewModels
         private void UpdateUser()
         {
             //if ((!isSelected) && (!stat.CheckIfUserExist(UserToDisplay.UserName))) return;
-            
-                if (!stat.ChkUserForUpdate(UserToDisplay)) return;
-                if (!App.StoreXML.UpdateUser(UserToDisplay))
-                {
-                    stat.Status = App.StoreXML.errorMessage;
-                    return;
-                }
 
-                App.Messenger.NotifyColleagues("UpdateUser", UserToDisplay);
-                var message = new IntermediateMsgVM { Flag = true, MessageId = 1, BtnCancelVisibility = Visibility.Hidden,MessageScreenTransfer = "Was was successfully updated !" };
-                CallYesOrNo(message);
+            if (!stat.ChkUserForUpdate(UserToDisplay)) return;
+            if (!App.StoreXML.UpdateUser(UserToDisplay))
+            {
+                stat.Status = App.StoreXML.errorMessage;
+                return;
+            }
+
+            App.Messenger.NotifyColleagues("UpdateUser", UserToDisplay);
+            var message = new IntermediateMsgVM { Flag = true, MessageId = 1, BtnCancelVisibility = Visibility.Hidden, MessageScreenTransfer = "Was was successfully updated !" };
+            CallYesOrNo(message);
 
         } //UpdateUser()
         #endregion
@@ -180,6 +197,9 @@ namespace WPF_Europa_MVVM.ViewModels
             }
             isSelected = false;
             App.Messenger.NotifyColleagues("DeleteUser");
+            var message = new IntermediateMsgVM { Flag = true, MessageId = 1, BtnCancelVisibility = Visibility.Hidden, MessageScreenTransfer = "Was was successfully deleted !" };
+            CallYesOrNo(message);
+
         } //DeleteUser
         #endregion
 
@@ -205,7 +225,7 @@ namespace WPF_Europa_MVVM.ViewModels
         private void SaveUser()
         {
             //if (!stat.CheckIfUserExist(UserToDisplay.UserName)) return;
-            
+
             if (!stat.ChkUserForAdd(UserToDisplay)) return;
 
             if (!App.StoreXML.SaveUser(UserToDisplay))
@@ -214,6 +234,9 @@ namespace WPF_Europa_MVVM.ViewModels
                 return;
             }
             App.Messenger.NotifyColleagues("SaveUser", UserToDisplay);
+            var message = new IntermediateMsgVM { Flag = true, MessageId = 1, BtnCancelVisibility = Visibility.Hidden, MessageScreenTransfer = "Was was successfully added !" };
+            CallYesOrNo(message);
+
         } //SaveUser()
         #endregion
 
@@ -221,14 +244,13 @@ namespace WPF_Europa_MVVM.ViewModels
         {
             GlobalServices.ModalService.NavigateTo(new YesOrNoMessage(param), delegate(bool returnValue)
             {
-                this.canProceed = returnValue; 
+                this.canProceed = returnValue;
             });
         }
 
-
         public void UserToProcess(UserVM p)
         {
-            if (p == null) { /*UserToDisplay = null;*/  isSelected = false;  return; }
+            if (p == null) { /*UserToDisplay = null;*/  isSelected = false; return; }
             UserVM temp = new UserVM();
             temp.CopyUser(p);
             temp.PropertyChanged += new PropertyChangedEventHandler(userVM_PropertyChanged);
@@ -240,7 +262,6 @@ namespace WPF_Europa_MVVM.ViewModels
             stat.NoError();
         } // ProcessUser()
 
-
         private void userVM_PropertyChanging(object sender, CancelPropertyNotificationEventArgs e)
         {
             var strOld = (null == e.OldValue) ? string.Empty : e.OldValue.ToString();
@@ -248,7 +269,7 @@ namespace WPF_Europa_MVVM.ViewModels
 
             if ((e.PropertyName == "UserName") && ((strNew + strOld).Length > 0))
                 e.Cancel = !stat.CheckIfUserExist(!isSelected ? strOld : strNew);
-            
+
         }
 
         private void userVM_PropertyChanged(object sender, PropertyChangedEventArgs e)
@@ -267,11 +288,9 @@ namespace WPF_Europa_MVVM.ViewModels
                 text = String.Format("The property '{0}' was changed.",
                     e.PropertyName);
             }
-
-            //MessageBox.Show(this, text, "Notify Test",
-            //    MessageBoxButtons.OK,
-            //    MessageBoxIcon.Information);
         }
+
+
 
     }
 }

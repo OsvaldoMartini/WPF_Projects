@@ -1,11 +1,16 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using WPF_Europa_MVVM.Interfaces;
 
-namespace WPF_Europa_MVVM.Views
+namespace WPF_Europa_MVVM.Views.ViewDialogs
 {
-    public class HierarchViewDialog : IModalDialog
+
+    public class UserViewDialog : IModalDialog
     {
-        private UserHierarchyView view;
+        private UserDisplayView view;
 
         void IModalDialog.BindViewModel<TViewModel>(TViewModel viewModel)
         {
@@ -22,14 +27,15 @@ namespace WPF_Europa_MVVM.Views
             GetDialog().Close();
         }
 
-        private UserHierarchyView GetDialog()
+        private UserDisplayView GetDialog()
         {
             if (view == null)
             {
                 //create the view if the view does not exist
-                view = new UserHierarchyView();
+                view = new UserDisplayView();
                 view.Closed += new EventHandler(view_Closed);
             }
+
             return view;
         }
 
@@ -37,7 +43,5 @@ namespace WPF_Europa_MVVM.Views
         {
             view = null;
         }
-
     }
 }
-

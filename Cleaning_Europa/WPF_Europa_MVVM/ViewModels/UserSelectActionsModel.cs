@@ -57,7 +57,7 @@ namespace WPF_Europa_MVVM.ViewModels
         {
             Messenger messenger = App.Messenger;
             if (_selectedUser != null)
-                Call_UserWindow();
+                Call_UserWindow(Mode.Edit);
             messenger.NotifyColleagues("UserSelectionChanged", _selectedUser);
         }
 
@@ -110,13 +110,14 @@ namespace WPF_Europa_MVVM.ViewModels
         }
 
 
-        private void Call_UserWindow()
+        private void Call_UserWindow(Mode mode)
         {
-            GlobalServices.ModalService.NavigateTo(new UserDisplay(), delegate(bool returnValue)
-            {
-                if (returnValue)
-                    GetUsers();
-            });
+            var userDisplayModel = UserDisplayModel.Instance();
+            userDisplayModel.Mode = mode;
+
+            IModalDialog dialog = ServiceProvider.Instance.Get<IModalDialog>();
+            dialog.BindViewModel(userDisplayModel);
+            dialog.ShowDialog();
         }
         #endregion
 
@@ -143,7 +144,7 @@ namespace WPF_Europa_MVVM.ViewModels
         private RelayCommand _addNewUserCommand;
         public ICommand AddNewUserCommand
         {
-            get { return _addNewUserCommand ?? (_addNewUserCommand = new RelayCommand(() => Call_UserWindow())); }
+            get { return _addNewUserCommand ?? (_addNewUserCommand = new RelayCommand(() => Call_UserWindow(Mode.Add))); }
         }
         #endregion
 
