@@ -2,9 +2,9 @@
 using System.ComponentModel;
 using System.Windows.Media;
 using Europa_Data.Model;
-using WPF_Europa_MVVM.Foundation;
+using EuropaWPF_App.Foundation;
 
-namespace WPF_Europa_MVVM.ViewModels
+namespace EuropaWPF_App.ViewModels
 {
     //For Error Detection and Messages Display
     public class UserDisplayModelStatus : ViewModelBase

@@ -2,7 +2,7 @@
 using System.Windows;
 using System.Windows.Input;
 
-namespace WPF_Europa_MVVM.Foundation
+namespace EuropaWPF_App.Foundation
 {
     public class ApplicationCloseCommand : ICommand
     {

@@ -51,8 +51,8 @@ namespace Europa_Data.Model
             set { surname = value; }
         }
 
-        private DateTime startDate;
-        public DateTime StartDate
+        private DateTime? startDate;
+        public DateTime? StartDate
         {
             get { return startDate; }
             set { startDate = value; }
@@ -95,14 +95,14 @@ namespace Europa_Data.Model
 
 
         public UserVM(Guid id, int userId, string userName, string forename,
-                       string surname, DateTime startDate, RoleModel role, DeptoModel depto, bool leaver, DateTime? leavingDate)
+                       string surname, DateTime? startDate, RoleModel role, DeptoModel depto, bool leaver, DateTime? leavingDate)
         {
             this._Guid = id;
             this._UserId = userId;
             UserName = userName;
             Forename = forename;
             Surname = surname;
-            StartDate = startDate;
+            StartDate = startDate == DateTime.MinValue ? null : startDate;
             _Role = role;
             Depto = depto;
             Leaver = leaver;

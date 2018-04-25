@@ -2,7 +2,7 @@
 using System.Text;
 using System.Windows;
 
-namespace WPF_Europa_MVVM.ViewModels
+namespace EuropaWPF_App.ViewModels
 {
     public class IntermediateMsgVM : ViewModelBase
     {

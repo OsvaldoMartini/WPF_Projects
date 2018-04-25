@@ -1,7 +1,7 @@
 ﻿using System.Windows;
-using WPF_Europa_MVVM.Interfaces;
+using EuropaWPF_App.Interfaces;
 
-namespace WPF_Europa_MVVM.Foundation
+namespace EuropaWPF_App.Foundation
 {
     public class GlobalServices
     {

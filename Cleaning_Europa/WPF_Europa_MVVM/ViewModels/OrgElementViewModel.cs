@@ -3,7 +3,7 @@ using System.ComponentModel;
 using System.IO;
 using Europa_Data.Model;
 
-namespace WPF_Europa_MVVM.ViewModels
+namespace EuropaWPF_App.ViewModels
 {
     public class OrgElementViewModel : ViewModelBase
     {

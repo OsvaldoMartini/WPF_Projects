@@ -3,7 +3,7 @@ using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
 using System.Windows.Media;
 
-namespace WPF_Europa_MVVM.Views
+namespace EuropaWPF_App.Views
 {
     /// <summary>
     /// Interaction logic for UserListView.xaml

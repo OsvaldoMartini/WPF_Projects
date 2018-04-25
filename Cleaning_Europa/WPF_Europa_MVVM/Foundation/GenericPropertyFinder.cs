@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Reflection;
 
-namespace WPF_Europa_MVVM.Foundation
+namespace EuropaWPF_App.Foundation
 {
     public class GenericPropertyFinder<TModel> where TModel : class
     {

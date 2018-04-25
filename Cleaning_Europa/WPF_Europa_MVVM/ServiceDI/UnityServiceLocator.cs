@@ -1,7 +1,7 @@
 ﻿using Microsoft.Practices.Unity;
-using WPF_Europa_MVVM.Interfaces;
+using EuropaWPF_App.Interfaces;
 
-namespace WPF_Europa_MVVM.ServiceDI
+namespace EuropaWPF_App.ServiceDI
 {
     class UnityServiceLocator : IServiceLocator
     {

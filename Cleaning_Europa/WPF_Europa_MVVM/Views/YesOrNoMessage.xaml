@@ -1,4 +1,4 @@
-﻿<UserControl x:Class="WPF_Europa_MVVM.Views.YesOrNoMessage"
+﻿<UserControl x:Class="EuropaWPF_App.Views.YesOrNoMessage"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
             BorderThickness="2" Padding="5" Background="#ff9933">

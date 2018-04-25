@@ -1,4 +1,4 @@
-﻿namespace WPF_Europa_MVVM.Interfaces
+﻿namespace EuropaWPF_App.Interfaces
 {
     public interface IModalDialog
     {

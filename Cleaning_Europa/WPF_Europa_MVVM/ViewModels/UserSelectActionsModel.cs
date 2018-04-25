@@ -3,13 +3,13 @@ using System.ComponentModel;
 using System.Linq;
 using System.Windows.Input;
 using Europa_Data.Controls;
-using WPF_Europa_MVVM.Foundation;
-using WPF_Europa_MVVM.Interfaces;
+using EuropaWPF_App.Foundation;
+using EuropaWPF_App.Interfaces;
 using Europa_Data.Model;
-using WPF_Europa_MVVM.ServiceDI;
-using WPF_Europa_MVVM.Views;
+using EuropaWPF_App.ServiceDI;
+using EuropaWPF_App.Views;
 
-namespace WPF_Europa_MVVM.ViewModels
+namespace EuropaWPF_App.ViewModels
 {
     public class UserSelectActionsModel : ViewModelBase
     {
@@ -78,13 +78,15 @@ namespace WPF_Europa_MVVM.ViewModels
 
         private void CheckUserExist(string username)
         {
+            bool exist = false;
             if (SelectedUser != null)
-            {
-                bool exist = _dataItems.Where(i => i._UserId != SelectedUser._UserId)
+               exist = _dataItems.Where(i => i._UserId != SelectedUser._UserId)
                     .Any(item => item.UserName == username);
+            else
+                exist = _dataItems.Any(item => item.UserName == username);
 
-                App.Messenger.NotifyColleagues("UserExist", exist);
-            }
+            App.Messenger.NotifyColleagues("UserExist", exist);
+            
         }
 
         private void UpdateUser(UserVM p)
@@ -120,6 +122,9 @@ namespace WPF_Europa_MVVM.ViewModels
 
             if (Mode.Add == mode)
                 App.Messenger.NotifyColleagues("UserSelectionChanged", new UserVM());
+            
+            if (Mode.Edit == mode)
+                App.Messenger.NotifyColleagues("SetModeAction", mode);
 
         }
 

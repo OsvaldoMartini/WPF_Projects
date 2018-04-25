@@ -1,9 +1,9 @@
 ﻿using System.Windows;
 using Europa_Data.DB_Helper;
-using WPF_Europa_MVVM.Foundation;
-using WPF_Europa_MVVM.StarterDI;
+using EuropaWPF_App.Foundation;
+using EuropaWPF_App.StarterDI;
 
-namespace WPF_Europa_MVVM
+namespace EuropaWPF_App
 {
     /// <summary>
     /// Interaction logic for App.xaml

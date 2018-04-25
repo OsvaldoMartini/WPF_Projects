@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace WPF_Europa_MVVM.Interfaces
+namespace EuropaWPF_App.Interfaces
 {
     public interface IUserDisplayVM : IModalDialog
     {

@@ -16,7 +16,7 @@ namespace Europa_Data.Model
         public string Forename { get; set; }
         public string Surname { get; set; }
         [XmlIgnore]
-        public DateTime StartDate { get; set; }
+        public DateTime? StartDate { get; set; }
         public RoleModel _Role { get; set; }
         public DeptoModel Depto { get; set; }
         [XmlIgnore]
@@ -27,8 +27,30 @@ namespace Europa_Data.Model
         [XmlElement("StartDate")]
         public string DumpStartDateXML
         {
-            get { return this.StartDate.ToString("yyyy-MM-dd HH:mm:ss"); }
-            set { this.StartDate = DateTime.Parse(value); }
+            get
+            {
+                if (this.LeavingDate != null)
+                {
+                    try
+                    {
+                        return DateTime.ParseExact(this.StartDate.ToString(), "d/MM/yyyy 00:00:00",
+                                CultureInfo.InvariantCulture,
+                                DateTimeStyles.AllowWhiteSpaces | DateTimeStyles.AssumeUniversal)
+                            .ToString("yyyy-MM-dd HH:mm:ss");
+                    }
+                    catch (Exception e)
+                    {
+                        return DateTime.MinValue.ToString("yyyy-MM-dd HH:mm:ss");
+                    }
+
+                }
+
+                return DateTime.MinValue.ToString("yyyy-MM-dd HH:mm:ss");
+            }
+            set
+            {
+                this.StartDate = DateTime.Parse(value);
+            }
         }
 
         

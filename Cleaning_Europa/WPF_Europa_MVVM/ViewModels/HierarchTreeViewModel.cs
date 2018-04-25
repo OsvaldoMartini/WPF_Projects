@@ -1,10 +1,10 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel;
 using System.Windows.Input;
-using WPF_Europa_MVVM.Foundation;
+using EuropaWPF_App.Foundation;
 using Europa_Data.Model;
 
-namespace WPF_Europa_MVVM.ViewModels
+namespace EuropaWPF_App.ViewModels
 {
     public class HierarchTreeViewModel : ViewModelBase
     {

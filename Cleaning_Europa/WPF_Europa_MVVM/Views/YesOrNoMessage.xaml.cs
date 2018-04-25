@@ -1,9 +1,9 @@
 ﻿using System.Windows;
 using System.Windows.Controls;
-using WPF_Europa_MVVM.Foundation;
-using WPF_Europa_MVVM.ViewModels;
+using EuropaWPF_App.Foundation;
+using EuropaWPF_App.ViewModels;
 
-namespace WPF_Europa_MVVM.Views
+namespace EuropaWPF_App.Views
 {
     /// <summary>
     /// Interaction logic for YesOrNoMessage.xaml

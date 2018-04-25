@@ -1,10 +1,10 @@
 ﻿using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Controls;
-using WPF_Europa_MVVM.Foundation;
-using WPF_Europa_MVVM.Interfaces;
+using EuropaWPF_App.Foundation;
+using EuropaWPF_App.Interfaces;
 
-namespace WPF_Europa_MVVM
+namespace EuropaWPF_App
 {
     /// <summary>
     /// Interaction logic for MainWindow.xaml

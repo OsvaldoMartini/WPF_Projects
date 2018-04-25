@@ -2,7 +2,7 @@
 using System.Windows.Controls;
 using Europa_Data.Model;
 
-namespace WPF_Europa_MVVM.Views
+namespace EuropaWPF_App.Views
 {
     /// <summary>
     /// Interaction logic for UserDisplay.xaml

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Reflection;
 
-namespace WPF_Europa_MVVM.Foundation
+namespace EuropaWPF_App.Foundation
 {
     /// <summary>
     /// Provides loosely-coupled messaging between

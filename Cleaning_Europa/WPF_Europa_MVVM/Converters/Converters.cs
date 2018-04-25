@@ -4,7 +4,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
 
-namespace WPF_Europa_MVVM.Converters
+namespace EuropaWPF_App.Converters
 {
     [ValueConversion(typeof(string), typeof(String))]
     public class DateTimeToShortDate : IValueConverter

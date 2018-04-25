@@ -3,13 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using WPF_Europa_MVVM.Interfaces;
-using WPF_Europa_MVVM.ServiceDI;
-using WPF_Europa_MVVM.ViewModels;
-using WPF_Europa_MVVM.Views;
-using WPF_Europa_MVVM.Views.ViewDialogs;
+using EuropaWPF_App.Interfaces;
+using EuropaWPF_App.ServiceDI;
+using EuropaWPF_App.ViewModels;
+using EuropaWPF_App.Views;
+using EuropaWPF_App.Views.ViewDialogs;
 
-namespace WPF_Europa_MVVM.StarterDI
+namespace EuropaWPF_App.StarterDI
 {
     class BootStrapper
     {

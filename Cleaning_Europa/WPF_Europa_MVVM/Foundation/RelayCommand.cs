@@ -2,7 +2,7 @@
 using System.Diagnostics;
 using System.Windows.Input;
 
-namespace WPF_Europa_MVVM.Foundation
+namespace EuropaWPF_App.Foundation
 {
     /// <summary>
     /// A command whose sole purpose is to 

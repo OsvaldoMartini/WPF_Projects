@@ -1,7 +1,7 @@
 ﻿using System;
-using WPF_Europa_MVVM.Interfaces;
+using EuropaWPF_App.Interfaces;
 
-namespace WPF_Europa_MVVM.Views.ViewDialogs
+namespace EuropaWPF_App.Views.ViewDialogs
 {
     public class HierarchDialogView : IHierarchModal
     {

@@ -1,6 +1,6 @@
 ﻿using System.Windows.Controls;
 
-namespace WPF_Europa_MVVM.Views.HierarchyViews
+namespace EuropaWPF_App.Views.HierarchyViews
 {
     /// <summary>
     /// Interaction logic for NavigationView.xaml

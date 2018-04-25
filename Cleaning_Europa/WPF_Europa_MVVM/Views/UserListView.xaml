@@ -1,9 +1,9 @@
-﻿<UserControl x:Class="WPF_Europa_MVVM.Views.UserListView"
+﻿<UserControl x:Class="EuropaWPF_App.Views.UserListView"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:viewModels="clr-namespace:WPF_Europa_MVVM.ViewModels"
-    xmlns:loc="clr-namespace:WPF_Europa_MVVM.Converters"
-    xmlns:views="clr-namespace:WPF_Europa_MVVM.Views">
+    xmlns:viewModels="clr-namespace:EuropaWPF_App.ViewModels"
+    xmlns:loc="clr-namespace:EuropaWPF_App.Converters"
+    xmlns:views="clr-namespace:EuropaWPF_App.Views">
     <UserControl.DataContext>
         <viewModels:UserSelectActionsModel />
     </UserControl.DataContext>
