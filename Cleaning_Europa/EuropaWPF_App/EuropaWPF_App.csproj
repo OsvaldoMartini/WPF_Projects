@@ -84,7 +84,7 @@
     <Compile Include="Interfaces\IServiceLocator.cs" />
     <Compile Include="ServiceDI\ServiceProvider.cs" />
     <Compile Include="ServiceDI\UnityServiceLocator.cs" />
-    <Compile Include="StarterDI\BootStrapper.cs" />
+    <Compile Include="ServiceDI\StarterDI\BootStrapper.cs" />
     <Compile Include="ViewModels\IntermediateMsgVM.cs" />
     <Compile Include="ViewModels\OrgElementViewModel.cs" />
     <Compile Include="ViewModels\HierarchTreeViewModel.cs" />

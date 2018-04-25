@@ -1,7 +1,7 @@
 ﻿using System.Windows;
 using Europa_Data.DB_Helper;
 using EuropaWPF_App.Foundation;
-using EuropaWPF_App.StarterDI;
+using EuropaWPF_App.ServiceDI.StarterDI;
 
 namespace EuropaWPF_App
 {

@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Controls;
-using EuropaWPF_App.Foundation;
 using EuropaWPF_App.Interfaces;
 
 namespace EuropaWPF_App

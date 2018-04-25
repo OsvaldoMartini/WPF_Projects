@@ -1,15 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using EuropaWPF_App.Interfaces;
-using EuropaWPF_App.ServiceDI;
-using EuropaWPF_App.ViewModels;
-using EuropaWPF_App.Views;
+﻿using EuropaWPF_App.Interfaces;
 using EuropaWPF_App.Views.ViewDialogs;
 
-namespace EuropaWPF_App.StarterDI
+namespace EuropaWPF_App.ServiceDI.StarterDI
 {
     class BootStrapper
     {

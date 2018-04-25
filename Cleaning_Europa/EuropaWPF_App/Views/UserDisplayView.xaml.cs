@@ -1,6 +1,4 @@
-﻿using System.Windows;
-using System.Windows.Controls;
-using Europa_Data.Model;
+﻿using System.Windows.Controls;
 
 namespace EuropaWPF_App.Views
 {

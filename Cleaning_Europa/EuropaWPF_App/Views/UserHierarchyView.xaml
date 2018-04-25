@@ -17,9 +17,15 @@
         <DataTemplate x:Key="DetailTemplate">
             <hierarchyViews:DetailView/>
         </DataTemplate>
+        <Style x:Key="DesignerItemStyle" TargetType="ContentControl" />
     </Window.Resources>
-   
-    <StackPanel Orientation="Horizontal">
+
+    <ContentControl 
+        Width="Auto"
+        Height="Auto"
+        Padding="2"
+        Style="{StaticResource DesignerItemStyle}">
+        <StackPanel Orientation="Horizontal">
 
         <ContentControl Content="{Binding}" ContentTemplate="{StaticResource TreeViewTemplate}"  />
         <StackPanel x:Name="pnlDetail">
@@ -28,4 +34,5 @@
         </StackPanel>
 
     </StackPanel>
+    </ContentControl>
 </Window>

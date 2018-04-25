@@ -6,7 +6,6 @@ using System.Linq;
 using System.Xml.Linq;
 using Europa_Data.DB_Helper;
 using Europa_Data.Model;
-using Moq;
 using NUnit.Framework;
 
 namespace Europa_Tests

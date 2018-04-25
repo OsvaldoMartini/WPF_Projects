@@ -1,5 +1,4 @@
 ﻿using System.Windows;
-using EuropaWPF_App.ViewModels;
 
 namespace EuropaWPF_App.Views
 {

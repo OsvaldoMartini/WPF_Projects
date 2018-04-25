@@ -1,12 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Windows;
 using System.Windows.Input;
 using EuropaWPF_App.Foundation;
 using Europa_Data.INotifyChanging;
 using Europa_Data.Model;
-using EuropaWPF_App.Interfaces;
 using EuropaWPF_App.Views;
 using PropertyChangingEventHandler = Europa_Data.INotifyChanging.PropertyChangingEventHandler;
 
