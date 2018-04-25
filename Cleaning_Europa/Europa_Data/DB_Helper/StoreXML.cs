@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Configuration;
 using Europa_Data.Controls;
 using Europa_Data.Model;
-using Europa_Data.ViewModel;
 
 namespace Europa_Data.DB_Helper
 {

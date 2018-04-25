@@ -18,6 +18,7 @@
             <hierarchyViews:DetailView/>
         </DataTemplate>
     </Window.Resources>
+   
     <StackPanel Orientation="Horizontal">
 
         <ContentControl Content="{Binding}" ContentTemplate="{StaticResource TreeViewTemplate}"  />

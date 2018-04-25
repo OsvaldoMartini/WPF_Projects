@@ -5,7 +5,9 @@ using System.Text;
 using System.Threading.Tasks;
 using WPF_Europa_MVVM.Interfaces;
 using WPF_Europa_MVVM.ServiceDI;
+using WPF_Europa_MVVM.ViewModels;
 using WPF_Europa_MVVM.Views;
+using WPF_Europa_MVVM.Views.ViewDialogs;
 
 namespace WPF_Europa_MVVM.StarterDI
 {
@@ -19,7 +21,8 @@ namespace WPF_Europa_MVVM.StarterDI
 
             //register the IModalDialog using an instance of the HierarchViewDialog
             //this sets up the view
-            ServiceProvider.Instance.Register<IModalDialog, HierarchViewDialog>();
+            ServiceProvider.Instance.Register<IHierarchModal, HierarchDialogView>();
+            //ServiceProvider.Instance.Register<IUserDisplayVM, UserDisplayVM>();
         }
     }
 }

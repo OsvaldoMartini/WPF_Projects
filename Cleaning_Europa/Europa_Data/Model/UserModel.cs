@@ -5,7 +5,6 @@ using System.IO;
 using System.Xml.Serialization;
 using Europa_Data.Controls;
 using Europa_Data.DB_Helper;
-using Europa_Data.ViewModel;
 
 namespace Europa_Data.Model
 {

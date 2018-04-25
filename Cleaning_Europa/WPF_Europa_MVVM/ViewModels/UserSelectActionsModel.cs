@@ -6,7 +6,6 @@ using Europa_Data.Controls;
 using WPF_Europa_MVVM.Foundation;
 using WPF_Europa_MVVM.Interfaces;
 using Europa_Data.Model;
-using Europa_Data.ViewModel;
 using WPF_Europa_MVVM.ServiceDI;
 using WPF_Europa_MVVM.Views;
 
@@ -58,6 +57,7 @@ namespace WPF_Europa_MVVM.ViewModels
             Messenger messenger = App.Messenger;
             if (_selectedUser != null)
                 Call_UserWindow(Mode.Edit);
+
             messenger.NotifyColleagues("UserSelectionChanged", _selectedUser);
         }
 
@@ -104,21 +104,25 @@ namespace WPF_Europa_MVVM.ViewModels
             var treeHierarchVM = HierarchTreeViewModel.Instance();
             treeHierarchVM.Mode = Mode.JustForView;
 
-            IModalDialog dialog = ServiceProvider.Instance.Get<IModalDialog>();
+            IHierarchModal dialog = ServiceProvider.Instance.Get<IHierarchModal>();
             dialog.BindViewModel(treeHierarchVM);
             dialog.ShowDialog();
         }
 
-
         private void Call_UserWindow(Mode mode)
         {
-            var userDisplayModel = UserDisplayModel.Instance();
-            userDisplayModel.Mode = mode;
+            
+            GlobalServices.ModalService.NavigateTo(new UserDisplayView(), delegate(bool returnValue)
+            {
+                if (returnValue)
+                    GetUsers();
+            });
 
-            IModalDialog dialog = ServiceProvider.Instance.Get<IModalDialog>();
-            dialog.BindViewModel(userDisplayModel);
-            dialog.ShowDialog();
+            if (Mode.Add == mode)
+                App.Messenger.NotifyColleagues("UserSelectionChanged", new UserVM());
+
         }
+
         #endregion
 
         #region ListBoxCommand

@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using Europa_Data.Controls;
-using Europa_Data.ViewModel;
 
 namespace Europa_Data.Model
 {

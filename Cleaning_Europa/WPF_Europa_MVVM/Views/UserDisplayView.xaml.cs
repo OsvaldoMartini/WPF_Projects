@@ -7,7 +7,7 @@ namespace WPF_Europa_MVVM.Views
     /// <summary>
     /// Interaction logic for UserDisplay.xaml
     /// </summary>
-    public partial class UserDisplayView : Window
+    public partial class UserDisplayView : UserControl
     {
         public UserDisplayView()
         {

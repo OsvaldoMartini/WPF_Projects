@@ -65,7 +65,9 @@
     <Compile Include="Converters\Converters.cs" />
     <Compile Include="Foundation\ApplicationCloseCommand.cs" />
     <Compile Include="Foundation\GlobalServices.cs" />
+    <Compile Include="Interfaces\IHierarchModal.cs" />
     <Compile Include="Interfaces\IModalService.cs" />
+    <Compile Include="Interfaces\IUserDisplayVM.cs" />
     <Compile Include="Views\HierarchyViews\DetailView.xaml.cs">
       <DependentUpon>DetailView.xaml</DependentUpon>
     </Compile>
@@ -86,11 +88,11 @@
     <Compile Include="ViewModels\IntermediateMsgVM.cs" />
     <Compile Include="ViewModels\OrgElementViewModel.cs" />
     <Compile Include="ViewModels\HierarchTreeViewModel.cs" />
-    <Compile Include="ViewModels\UserDisplayModel.cs" />
+    <Compile Include="ViewModels\UserDisplayVM.cs" />
     <Compile Include="ViewModels\UserDisplayModelStatus.cs" />
     <Compile Include="ViewModels\UserSelectActionsModel.cs" />
     <Compile Include="ViewModels\ViewModelBase.cs" />
-    <Compile Include="Views\ViewDialogs\HierarchViewDialog.cs" />
+    <Compile Include="Views\ViewDialogs\HierarchDialogView.cs" />
     <Compile Include="Views\UserDisplayView.xaml.cs">
       <DependentUpon>UserDisplayView.xaml</DependentUpon>
     </Compile>
@@ -100,7 +102,6 @@
     <Compile Include="Views\UserListView.xaml.cs">
       <DependentUpon>UserListView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\ViewDialogs\UserViewDialog.cs" />
     <Compile Include="Views\YesOrNoMessage.xaml.cs">
       <DependentUpon>YesOrNoMessage.xaml</DependentUpon>
     </Compile>

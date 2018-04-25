@@ -2,7 +2,6 @@
 using System.ComponentModel;
 using System.IO;
 using Europa_Data.Model;
-using Europa_Data.ViewModel;
 
 namespace WPF_Europa_MVVM.ViewModels
 {

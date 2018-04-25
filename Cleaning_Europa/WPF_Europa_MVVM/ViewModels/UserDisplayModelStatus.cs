@@ -1,7 +1,7 @@
 ﻿using System;
 using System.ComponentModel;
 using System.Windows.Media;
-using Europa_Data.ViewModel;
+using Europa_Data.Model;
 using WPF_Europa_MVVM.Foundation;
 
 namespace WPF_Europa_MVVM.ViewModels

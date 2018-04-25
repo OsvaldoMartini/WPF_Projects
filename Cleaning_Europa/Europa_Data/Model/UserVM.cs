@@ -1,8 +1,7 @@
 ﻿using System;
 using Europa_Data.INotifyChanging;
-using Europa_Data.Model;
 
-namespace Europa_Data.ViewModel
+namespace Europa_Data.Model
 {
     //Communication to / from SQL uses this class for user
     // Consversion routines UserModel <--> User provided
@@ -14,9 +13,11 @@ namespace Europa_Data.ViewModel
 
     public class UserVM : PropertyNotificationObject
     {
-       
+
         private Guid _guiid;
-        public Guid _Guid{ get { return _guiid; }
+        public Guid _Guid
+        {
+            get { return _guiid; }
             internal set { _guiid = value; }
         }
         public int ParentId { get; set; }
@@ -28,7 +29,7 @@ namespace Europa_Data.ViewModel
             internal set { _userId = value; }
         }
 
-        
+
         private string userName;
         public string UserName
         {
@@ -68,14 +69,15 @@ namespace Europa_Data.ViewModel
         public DeptoModel Depto
         {
             get { return depto; }
-            set { depto = value;}
+            set { depto = value; }
         }
 
         private bool leaver;
         public bool Leaver
         {
             get { return this.leaver; }
-            set {
+            set
+            {
                 SetProperty<bool>("Leaver", ref this.leaver, value);
             }
         }
@@ -91,9 +93,9 @@ namespace Europa_Data.ViewModel
         {
         }
 
-     
+
         public UserVM(Guid id, int userId, string userName, string forename,
-                       string surname, DateTime startDate, RoleModel role,DeptoModel depto, bool leaver, DateTime? leavingDate)
+                       string surname, DateTime startDate, RoleModel role, DeptoModel depto, bool leaver, DateTime? leavingDate)
         {
             this._Guid = id;
             this._UserId = userId;
@@ -104,7 +106,7 @@ namespace Europa_Data.ViewModel
             _Role = role;
             Depto = depto;
             Leaver = leaver;
-            LeavingDate = leavingDate==DateTime.MinValue?null:leavingDate;
+            LeavingDate = leavingDate == DateTime.MinValue ? null : leavingDate;
 
         }
 
@@ -138,7 +140,7 @@ namespace Europa_Data.ViewModel
 
     //class User
 
-    
-   
+
+
 
 }
