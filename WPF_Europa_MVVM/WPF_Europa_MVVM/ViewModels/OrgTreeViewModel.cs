@@ -3,9 +3,8 @@ using System.ComponentModel;
 using System.Windows.Input;
 using WPF_Europa_MVVM.Foundation;
 using WPF_Europa_MVVM.Model;
-using WPF_Europa_MVVM.ViewModels;
 
-namespace DevLake.OrgChart.UI.ViewModel
+namespace WPF_Europa_MVVM.ViewModels
 {
     public class OrgTreeViewModel : ViewModelBase
     {
@@ -16,6 +15,16 @@ namespace DevLake.OrgChart.UI.ViewModel
         private ICommand selectedCommand;
         private ICommand changeDisplayLevelCommand;
         private int displayLevel = -1;  //display all levels by default
+
+
+        /// <summary>
+        /// For determining wich Action to be made inside  of the view
+        /// </summary>
+        public Mode Mode
+        {
+            get;
+            set;
+        }
 
         //the root of the visual tree
         public List<OrgElementViewModel> Root

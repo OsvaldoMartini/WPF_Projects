@@ -4,6 +4,8 @@ using System.Linq;
 using System.Windows.Input;
 using WPF_Europa_MVVM.Controls;
 using WPF_Europa_MVVM.Foundation;
+using WPF_Europa_MVVM.Interfaces;
+using WPF_Europa_MVVM.Service;
 using WPF_Europa_MVVM.Views;
 
 namespace WPF_Europa_MVVM.ViewModels
@@ -127,6 +129,12 @@ namespace WPF_Europa_MVVM.ViewModels
 
         private void Call_Hierarch()
         {
+            var treeHierarchVM = OrgTreeViewModel.Instance();
+            treeHierarchVM.Mode = Mode.JustForView;
+
+            IModalDialog dialog = ServiceProvider.Instance.Get<IModalDialog>();
+            dialog.BindViewModel(treeHierarchVM);
+            dialog.ShowDialog();
         }
 
 

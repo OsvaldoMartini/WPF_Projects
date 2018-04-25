@@ -1,6 +1,7 @@
 ﻿using System.Windows;
 using WPF_Europa_MVVM.Foundation;
 using WPF_Europa_MVVM.Model;
+using WPF_Europa_MVVM.StarterDI;
 
 namespace WPF_Europa_MVVM
 {
@@ -15,6 +16,13 @@ namespace WPF_Europa_MVVM
         {
             get { return _messenger; }
         }
-readonly static Messenger _messenger = new Messenger();
+        readonly static Messenger _messenger = new Messenger();
+
+        protected override void OnStartup(StartupEventArgs e)
+        {
+            base.OnStartup(e);
+
+            BootStrapper.Initialize();
+        }
     }
 }
