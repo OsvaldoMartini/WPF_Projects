@@ -1,0 +1,9 @@
+﻿<UserControl x:Class="WPF_Europa_MVVM.Views.HierarchyViews.DetailView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             MaxWidth="600">
+    <StackPanel>
+        <Button Template="{StaticResource chartDetailButton}"/>
+    </StackPanel>
+</UserControl>
