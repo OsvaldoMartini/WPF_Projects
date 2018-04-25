@@ -12,7 +12,7 @@ namespace WPF_Europa_MVVM.Views
         {
             InitializeComponent();
             //I left this line of code just do speed up the test delivery
-            //this.DataContext = OrgTreeViewModel.Instance();
+            this.SizeToContent = SizeToContent.WidthAndHeight;
         }
     }
 }

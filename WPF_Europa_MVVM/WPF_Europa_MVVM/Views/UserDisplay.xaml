@@ -44,7 +44,7 @@
                     </Grid.RowDefinitions>
 
 
-                    <Border Background="#90000000" Visibility="{Binding Visibility}">
+                    <Border Background="#90000000" Visibility="Visible">
                         <Border BorderBrush="Black" BorderThickness="1" Background="AliceBlue" 
                     CornerRadius="10,0,10,0" VerticalAlignment="Center"
                     HorizontalAlignment="Center">

@@ -39,7 +39,7 @@
                                    HorizontalAlignment="Center"
                                    FontSize="18"
                                    FontWeight="Black"
-                                   Text="Hierarchy" />
+                                   Text="User Details Of Performance" />
                         <TextBlock Grid.Row="1"
                                    Margin="10"
                                    HorizontalAlignment="Left"
@@ -83,7 +83,7 @@
                     </Grid.RowDefinitions>
 
 
-                    <Border Background="#90000000" Visibility="{Binding Visibility}">
+                    <Border Background="#90000000" Visibility="Visible">
                         <Border BorderBrush="Black" BorderThickness="1" Background="AliceBlue" 
                     CornerRadius="10,0,10,0" VerticalAlignment="Center"
                     HorizontalAlignment="Center">

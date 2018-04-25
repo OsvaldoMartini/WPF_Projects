@@ -8,8 +8,6 @@ namespace WPF_Europa_MVVM.Foundation
 {
     public class GenericPropertyFinder<TModel> where TModel : class
     {
-      
-
         public void PrintTModelPropertyAndValue(TModel tmodelObj)
         {
             //Getting Type of Generic Class Model

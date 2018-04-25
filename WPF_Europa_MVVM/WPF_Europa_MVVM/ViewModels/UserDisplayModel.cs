@@ -20,7 +20,6 @@ namespace WPF_Europa_MVVM.ViewModels
         private List<RoleModel> _roles;
         private List<DeptoModel> _deptos;
 
-
         //Messegers
         public UserDisplayModel()
         {

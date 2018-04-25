@@ -8,7 +8,7 @@ namespace WPF_Europa_MVVM.Foundation
     {
         public event EventHandler CanExecuteChanged
         {
-            // You may not need a body here at all...
+            // I may not need a body here at all...
             add { CommandManager.RequerySuggested += value; }
             remove { CommandManager.RequerySuggested -= value; }
         }
