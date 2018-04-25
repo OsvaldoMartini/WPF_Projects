@@ -54,7 +54,7 @@ namespace EuropaWPF_App.ViewModels
         #endregion
 
 
-        public UserDisplayModelStatus Stat
+        public UserDisplayModelStatus CheckStat
         {
             get { return stat; }
         }

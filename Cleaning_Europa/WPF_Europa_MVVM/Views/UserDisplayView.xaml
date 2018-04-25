@@ -68,35 +68,33 @@
                                 </Grid.RowDefinitions>
 
                                 <TextBlock Grid.Row="0" Grid.Column="0" Margin="7">Username:</TextBlock>
-                                <TextBox Grid.Row="0" Grid.Column="1" Margin="5"  BorderBrush="{Binding Path=Stat.UserNameBrush}" BorderThickness="1"  CharacterCasing="Lower"
+                                <TextBox Grid.Row="0" Grid.Column="1" Margin="5"  BorderBrush="{Binding Path=CheckStat.UserNameBrush}" BorderThickness="1"  CharacterCasing="Lower"
                      Text="{Binding Path=UserToDisplay.UserName, UpdateSourceTrigger=LostFocus, Mode=TwoWay}"></TextBox>
 
                                 <TextBlock Grid.Row="1" Margin="7" Grid.Column="0" >Forename:</TextBlock>
-                                <TextBox Margin="5" Grid.Row="1" Grid.Column="1" BorderBrush="{Binding Path=Stat.ForenameBrush}" BorderThickness="1"
+                                <TextBox Margin="5" Grid.Row="1" Grid.Column="1" BorderBrush="{Binding Path=CheckStat.ForenameBrush}" BorderThickness="1"
                      Text="{Binding Path=UserToDisplay.Forename, UpdateSourceTrigger=PropertyChanged}"></TextBox>
 
                                 <TextBlock Grid.Row="2" Margin="7" Grid.Column="0" >Surname:</TextBlock>
-                                <TextBox Margin="5" Grid.Row="2" Grid.Column="1" BorderBrush="{Binding Path=Stat.SurnameBrush}" BorderThickness="1"
+                                <TextBox Margin="5" Grid.Row="2" Grid.Column="1" BorderBrush="{Binding Path=CheckStat.SurnameBrush}" BorderThickness="1"
                                          Text="{Binding Path=UserToDisplay.Surname , UpdateSourceTrigger=PropertyChanged}"></TextBox>
 
                                 <TextBlock Margin="7" Grid.Row="3" Grid.Column="0" >Start Date:</TextBlock>
                                 <DatePicker Name="DtStartDate" Height="25" Width="115"
                                             HorizontalAlignment="Left" 
-                                            Margin="5" Grid.Row="3" Grid.Column="1"  BorderBrush="{Binding Path=Stat.StartDateBrush}" BorderThickness="1"
+                                            Margin="5" Grid.Row="3" Grid.Column="1"  BorderBrush="{Binding Path=CheckStat.StartDateBrush}" BorderThickness="1"
                                             VerticalAlignment="Top" IsDropDownOpen="False"   
                                             IsTodayHighlighted="True"
                                             SelectedDate="{Binding Path=UserToDisplay.StartDate, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}">
 
                                 </DatePicker>
                                 <TextBlock Margin="7" Grid.Row="4" Grid.Column="0" >Role:</TextBlock>
-                                <!--<TextBox Margin="5" Grid.Row="4" Grid.Column="1"  BorderBrush="{Binding Path=Stat.RoleBrush}" BorderThickness="1"
-                                         Text="{Binding Path=UserToDisplay.Role.RoleName, UpdateSourceTrigger=PropertyChanged}"></TextBox>-->
                                 <ComboBox Name="Roles" ItemsSource="{Binding Path=Roles}"
                                           DisplayMemberPath="RoleName"
                                           SelectedValuePath="id"
                                           SelectedValue="{Binding Path=UserToDisplay._Role.id}"
                                           Margin="5" Grid.Row="4" Grid.Column="1"  
-                                          BorderBrush="{Binding Stat.RoleBrush}" BorderThickness="1"
+                                          BorderBrush="{Binding CheckStat.RoleBrush}" BorderThickness="1"
                                           SelectedItem="{Binding RoleItemSelected, UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}">
 
                                 </ComboBox>
@@ -107,7 +105,7 @@
                                           SelectedValuePath="id"
                                           SelectedValue="{Binding Path=UserToDisplay.Depto.id}"
                                           Margin="5" Grid.Row="5" Grid.Column="1"  
-                                          BorderBrush="{Binding Path=Stat.DeptoBrush}" BorderThickness="1"
+                                          BorderBrush="{Binding Path=CheckStat.DeptoBrush}" BorderThickness="1"
                                           SelectedItem="{Binding DeptoItemSelected, UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}">
                                 </ComboBox>
 
@@ -116,19 +114,17 @@
 
 
                                 <TextBlock Grid.Row="7" Margin="7" Grid.Column="0" >Leaving Date:</TextBlock>
-                                <!--<TextBox Margin="5" Grid.Row="7" Grid.Column="1"  BorderBrush="{Binding Path=Stat.LeavingDateBrush}" BorderThickness="1"
-                                         Text="{Binding Path=UserToDisplay.LeavingDate, UpdateSourceTrigger=PropertyChanged}"></TextBox>-->
                                 <DatePicker Name="DtLeavingDate" Height="25" Width="115"
                                             HorizontalAlignment="Left" 
                                             IsEnabled="{Binding Path=UserToDisplay.Leaver}"
-                                            Margin="5" Grid.Row="7" Grid.Column="1"  BorderBrush="{Binding Path=Stat.LeavingDateBrush}" BorderThickness="1"
+                                            Margin="5" Grid.Row="7" Grid.Column="1"  BorderBrush="{Binding Path=CheckStat.LeavingDateBrush}" BorderThickness="1"
                                             VerticalAlignment="Top" IsDropDownOpen="False"                   
                                             IsTodayHighlighted="True"
                                             SelectedDate="{Binding Path=UserToDisplay.LeavingDate, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}">
 
                                 </DatePicker>
                                 <TextBlock Margin="7,25,15,0" Grid.Row="8" Grid.Column="0" >Status:</TextBlock>
-                                <TextBox Margin="7" Grid.Row="9" Grid.Column="0" Grid.ColumnSpan="2" Text="{Binding Path=Stat.Status}"></TextBox>
+                                <TextBox Margin="7" Grid.Row="9" Grid.Column="0" Grid.ColumnSpan="2" Text="{Binding Path=CheckStat.Status}"></TextBox>
                             </Grid>
 
                         </Border>

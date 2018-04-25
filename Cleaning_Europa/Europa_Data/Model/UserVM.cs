@@ -89,6 +89,19 @@ namespace Europa_Data.Model
             set { leavingDate = value; }
         }
 
+        private string _description;
+        public string Description
+        {
+            get { return _description; }
+            set
+            {
+                _description = value;
+                SetProperty<string>("Description", ref this._description, value);
+            }
+        }
+
+     
+
         public UserVM()
         {
         }
@@ -107,11 +120,13 @@ namespace Europa_Data.Model
             Depto = depto;
             Leaver = leaver;
             LeavingDate = leavingDate == DateTime.MinValue ? null : leavingDate;
+            Description = this.ToString();
 
         }
 
         public void CopyUser(UserVM p)
         {
+            
             this._Guid = p._Guid;
             this._UserId = p._UserId;
             this.UserName = p.UserName;
@@ -122,6 +137,7 @@ namespace Europa_Data.Model
             this.Depto = p.Depto;
             this.Leaver = p.Leaver;
             this.LeavingDate = p.LeavingDate;
+            this.Description = this.ToString();
         }
 
         //Creating a new user in the DB assigns the UserId
