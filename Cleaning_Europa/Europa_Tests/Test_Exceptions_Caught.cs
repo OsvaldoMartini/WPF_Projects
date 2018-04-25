@@ -4,11 +4,10 @@ using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Xml.Linq;
-using Europa_App.Model;
-using Europa_App.Util;
+using Europa_Data.DB_Helper;
+using Europa_Data.Model;
 using Moq;
 using NUnit.Framework;
-using WPF_Europa_MVVM.ViewModels;
 
 namespace Europa_Tests
 {
@@ -24,7 +23,7 @@ namespace Europa_Tests
             try
             {
                 //open file
-                pathFile = String.Format("{0}{1}\\ProductModel.xml", AppDomain.CurrentDomain.BaseDirectory,
+                pathFile = String.Format("{0}{1}\\UserModel.xml", AppDomain.CurrentDomain.BaseDirectory,
                     DBUtility.FilePath);
                 bool existexpected = File.Exists(pathFile);
                 Assert.IsFalse(existexpected);
@@ -49,11 +48,11 @@ namespace Europa_Tests
             try
             {
                 //open file
-                pathFile = String.Format("{0}{1}\\ProductModel.xml", AppDomain.CurrentDomain.BaseDirectory,
+                pathFile = String.Format("{0}{1}\\UserModel.xml", AppDomain.CurrentDomain.BaseDirectory,
                     DBUtility.FilePath);
                 bool existexpected = File.Exists(pathFile);
                 if (!File.Exists(pathFile))
-                    DBUtility.CreateFile<ProductModel>(DBUtility.MockProductModel(), pathFile);
+                    DBUtility.CreateFile<UserModel>(DBUtility.MockUserModel(), pathFile);
 
                 Assert.IsTrue(existexpected);
             }
@@ -72,8 +71,8 @@ namespace Europa_Tests
         {
 
             XDocument root = XDocument.Parse(@"<?xml version='1.0' encoding='utf-8'?>
-                <ArrayOfProductModel xmlns:xsd='http://www.w3.org/2001/XMLSchema' xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'>
-                <ProductModel>
+                <ArrayOfUserModel xmlns:xsd='http://www.w3.org/2001/XMLSchema' xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'>
+                <UserModel>
                 <ID>4a2f066d-d0c5-4c71-bd3b-74e6938cf37b</ID>
                 <ProductId>1</ProductId>
                 <ModelNumber>ABL1235</ModelNumber>
@@ -81,8 +80,8 @@ namespace Europa_Tests
                 <UnitCost>10500</UnitCost>
                 <Description>Bla Bla Bla</Description>
                 <CategoryName>Category Descents</CategoryName>
-                </ProductModel>
-                <ProductModel>
+                </UserModel>
+                <UserModel>
                 <ID>2eae414d-d7cd-43a2-b67e-e00b6b525dd0</ID>
                 <ProductId>2</ProductId>
                 <ModelNumber>FFhTR65</ModelNumber>
@@ -90,9 +89,9 @@ namespace Europa_Tests
                 <UnitCost>310555</UnitCost>
                 <Description>Tom Tom Tom</Description>
                 <CategoryName>Category Vehicles</CategoryName>
-                </ProductModel>
-                </ArrayOfProductModel>");
-            //string grandChild3 = (string)(root.Descendants("ProductModel").Select(el => el.Value=="a2f066d-d0c5-4c71-bd3b-74e6938cf37b"));
+                </UserModel>
+                </ArrayOfUserModel>");
+            //string grandChild3 = (string)(root.Descendants("UserModel").Select(el => el.Value=="a2f066d-d0c5-4c71-bd3b-74e6938cf37b"));
 
             Dictionary<string, string> lstDic = new Dictionary<string, string>();
             lstDic.Add("ID", "2eae414d-d7cd-43a2-b67e-e00b6b525dd0");
@@ -103,12 +102,12 @@ namespace Europa_Tests
                 where x.Key.Contains("ID")
                 select x.Value).FirstOrDefault();
 
-            foreach (var child in root.Root.Element("ProductModel").Elements())
+            foreach (var child in root.Root.Element("UserModel").Elements())
                 Debug.WriteLine(string.Format("{0}:{1}", child.Name, child.Value));
 
             //Assert.AreEqual("", string.Format("{0}:{1}", child.Name, child.Value));
 
-            var elements = root.Element("ArrayOfProductModel").Elements();
+            var elements = root.Element("ArrayOfUserModel").Elements();
             foreach (var child in elements)
             {
                 var elmId = child.Element("ID");

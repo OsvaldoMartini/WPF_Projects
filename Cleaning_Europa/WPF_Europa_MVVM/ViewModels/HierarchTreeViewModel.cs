@@ -2,7 +2,7 @@
 using System.ComponentModel;
 using System.Windows.Input;
 using WPF_Europa_MVVM.Foundation;
-using WPF_Europa_MVVM.Model;
+using Europa_Data.Model;
 
 namespace WPF_Europa_MVVM.ViewModels
 {

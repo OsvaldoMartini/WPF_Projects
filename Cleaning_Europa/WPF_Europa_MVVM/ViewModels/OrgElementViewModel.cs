@@ -1,7 +1,8 @@
 ﻿using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.IO;
-using WPF_Europa_MVVM.Model;
+using Europa_Data.Model;
+using Europa_Data.ViewModel;
 
 namespace WPF_Europa_MVVM.ViewModels
 {

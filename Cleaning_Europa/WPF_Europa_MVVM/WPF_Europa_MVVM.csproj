@@ -80,22 +80,12 @@
     </Compile>
     <Compile Include="Interfaces\IModalDialog.cs" />
     <Compile Include="Interfaces\IServiceLocator.cs" />
-    <Compile Include="DB_Helper\DBUtility.cs" />
-    <Compile Include="Model\DeptoModel.cs" />
-    <Compile Include="Model\HierarchyOrganization.cs" />
-    <Compile Include="Model\RoleModel.cs" />
-    <Compile Include="INotifyChanging\CancelPropertyNotificationEventArgs.cs" />
-    <Compile Include="INotifyChanging\IPropertyNotification.cs" />
-    <Compile Include="INotifyChanging\PropertyNotificationEventArgs.cs" />
-    <Compile Include="INotifyChanging\PropertyNotificationObject.cs" />
-    <Compile Include="Service\ServiceProvider.cs" />
-    <Compile Include="Service\UnityServiceLocator.cs" />
+    <Compile Include="ServiceDI\ServiceProvider.cs" />
+    <Compile Include="ServiceDI\UnityServiceLocator.cs" />
     <Compile Include="StarterDI\BootStrapper.cs" />
     <Compile Include="ViewModels\IntermediateMsgVM.cs" />
-    <Compile Include="ViewModels\Modes.cs" />
     <Compile Include="ViewModels\OrgElementViewModel.cs" />
     <Compile Include="ViewModels\HierarchTreeViewModel.cs" />
-    <Compile Include="ViewModels\UserVM.cs" />
     <Compile Include="ViewModels\UserDisplayModel.cs" />
     <Compile Include="ViewModels\UserDisplayModelStatus.cs" />
     <Compile Include="ViewModels\UserSelectActionsModel.cs" />
@@ -137,8 +127,6 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Controls\ObservedCollection.cs" />
-    <Compile Include="Controls\UserObservableCollection.cs" />
     <Compile Include="Foundation\CommandBehavior.cs" />
     <Compile Include="Foundation\GenericPropertyFinder.cs" />
     <Compile Include="Foundation\Messenger.cs" />
@@ -185,10 +173,6 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Model\CustomerModel.cs" />
-    <Compile Include="DB_Helper\IDBUtility.cs" />
-    <Compile Include="Model\UserModel.cs" />
-    <Compile Include="DB_Helper\StoreXML.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -221,7 +205,12 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="..\Europa_Data\Europa_Data.csproj">
+      <Project>{D73F003C-6C22-4554-B553-BDC4C50DE6E7}</Project>
+      <Name>Europa_Data</Name>
+    </ProjectReference>
+  </ItemGroup>
   <ItemGroup>
     <None Include="DLL\Microsoft.Practices.Unity.dll">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>

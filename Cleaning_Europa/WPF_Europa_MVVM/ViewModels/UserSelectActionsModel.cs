@@ -2,10 +2,12 @@
 using System.ComponentModel;
 using System.Linq;
 using System.Windows.Input;
-using WPF_Europa_MVVM.Controls;
+using Europa_Data.Controls;
 using WPF_Europa_MVVM.Foundation;
 using WPF_Europa_MVVM.Interfaces;
-using WPF_Europa_MVVM.Service;
+using Europa_Data.Model;
+using Europa_Data.ViewModel;
+using WPF_Europa_MVVM.ServiceDI;
 using WPF_Europa_MVVM.Views;
 
 namespace WPF_Europa_MVVM.ViewModels

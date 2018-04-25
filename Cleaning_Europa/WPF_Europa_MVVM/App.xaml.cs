@@ -1,7 +1,6 @@
 ﻿using System.Windows;
-using WPF_Europa_MVVM.DB_Helper;
+using Europa_Data.DB_Helper;
 using WPF_Europa_MVVM.Foundation;
-using WPF_Europa_MVVM.Model;
 using WPF_Europa_MVVM.StarterDI;
 
 namespace WPF_Europa_MVVM

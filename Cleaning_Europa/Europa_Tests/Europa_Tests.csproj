@@ -79,19 +79,14 @@
   <ItemGroup>
     <Compile Include="Test_Exceptions_Caught.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="UserVM.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Europa_App\Europa_App.csproj">
-      <Project>{4d1c4131-7074-4cb9-a93e-328b30085406}</Project>
-      <Name>Europa_App</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\WPF_Europa_MVVM\WPF_Europa_MVVM.csproj">
-      <Project>{0fadaa25-18c2-4877-8b54-4b3bdced5e9b}</Project>
-      <Name>WPF_Europa_MVVM</Name>
+    <ProjectReference Include="..\Europa_Data\Europa_Data.csproj">
+      <Project>{d73f003c-6c22-4554-b553-bdc4c50de6e7}</Project>
+      <Name>Europa_Data</Name>
     </ProjectReference>
   </ItemGroup>
   <Choose>

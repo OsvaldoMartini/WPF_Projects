@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using WPF_Europa_MVVM.Interfaces;
-using WPF_Europa_MVVM.Service;
+using WPF_Europa_MVVM.ServiceDI;
 using WPF_Europa_MVVM.Views;
 
 namespace WPF_Europa_MVVM.StarterDI
