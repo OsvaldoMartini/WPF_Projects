@@ -1,14 +1,30 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
 using WPF_Europa_MVVM.Controls;
+using WPF_Europa_MVVM.Model;
 using WPF_Europa_MVVM.ViewModels;
 
-namespace WPF_Europa_MVVM.Model
+namespace WPF_Europa_MVVM.DB_Helper
 {
     public class StoreXML
     {
         public bool hasError = false;
         public string errorMessage;
+
+        //Type of CSV must be Implemented
+        private string _typeOfFile;
+        public string TypeOfFile
+        {
+            get
+            {
+                if (this._typeOfFile == String.Empty)
+                    this._typeOfFile = ConfigurationSettings.AppSettings["typeOfFile"];
+
+                return _typeOfFile;
+            }
+            set { _typeOfFile = value; }
+        }
 
         public bool DeleteUser(int p)
         {

@@ -4,6 +4,7 @@ using System.Globalization;
 using System.IO;
 using System.Xml.Serialization;
 using WPF_Europa_MVVM.Controls;
+using WPF_Europa_MVVM.DB_Helper;
 using WPF_Europa_MVVM.ViewModels;
 
 namespace WPF_Europa_MVVM.Model

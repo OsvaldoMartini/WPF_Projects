@@ -1,4 +1,4 @@
-﻿namespace WPF_Europa_MVVM.Model
+﻿namespace WPF_Europa_MVVM.DB_Helper
 {
     interface IDBUtility<T>
     {

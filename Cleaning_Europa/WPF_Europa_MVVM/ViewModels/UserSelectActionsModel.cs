@@ -13,14 +13,13 @@ namespace WPF_Europa_MVVM.ViewModels
     public class UserSelectActionsModel : ViewModelBase
     {
 
+        #region Constructor and Messengers Registered
         public UserSelectActionsModel()
         {
             _dataItems = new UserObservableCollection<UserVM>();
-
             DataItems = App.StoreXML.GetUsers();
-
             _listBoxCommand = new RelayCommand(() => SelectionHasChanged());
-            
+
             //Messengers / messages
             App.Messenger.Register("UserCleared", (Action)(() => SelectedUser = null));
             App.Messenger.Register("GetUsers", (Action)(() => GetUsers()));
@@ -30,14 +29,28 @@ namespace WPF_Europa_MVVM.ViewModels
             App.Messenger.Register("CheckUserExist", (Action<string>)((param) => CheckUserExist(param)));
 
         }
+        #endregion
 
-
-        private readonly RelayCommand _listBoxCommand;
-        public ICommand ListBoxCommand
+        #region UserObservableCollection
+        private UserObservableCollection<UserVM> _dataItems;
+        public UserObservableCollection<UserVM> DataItems
         {
-            get { return _listBoxCommand; }
+            get { return _dataItems; }
+            //If dataItems replaced by new collection, WPF must be told
+            set { _dataItems = value; OnPropertyChanged(new PropertyChangedEventArgs("DataItems")); }
         }
+        #endregion
 
+        #region SelectedUser
+        private UserVM _selectedUser;
+        public UserVM SelectedUser
+        {
+            get { return _selectedUser; }
+            set { _selectedUser = value; OnPropertyChanged(new PropertyChangedEventArgs("SelectedUser")); }
+        }
+        #endregion
+
+        #region Methods
         private void SelectionHasChanged()
         {
             Messenger messenger = App.Messenger;
@@ -45,17 +58,6 @@ namespace WPF_Europa_MVVM.ViewModels
                 Call_UserWindow();
             messenger.NotifyColleagues("UserSelectionChanged", _selectedUser);
         }
-
-        #region DoubleClick Custom Command
-        private RelayCommand _mouseDoubleClickCommand;
-        public ICommand MouseDoubleClickCommand
-        {
-            get
-            {
-                return _mouseDoubleClickCommand ?? (_mouseDoubleClickCommand = new RelayCommand(() => SelectionHasChanged()));
-            }
-        }
-        #endregion
 
         private void GetUsers()
         {
@@ -65,12 +67,11 @@ namespace WPF_Europa_MVVM.ViewModels
                 App.Messenger.NotifyColleagues("SetStatus", App.StoreXML.errorMessage);
         }
 
-
         private void SaveUser(UserVM p)
         {
             _dataItems.Add(p);
             App.Messenger.NotifyColleagues("ClearUserDisplay");
-            
+
         }
 
         private void CheckUserExist(string username)
@@ -81,8 +82,6 @@ namespace WPF_Europa_MVVM.ViewModels
                     .Any(item => item.UserName == username);
 
                 App.Messenger.NotifyColleagues("UserExist", exist);
-                // if (exist)
-               //     App.Messenger.NotifyColleagues("ReturnOriginalName", SelectedUser.UserName);
             }
         }
 
@@ -93,38 +92,9 @@ namespace WPF_Europa_MVVM.ViewModels
             SelectedUser = p;
         }
 
-
         private void DeleteUser()
         {
             _dataItems.Remove(_selectedUser);
-        }
-
-        private UserObservableCollection<UserVM> _dataItems;
-        public UserObservableCollection<UserVM> DataItems
-        {
-            get { return _dataItems; }
-            //If dataItems replaced by new collection, WPF must be told
-            set { _dataItems = value; OnPropertyChanged(new PropertyChangedEventArgs("DataItems")); }
-        }
-
-        private UserVM _selectedUser;
-        public UserVM SelectedUser
-        {
-            get { return _selectedUser; }
-            set { _selectedUser = value; OnPropertyChanged(new PropertyChangedEventArgs("SelectedUser")); }
-        }
-        
-
-        private RelayCommand _addNewUserCommand;
-        public ICommand AddNewUserCommand
-        {
-            get { return _addNewUserCommand ?? (_addNewUserCommand = new RelayCommand(() => Call_UserWindow())); }
-        }
-
-        private RelayCommand _hierarchCommand;
-        public ICommand HierarchCommand
-        {
-            get { return _hierarchCommand ?? (_hierarchCommand = new RelayCommand(() => Call_Hierarch())); }
         }
 
         private void Call_Hierarch()
@@ -146,8 +116,42 @@ namespace WPF_Europa_MVVM.ViewModels
                     GetUsers();
             });
         }
+        #endregion
 
-       
+        #region ListBoxCommand
+        private readonly RelayCommand _listBoxCommand;
+        public ICommand ListBoxCommand
+        {
+            get { return _listBoxCommand; }
+        }
+        #endregion
+
+        #region DoubleClick Custom Command
+        private RelayCommand _mouseDoubleClickCommand;
+        public ICommand MouseDoubleClickCommand
+        {
+            get
+            {
+                return _mouseDoubleClickCommand ?? (_mouseDoubleClickCommand = new RelayCommand(() => SelectionHasChanged()));
+            }
+        }
+        #endregion
+
+        #region AddNewUserCommand
+        private RelayCommand _addNewUserCommand;
+        public ICommand AddNewUserCommand
+        {
+            get { return _addNewUserCommand ?? (_addNewUserCommand = new RelayCommand(() => Call_UserWindow())); }
+        }
+        #endregion
+
+        #region HierarchCommand
+        private RelayCommand _hierarchCommand;
+        public ICommand HierarchCommand
+        {
+            get { return _hierarchCommand ?? (_hierarchCommand = new RelayCommand(() => Call_Hierarch())); }
+        }
+        #endregion
 
         #region Close App
         //Two Differents Ways to closing the app
@@ -162,7 +166,6 @@ namespace WPF_Europa_MVVM.ViewModels
             new ApplicationCloseCommand().Execute(this);
         } //CloseApp()
         #endregion
-
 
         #region ApplicationCloseCommand
         private static readonly ICommand appCloseCmd = new ApplicationCloseCommand();

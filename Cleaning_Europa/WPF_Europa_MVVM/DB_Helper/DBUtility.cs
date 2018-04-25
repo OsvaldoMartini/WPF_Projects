@@ -6,8 +6,9 @@ using System.Xml;
 using System.Xml.Linq;
 using System.Xml.Serialization;
 using WPF_Europa_MVVM.Foundation;
+using WPF_Europa_MVVM.Model;
 
-namespace WPF_Europa_MVVM.Model
+namespace WPF_Europa_MVVM.DB_Helper
 {
     public class DBUtility
     {

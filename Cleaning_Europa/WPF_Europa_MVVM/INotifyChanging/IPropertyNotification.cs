@@ -1,7 +1,7 @@
 ﻿using System;
 using System.ComponentModel;
 
-namespace WPF_Europa_MVVM.NotifyProp
+namespace WPF_Europa_MVVM.INotifyChanging
 {
     /// <summary>
     /// Notifies clients that a property value is changing or changed.

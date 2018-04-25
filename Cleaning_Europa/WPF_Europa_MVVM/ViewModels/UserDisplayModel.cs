@@ -4,10 +4,10 @@ using System.ComponentModel;
     using System.Windows;
     using System.Windows.Input;
 using WPF_Europa_MVVM.Foundation;
+    using WPF_Europa_MVVM.INotifyChanging;
     using WPF_Europa_MVVM.Model;
-using WPF_Europa_MVVM.NotifyProp;
-using WPF_Europa_MVVM.Views;
-using PropertyChangingEventHandler = WPF_Europa_MVVM.NotifyProp.PropertyChangingEventHandler;
+    using WPF_Europa_MVVM.Views;
+using PropertyChangingEventHandler = WPF_Europa_MVVM.INotifyChanging.PropertyChangingEventHandler;
 
 namespace WPF_Europa_MVVM.ViewModels
 {

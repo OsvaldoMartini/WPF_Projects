@@ -1,6 +1,6 @@
 ﻿using System;
+using WPF_Europa_MVVM.INotifyChanging;
 using WPF_Europa_MVVM.Model;
-using WPF_Europa_MVVM.NotifyProp;
 
 namespace WPF_Europa_MVVM.ViewModels
 {

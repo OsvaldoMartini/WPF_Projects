@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace WPF_Europa_MVVM.NotifyProp
+namespace WPF_Europa_MVVM.INotifyChanging
 {
     /// <summary>
     /// This class extends <see cref="T:PropertyNotificationEventArgs"/> and

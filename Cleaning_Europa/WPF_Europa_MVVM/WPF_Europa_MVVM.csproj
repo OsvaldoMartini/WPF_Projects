@@ -80,17 +80,17 @@
     </Compile>
     <Compile Include="Interfaces\IModalDialog.cs" />
     <Compile Include="Interfaces\IServiceLocator.cs" />
-    <Compile Include="Model\DBUtility.cs" />
+    <Compile Include="DB_Helper\DBUtility.cs" />
     <Compile Include="Model\DeptoModel.cs" />
     <Compile Include="Model\HierarchyOrganization.cs" />
     <Compile Include="Model\RoleModel.cs" />
-    <Compile Include="NotifyProp\CancelPropertyNotificationEventArgs.cs" />
-    <Compile Include="NotifyProp\IPropertyNotification.cs" />
-    <Compile Include="NotifyProp\PropertyNotificationEventArgs.cs" />
-    <Compile Include="NotifyProp\PropertyNotificationObject.cs" />
+    <Compile Include="INotifyChanging\CancelPropertyNotificationEventArgs.cs" />
+    <Compile Include="INotifyChanging\IPropertyNotification.cs" />
+    <Compile Include="INotifyChanging\PropertyNotificationEventArgs.cs" />
+    <Compile Include="INotifyChanging\PropertyNotificationObject.cs" />
     <Compile Include="Service\ServiceProvider.cs" />
     <Compile Include="Service\UnityServiceLocator.cs" />
-    <Compile Include="StarterDI\Class1.cs" />
+    <Compile Include="StarterDI\BootStrapper.cs" />
     <Compile Include="ViewModels\IntermediateMsgVM.cs" />
     <Compile Include="ViewModels\Modes.cs" />
     <Compile Include="ViewModels\OrgElementViewModel.cs" />
@@ -186,9 +186,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Model\CustomerModel.cs" />
-    <Compile Include="Model\IDBUtility.cs" />
+    <Compile Include="DB_Helper\IDBUtility.cs" />
     <Compile Include="Model\UserModel.cs" />
-    <Compile Include="Model\StoreXML.cs" />
+    <Compile Include="DB_Helper\StoreXML.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -221,9 +221,7 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="XML_Utils\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <None Include="DLL\Microsoft.Practices.Unity.dll">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
