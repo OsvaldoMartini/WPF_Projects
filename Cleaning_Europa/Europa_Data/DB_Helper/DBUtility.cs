@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.IO;
 using System.Linq;
 using System.Xml;
@@ -98,6 +99,8 @@ namespace Europa_Data.DB_Helper
 
         }
 
+        //Type of CSV must be Implemented
+        private static string _typeOfFile= ConfigurationSettings.AppSettings["typeOfFile"];
 
         public static List<T> CreateFile<T>(List<T> list, string fileName = "")
         {
@@ -113,24 +116,13 @@ namespace Europa_Data.DB_Helper
             }
 
             string filePath = Path.Combine(directory, fileName);
-            if (!File.Exists(filePath))
+            if (!File.Exists(filePath) && (_typeOfFile.Equals("XML")))
             {
-                //Just Create File Blank
-                //FileStream f = File.Create(filePath);
-                //f.Close();
 
                 XDocument doc = new XDocument();
                 DBUtility.SerializeParams<T>(doc, list);
                 doc.Root.Name = "ArrayOf" + fileName;
-                // doc.Root.Namespace = 
                 doc.Save(filePath + ".xml");
-
-                ////Creates Interelly XML File From Object
-                //DataContractSerializer serializer = new DataContractSerializer(typeof(List<T>));
-                //using (FileStream writer = new FileStream(filePath, FileMode.Create))
-                //{
-                //    serializer.WriteObject(writer, list);
-                //}
 
             }
 
@@ -155,8 +147,8 @@ namespace Europa_Data.DB_Helper
             foreach (var item in lstDic)
             {
                 var valueOf = (from x in lstDic
-                    where x.Key.Contains(item.Key)
-                    select x.Value).FirstOrDefault();
+                               where x.Key.Contains(item.Key)
+                               select x.Value).FirstOrDefault();
 
                 ele.SetElementValue(item.Key, valueOf);
                 //item.SetAttributeValue(item.Name, valueOf);
@@ -177,22 +169,9 @@ namespace Europa_Data.DB_Helper
             XDocument xdoc = XDocument.Load(xmlFilename);
             xdoc.Element("ArrayOfUserModel")
                 .Elements("UserModel")
-                .Where(x => (string) x.Element("UserId") == p.ToString())
+                .Where(x => (string)x.Element("UserId") == p.ToString())
                 .Remove();
             xdoc.Save(xmlFilename);
-
-            //var settings = new XmlWriterSettings
-            //{
-            //    OmitXmlDeclaration = true
-            //};
-            //using (var stream = File.Create(xmlFilename))
-            //{
-            //    using (var writer = XmlWriter.Create(stream, settings))
-            //    {
-            //        xdoc.Save(writer);
-            //    }
-            //}
-
             return true;
         }
 
@@ -207,8 +186,8 @@ namespace Europa_Data.DB_Helper
             var elements = xdoc.Element("ArrayOfUserModel").Elements();
 
             var valueProdID = (from x in lstDic
-                where x.Key.Contains("Guid")
-                select x.Value).FirstOrDefault();
+                               where x.Key.Contains("Guid")
+                               select x.Value).FirstOrDefault();
 
             foreach (var child in elements)
             {
@@ -220,29 +199,30 @@ namespace Europa_Data.DB_Helper
 
                         if (item.Name == "_Role")
                         {
-                            GenericPropertyFinder<RoleModel> objRole= new GenericPropertyFinder<RoleModel>();
-                            
+                            GenericPropertyFinder<RoleModel> objRole = new GenericPropertyFinder<RoleModel>();
+
                             var pItems = objRole.ReturTModelPropertyAndValue(p._Role);
-                            
+
                             foreach (var subItem in item.Elements())
                             {
                                 var valueOf = (from x in pItems
-                                    where x.Key.Contains(subItem.Name.ToString())
-                                    select x.Value).FirstOrDefault();
-                                
+                                               where x.Key.Contains(subItem.Name.ToString())
+                                               select x.Value).FirstOrDefault();
+
                                 subItem.SetValue(valueOf);
                             }
-                        }else if (item.Name == "Depto")
+                        }
+                        else if (item.Name == "Depto")
                         {
-                            GenericPropertyFinder<DeptoModel> objDepto= new GenericPropertyFinder<DeptoModel>();
-                            
+                            GenericPropertyFinder<DeptoModel> objDepto = new GenericPropertyFinder<DeptoModel>();
+
                             var pItems = objDepto.ReturTModelPropertyAndValue(p.Depto);
 
                             foreach (var subItem in item.Elements())
                             {
                                 var valueOf = (from x in pItems
-                                    where x.Key.Contains(subItem.Name.ToString())
-                                    select x.Value).FirstOrDefault();
+                                               where x.Key.Contains(subItem.Name.ToString())
+                                               select x.Value).FirstOrDefault();
 
                                 subItem.SetValue(valueOf);
                             }
@@ -250,8 +230,8 @@ namespace Europa_Data.DB_Helper
                         else
                         {
                             var valueOf = (from x in lstDic
-                                where x.Key.Contains(item.Name.ToString())
-                                select x.Value).FirstOrDefault();
+                                           where x.Key.Contains(item.Name.ToString())
+                                           select x.Value).FirstOrDefault();
 
                             if (valueOf != null)
                                 item.SetValue(valueOf);
@@ -347,7 +327,7 @@ namespace Europa_Data.DB_Helper
 
                 System.Xml.XmlReader reader = xdoc.CreateReader();
 
-                result = (List<T>) serializer.Deserialize(reader);
+                result = (List<T>)serializer.Deserialize(reader);
                 reader.Close();
             }
             finally
@@ -383,7 +363,7 @@ namespace Europa_Data.DB_Helper
             {
                 StreamReader xmlStream = new StreamReader(XmlFilename);
                 XmlSerializer serializer = new XmlSerializer(typeof(T));
-                returnObject = (T) serializer.Deserialize(xmlStream);
+                returnObject = (T)serializer.Deserialize(xmlStream);
             }
             catch (Exception ex)
             {

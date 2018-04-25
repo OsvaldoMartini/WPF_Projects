@@ -12,20 +12,6 @@ namespace Europa_Data.DB_Helper
         public bool hasError = false;
         public string errorMessage;
 
-        //Type of CSV must be Implemented
-        private string _typeOfFile;
-        public string TypeOfFile
-        {
-            get
-            {
-                if (this._typeOfFile == String.Empty)
-                    this._typeOfFile = ConfigurationSettings.AppSettings["typeOfFile"];
-
-                return _typeOfFile;
-            }
-            set { _typeOfFile = value; }
-        }
-
         public bool DeleteUser(int p)
         {
             try
