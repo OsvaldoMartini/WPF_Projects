@@ -23,6 +23,10 @@ namespace EuropaWPF_App.ViewModels
         private bool _canProceedSave;
         private List<RoleModel> _roles;
         private List<DeptoModel> _deptos;
+        private RoleModel _roleItem;
+        private DeptoModel _deptoItem;
+
+
         private Mode _mode;
         #endregion
 
@@ -72,43 +76,54 @@ namespace EuropaWPF_App.ViewModels
        
         public UserVM UserToDisplay
         {
-            get { return _userToDisplay; }
+            get { return this._userToDisplay; }
             set
             {
-                if (_userToDisplay == null || _userToDisplay._UserId == 0)
-                {
-                    _userToDisplay = value;
-                    OnPropertyChanged(new PropertyChangedEventArgs("UserToDisplay"));
-                }
+                this._userToDisplay = value;
+                OnPropertyChanged(new PropertyChangedEventArgs("UserToDisplay"));
+                
             }
         }
 
 
-        private RoleModel _roleItem;
 
         public RoleModel RoleItemSelected
         {
-            get { return _roleItem; }
+            get
+            {
+                if (UserToDisplay != null && UserToDisplay._Role != null)
+                    return _roles.FirstOrDefault(role => role.id == UserToDisplay._Role.id);
+                return _roleItem;
+            }
             set
             {
-                _roleItem = value;
-                UpdateRoleUser(_roleItem);
+                if ( this.UserToDisplay != null)
+                    UserToDisplay._Role = value;
+                else
+                    this._roleItem = null;
                 OnPropertyChanged(new PropertyChangedEventArgs("RoleItemSelected"));
             }
         }
 
 
-        private DeptoModel _deptoItemSelected;
-
         public DeptoModel DeptoItemSelected
         {
-            get { return _deptoItemSelected; }
+            get
+            {
+                if (UserToDisplay != null && UserToDisplay.Depto != null)
+                    return _deptos.FirstOrDefault(deptos => deptos.id == UserToDisplay.Depto.id);
+                return _deptoItem;
+            }
             set
             {
-                _deptoItemSelected = value;
-                UpdateDeptoUser(_deptoItemSelected);
-                OnPropertyChanged(new PropertyChangedEventArgs("RoleItemSelected"));
+                if (this.UserToDisplay != null)
+                    UserToDisplay.Depto = value;
+                else
+                    this._deptoItem = null;
+
+                OnPropertyChanged(new PropertyChangedEventArgs("DeptoItemSelected"));
             }
+
         }
 
         private void UpdateRoleUser(RoleModel r)
@@ -155,11 +170,17 @@ namespace EuropaWPF_App.ViewModels
         }
 
         private void ClearUserDisplay()
-        {
+        {   App.Messenger.NotifyColleagues("UserCleared");
+
             isSelected = false;
             stat.NoError();
-            this._userToDisplay = null;
-            App.Messenger.NotifyColleagues("UserCleared");
+            UserToDisplay = null;
+            UserToDisplay = new UserVM();
+            UserToDisplay.PropertyChanged += new PropertyChangedEventHandler(userVM_PropertyChanged);
+            UserToDisplay.PropertyChanging += new PropertyChangingEventHandler(userVM_PropertyChanging);
+
+            Mode = Mode.Add;
+            
         } //ClearUserDisplay()
 
         #endregion
@@ -174,8 +195,6 @@ namespace EuropaWPF_App.ViewModels
 
         private void UpdateUser()
         {
-            //if ((!isSelected) && (!stat.CheckIfUserExist(UserToDisplay.UserName))) return;
-
             if (!stat.ChkUserForUpdate(UserToDisplay)) return;
             if (!App.StoreXML.UpdateUser(UserToDisplay))
             {
@@ -235,7 +254,7 @@ namespace EuropaWPF_App.ViewModels
         
         public ICommand SaveCommand
         {
-            get { return saveCommand ?? (saveCommand = new RelayCommand(() => SaveUser(), () => CanProceedSave)); }
+            get { return saveCommand ?? (saveCommand = new RelayCommand(() => SaveUser(), () => !isSelected)); }
         }
 
         #region CancelCommand
@@ -326,9 +345,16 @@ namespace EuropaWPF_App.ViewModels
         {
             if (p == null)
             {
-                /*UserToDisplay = null;*/
+                UserToDisplay = null;
                 isSelected = false;
                 return;
+            }else if (p._UserId == 0)
+            {
+                UserToDisplay = null;
+                isSelected = false;
+                this._canProceedSave = true;
+                this._canProceedUpd = false;
+
             }
 
 
@@ -338,6 +364,7 @@ namespace EuropaWPF_App.ViewModels
             temp.PropertyChanging += new PropertyChangingEventHandler(userVM_PropertyChanging);
 
             _userToDisplay = temp;
+
             if (this._mode == Mode.Add)
                 isSelected = false;
             if (this._mode == Mode.Edit)

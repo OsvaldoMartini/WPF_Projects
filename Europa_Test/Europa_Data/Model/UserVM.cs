@@ -53,11 +53,7 @@ namespace Europa_Data.Model
         public string Forename
         {
             get { return forename; }
-            set
-            {
-                forename = value;
-                SetProperty<string>("Forename", ref this.forename, value);
-            }
+            set { SetProperty<string>("Forename", ref this.forename, value); }
         }
 
         private string surname;
@@ -65,11 +61,7 @@ namespace Europa_Data.Model
         public string Surname
         {
             get { return surname; }
-            set
-            {
-                surname = value;
-                SetProperty<string>("Surname", ref this.surname, value);
-            }
+            set { SetProperty<string>("Surname", ref this.surname, value); }
         }
 
         private DateTime startDate;
@@ -77,11 +69,7 @@ namespace Europa_Data.Model
         public DateTime StartDate
         {
             get { return startDate; }
-            set
-            {
-                startDate = value;
-                SetProperty<DateTime>("StartDate", ref this.startDate, value);
-            }
+            set { SetProperty<DateTime>("StartDate", ref this.startDate, value); }
         }
 
         private RoleModel role;
@@ -89,11 +77,7 @@ namespace Europa_Data.Model
         public RoleModel _Role
         {
             get { return role; }
-            set
-            {
-                role = value;
-                SetProperty<RoleModel>("_Role", ref this.role, value);
-            }
+            set { SetProperty<RoleModel>("_Role", ref this.role, value); }
         }
 
         private DeptoModel depto;
@@ -101,11 +85,7 @@ namespace Europa_Data.Model
         public DeptoModel Depto
         {
             get { return depto; }
-            set
-            {
-                depto = value;
-                SetProperty<DeptoModel>("Depto", ref this.depto, value);
-            }
+            set { SetProperty<DeptoModel>("_Role", ref this.depto, value); }
         }
 
         private bool leaver;
@@ -121,11 +101,7 @@ namespace Europa_Data.Model
         public DateTime LeavingDate
         {
             get { return leavingDate; }
-            set
-            {
-                leavingDate = value;
-                SetProperty<DateTime>("leavingDate", ref this.leavingDate, value);
-            }
+            set { SetProperty<DateTime>("LeavingDate", ref this.leavingDate, value); }
         }
 
         private string _description;
@@ -133,11 +109,7 @@ namespace Europa_Data.Model
         public string Description
         {
             get { return _description; }
-            set
-            {
-                _description = value;
-                SetProperty<string>("Description", ref this._description, value);
-            }
+            set { SetProperty<string>("Description", ref this._description, value); }
         }
 
 

@@ -186,6 +186,7 @@ namespace Europa_Data.DB_Helper
             var lstDic = objGenericPropertyFinder.ReturTModelPropertyAndValue(p);
 
             XDocument xdoc = XDocument.Load(xmlFilename);
+            xdoc.Declaration = new XDeclaration("1.0", "utf-8", "yes");
             var elements = xdoc.Element("ArrayOfUserModel").Elements();
 
             var valueProdID = (from x in lstDic
@@ -249,6 +250,21 @@ namespace Europa_Data.DB_Helper
 
 
             }
+
+            DateTime t;
+            bool b;
+            xdoc
+                .DescendantNodes()
+                .Where(d => d.NodeType == XmlNodeType.Text &&
+                            DateTime.TryParse(d.ToString(), out t))
+                .ToList()
+                .ForEach(n => n.Parent.SetValue(DateTime.Parse(n.ToString())));
+            xdoc
+                .DescendantNodes()
+                .Where(d => d.NodeType == XmlNodeType.Text &&
+                            Boolean.TryParse(d.ToString(), out b))
+                .ToList()
+                .ForEach(n => n.Parent.SetValue(Boolean.Parse(n.ToString())));
 
             xdoc.Save(xmlFilename);
 

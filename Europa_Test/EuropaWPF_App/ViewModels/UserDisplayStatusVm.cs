@@ -191,7 +191,7 @@ namespace EuropaWPF_App.ViewModels
             }
             else SurnameBrush = okBrush;
 
-            if ((p.StartDate > DateTime.Now || p.StartDate < p.LeavingDate))
+            if ((p.StartDate > DateTime.Now || p.StartDate > p.LeavingDate))
             {
                 errCnt++;
                 StartDateBrush = errorBrush;

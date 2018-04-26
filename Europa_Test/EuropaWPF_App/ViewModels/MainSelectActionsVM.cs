@@ -52,13 +52,13 @@ namespace EuropaWPF_App.ViewModels
         #endregion
 
         #region Methods
+
         private void SelectionHasChanged()
         {
-            Messenger messenger = App.Messenger;
             if (_selectedUser != null)
+            {
                 Call_UserWindow(Mode.Edit);
-
-            messenger.NotifyColleagues("UserSelectionChanged", _selectedUser);
+            }
         }
 
         private void GetUsers()
@@ -113,18 +113,26 @@ namespace EuropaWPF_App.ViewModels
 
         private void Call_UserWindow(Mode mode)
         {
-            
             GlobalServices.ModalService.NavigateTo(new UserDisplayView(), delegate(bool returnValue)
             {
                 if (returnValue)
                     GetUsers();
             });
 
+            App.Messenger.NotifyColleagues("SetModeAction", mode);
+
             if (Mode.Add == mode)
+            {
                 App.Messenger.NotifyColleagues("UserSelectionChanged", new UserVM());
-            
+            }
+
             if (Mode.Edit == mode)
-                App.Messenger.NotifyColleagues("SetModeAction", mode);
+            {
+                App.Messenger.NotifyColleagues("UserSelectionChanged", _selectedUser);
+            }
+
+
+
 
         }
 
