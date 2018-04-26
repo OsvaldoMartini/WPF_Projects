@@ -1,0 +1,29 @@
+﻿<Window x:Class="Products_SQL_Linq.MainWindow"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:views="clr-namespace:Products_SQL_Linq.Views"
+    Title="ProductMvvm" Height="550" Width="370" MinHeight="550"
+    WindowStartupLocation="CenterScreen" Loaded="Window_Loaded">
+    <Grid>
+        <Grid.Background>
+            <ImageBrush ImageSource="LightBrushedx.jpg" TileMode="Tile" 
+                            ViewportUnits="Absolute" Viewport="0,0,200,200">
+            </ImageBrush>
+        </Grid.Background>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="3*"></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="7*"></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
+        </Grid.RowDefinitions>
+        <views:ProductSelectionView Grid.Row="0"/>
+        <GridSplitter Grid.Row="1" HorizontalAlignment="Stretch" VerticalAlignment="Bottom" ResizeBehavior="PreviousAndNext"
+                      Height="5"/>
+        <views:ProductDisplay Grid.Row="2"/>
+        <StackPanel  Grid.Row="3" HorizontalAlignment="Right" Orientation="Horizontal" Margin="5,2,10,10">
+            <Button Command="{Binding LoadXMLByLinqPage}" Margin="2,5,0,0"  Padding="5" Background="Black" Height="35" Width="110" 
+            >Load XML by Linq</Button>
+        </StackPanel>
+</Grid>
+</Window>
