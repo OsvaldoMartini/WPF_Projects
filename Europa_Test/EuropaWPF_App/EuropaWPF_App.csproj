@@ -41,6 +41,10 @@
     <Reference Include="PresentationFramework.Aero" />
     <Reference Include="System" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Windows.Controls.DataVisualization.Toolkit, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Windows.Controls.DataVisualization.Toolkit.4.0.0.0\lib\net40-Client\System.Windows.Controls.DataVisualization.Toolkit.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System.Windows.Interactivity, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>Dll\System.Windows.Interactivity.dll</HintPath>
@@ -92,6 +96,9 @@
     <Compile Include="ViewModels\UserDisplayStatusVm.cs" />
     <Compile Include="ViewModels\MainSelectActionsVm.cs" />
     <Compile Include="ViewModels\ViewModelBase.cs" />
+    <Compile Include="Views\UserAnalizesChart.xaml.cs">
+      <DependentUpon>UserAnalizesChart.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\ViewDialogs\HierarchDialogView.cs" />
     <Compile Include="Views\UserDisplayView.xaml.cs">
       <DependentUpon>UserDisplayView.xaml</DependentUpon>
@@ -154,6 +161,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Resources\ResourceDictionary.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\UserAnalizesChart.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

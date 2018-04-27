@@ -113,9 +113,14 @@ namespace Europa_Data.Model
             set { SetProperty<string>("Description", ref this._description, value); }
         }
 
-        private Collection<UserAnalisys> userAnalizes;
-        public Collection<UserAnalisys> UserAnalizes { get; set; }
+        private UserAnalisysCollection _userAnalizes;
 
+        public UserAnalisysCollection UserAnalizes
+        {
+
+            get { return _userAnalizes; }
+            set { this._userAnalizes = value; }
+        }
 
 
 
