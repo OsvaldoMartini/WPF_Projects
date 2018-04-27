@@ -73,7 +73,7 @@ namespace Europa_Tests
                 <ArrayOfUserModel xmlns:xsd='http://www.w3.org/2001/XMLSchema' xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'>
                 <UserModel>
                 <ID>4a2f066d-d0c5-4c71-bd3b-74e6938cf37b</ID>
-                <ProductId>1</ProductId>
+                <UserId>1</UserId>
                 <ModelNumber>ABL1235</ModelNumber>
                 <ModelName>ModelName</ModelName>
                 <UnitCost>10500</UnitCost>
@@ -82,7 +82,7 @@ namespace Europa_Tests
                 </UserModel>
                 <UserModel>
                 <ID>2eae414d-d7cd-43a2-b67e-e00b6b525dd0</ID>
-                <ProductId>2</ProductId>
+                <UserId>2</UserId>
                 <ModelNumber>FFhTR65</ModelNumber>
                 <ModelName>Toyota</ModelName>
                 <UnitCost>310555</UnitCost>
@@ -94,7 +94,7 @@ namespace Europa_Tests
 
             Dictionary<string, string> lstDic = new Dictionary<string, string>();
             lstDic.Add("ID", "2eae414d-d7cd-43a2-b67e-e00b6b525dd0");
-            lstDic.Add("ProductId", "20");
+            lstDic.Add("UserId", "20");
             lstDic.Add("ModelNumber", "Osvaldo Martini");
 
             var valueProdID = (from x in lstDic

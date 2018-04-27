@@ -171,7 +171,7 @@ namespace Europa_Data.Model
 
         public override string ToString()
         {
-            return string.Format("Username:{0}\nForename:{1}\nSurname{2}", this.UserName, this.Forename, this.Surname);
+            return string.Format("Username:  {0}\nFull name:{1} {2}", this.UserName, this.Forename, this.Surname);
         }
 
 

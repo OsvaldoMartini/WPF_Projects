@@ -45,7 +45,7 @@
                                    HorizontalAlignment="Left"
                                    Text="{Binding Description}"
                                    TextWrapping="WrapWithOverflow" />
-                        <StackPanel>
+                        <StackPanel Grid.Row="2">
                             <views:UserAnalizesChart/>
                         </StackPanel>
                     </Grid>
@@ -83,10 +83,15 @@
                     <Grid.RowDefinitions>
                         <RowDefinition Height="*"></RowDefinition>
                         <RowDefinition Height="Auto"></RowDefinition>
+                        <RowDefinition Height="Auto"></RowDefinition>
                     </Grid.RowDefinitions>
+                    <TextBlock Grid.Row="0" Margin="10"
+                               HorizontalAlignment="Center"
+                               FontSize="12"
+                               FontWeight="Black"
+                               Text="*Double Click on the grid will open the Second View" />
 
-
-                    <Border Background="#90000000" Visibility="Visible">
+                    <Border Grid.Row="1" Background="#90000000" Visibility="Visible">
                         <Border BorderBrush="Black" BorderThickness="1" Background="AliceBlue" 
                     CornerRadius="10,0,10,0" VerticalAlignment="Center"
                     HorizontalAlignment="Center">
@@ -156,7 +161,7 @@
 
                         </Border>
                     </Border>
-                    <DockPanel  Grid.Row="1" HorizontalAlignment="Left" Margin="5,2,0,5" Width="300">
+                    <DockPanel  Grid.Row="2" HorizontalAlignment="Left" Margin="5,2,0,5" Width="300">
                         <Button Margin="2,5,0,2"  Padding="2" Height="35" Width="50"
                                 Command="{Binding CloseAppCommand}">Close</Button>
                         <Button Margin="0,5,0,2"  Padding="2" Height="35" Width="60"

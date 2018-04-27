@@ -11,9 +11,9 @@
         <model:UserVM x:Key="UserAnalizesCollection"/>
     </UserControl.Resources>-->
     <Grid>
-        <cht:Chart Name="UserAnalizes" Title="Top 5 Most Populous Countries of the World" Background="LightBlue">
+        <cht:Chart Name="UserAnalizes" Title="Performace Analyze" Background="LightBlue">
             <cht:Chart.Series>
-                <cht:ColumnSeries Title="Population" ItemsSource="{Binding UserAnalizes}" IndependentValueBinding="{Binding Path=NameAnalize}" DependentValueBinding="{Binding Path=ValueReached}">
+                <cht:ColumnSeries Title="Points" ItemsSource="{Binding UserAnalizes}" IndependentValueBinding="{Binding Path=NameAnalize}" DependentValueBinding="{Binding Path=ValueReached}">
                 </cht:ColumnSeries>
             </cht:Chart.Series>
         </cht:Chart>
