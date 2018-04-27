@@ -101,7 +101,7 @@ namespace Europa_Data.DB_Helper
         }
 
         //Type of CSV must be Implemented
-        private static string _typeOfFile= ConfigurationSettings.AppSettings["typeOfFile"];
+        private static string _typeOfFile = ConfigurationSettings.AppSettings["typeOfFile"];
 
         public static List<T> CreateFile<T>(List<T> list, string fileName = "")
         {
@@ -146,23 +146,62 @@ namespace Europa_Data.DB_Helper
             var lstDic = objGenericPropertyFinder.ReturTModelPropertyAndValue(p);
 
             XElement ele = new XElement("UserModel", null);
+            XElement subEle = null;
 
             foreach (var item in lstDic)
             {
-                var valueOf = (from x in lstDic
-                               where x.Key.Contains(item.Key)
-                               select x.Value).FirstOrDefault();
 
-                ele.SetElementValue(item.Key, valueOf);
-                //item.SetAttributeValue(item.Name, valueOf);
+                if (subEle != null && subEle.Name != item.Key.Remove(5))
+                {
+                    ele.Add(subEle);
+                    subEle = null;
+                }
+
+                if (item.Key.Contains("_Role"))
+                {
+                    if (subEle == null)
+                        subEle = new XElement("_Role", null);
+
+
+                    var valueOf = (from x in lstDic
+                                   where x.Key.Contains(item.Key)
+                                   select x.Value).FirstOrDefault();
+
+                    subEle.SetElementValue(item.Key.Remove(0, 6), valueOf);
+                    continue;
+
+                }
+                else if (item.Key.Contains("Depto"))
+                {
+                    if (subEle == null)
+                        subEle = new XElement("Depto", null);
+
+                    var valueOf = (from x in lstDic
+                                   where x.Key.Contains(item.Key)
+                                   select x.Value).FirstOrDefault();
+
+                    subEle.SetElementValue(item.Key.Remove(0, 6), valueOf);
+                    continue;
+                }
+                else
+                {
+
+
+                    var valueOf = (from x in lstDic
+                                   where x.Key.Contains(item.Key)
+                                   select x.Value).FirstOrDefault();
+
+                    ele.SetElementValue(item.Key, valueOf);
+
+                }
+
+
             }
-
             xdoc.Root.Add(ele);
 
-
+            xdoc = ValidatesFieldsXDoc(xdoc);
 
             xdoc.Save(xmlFilename);
-
             return true;
 
         }
@@ -174,6 +213,7 @@ namespace Europa_Data.DB_Helper
                 .Elements("UserModel")
                 .Where(x => (string)x.Element("UserId") == p.ToString())
                 .Remove();
+
             xdoc.Save(xmlFilename);
             return true;
         }
@@ -251,6 +291,15 @@ namespace Europa_Data.DB_Helper
 
             }
 
+            xdoc = ValidatesFieldsXDoc(xdoc);
+
+            xdoc.Save(xmlFilename);
+            return true;
+
+        }
+
+        private static XDocument ValidatesFieldsXDoc(XDocument xdoc)
+        {
             DateTime t;
             bool b;
             xdoc
@@ -266,12 +315,9 @@ namespace Europa_Data.DB_Helper
                 .ToList()
                 .ForEach(n => n.Parent.SetValue(Boolean.Parse(n.ToString())));
 
-            xdoc.Save(xmlFilename);
-
-            return true;
+            return xdoc;
 
         }
-
 
 
         public static Object ObjectToXML(string xml, Type objectType)
@@ -341,10 +387,10 @@ namespace Europa_Data.DB_Helper
             try
             {
 
-                System.Xml.Serialization.XmlSerializer serializer =
-                    new System.Xml.Serialization.XmlSerializer(typeof(List<T>));
+                XmlSerializer serializer =
+                    new XmlSerializer(typeof(List<T>));
 
-                System.Xml.XmlReader reader = xdoc.CreateReader();
+                XmlReader reader = xdoc.CreateReader();
 
                 result = (List<T>)serializer.Deserialize(reader);
                 reader.Close();
@@ -362,10 +408,10 @@ namespace Europa_Data.DB_Helper
 
         public static void SerializeParams<T>(XDocument doc, List<T> paramList)
         {
-            System.Xml.Serialization.XmlSerializer serializer =
-                new System.Xml.Serialization.XmlSerializer(paramList.GetType());
+            XmlSerializer serializer =
+                new XmlSerializer(paramList.GetType());
 
-            System.Xml.XmlWriter writer = doc.CreateWriter();
+            XmlWriter writer = doc.CreateWriter();
 
             serializer.Serialize(writer, paramList);
 

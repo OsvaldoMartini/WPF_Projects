@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.ObjectModel;
 using Europa_Data.INotifyChanging;
 
 namespace Europa_Data.Model
@@ -112,6 +113,10 @@ namespace Europa_Data.Model
             set { SetProperty<string>("Description", ref this._description, value); }
         }
 
+        private Collection<UserAnalisys> userAnalizes;
+        public Collection<UserAnalisys> UserAnalizes { get; set; }
+
+
 
 
         public UserVM()
@@ -133,7 +138,7 @@ namespace Europa_Data.Model
             Leaver = Convert(leaver);
             LeavingDate = Convert(leavingDate);
             Description = this.ToString();
-
+            UserAnalizes = new UserAnalisysCollection();
         }
 
         public void CopyUser(UserVM p)

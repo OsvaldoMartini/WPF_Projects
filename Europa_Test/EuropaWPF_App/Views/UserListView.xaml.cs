@@ -17,7 +17,7 @@ namespace EuropaWPF_App.Views
         }
 
 
-        private void dataGrid1_Loaded(object sender, RoutedEventArgs e)
+        private void GridUsers_Loaded(object sender, RoutedEventArgs e)
         {
             DataGrid dg = sender as DataGrid;
             Border border = VisualTreeHelper.GetChild(dg, 0) as Border;
@@ -54,7 +54,7 @@ namespace EuropaWPF_App.Views
             return null;
         }
 
-        private void dataGrid1_RowDetailsVisibilityChanged(object sender, DataGridRowDetailsEventArgs e)
+        private void GridUsers_RowDetailsVisibilityChanged(object sender, DataGridRowDetailsEventArgs e)
         {
             DataGridRow row = e.Row as DataGridRow;
             FrameworkElement tb = GetTemplateChildByName(row, "RowHeaderToggleButton");

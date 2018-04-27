@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.IO;
+using System.Xml.Serialization;
 using Europa_Data.Controls;
 using Europa_Data.DB_Helper;
 
@@ -20,8 +22,12 @@ namespace Europa_Data.Model
         public bool Leaver { get; set; }
         //[XmlIgnore]
         public DateTime LeavingDate { get; set; }
+        [XmlIgnore]
+        public Collection<UserAnalisys> UserAnalizes { get; set; }
+
 
         private string _description;
+        [XmlIgnore]
         public string Description
         {
             get { return _description; }

@@ -54,6 +54,7 @@
     <Compile Include="Model\Enums.cs" />
     <Compile Include="Model\HierarchyOrganization.cs" />
     <Compile Include="Model\RoleModel.cs" />
+    <Compile Include="Model\UserAnalisys.cs" />
     <Compile Include="Model\UserModel.cs" />
     <Compile Include="Model\UserVM.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
