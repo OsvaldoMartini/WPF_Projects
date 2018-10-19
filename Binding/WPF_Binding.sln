@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2013
-VisualStudioVersion = 12.0.21005.1
+# Visual Studio 15
+VisualStudioVersion = 15.0.27703.2026
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Binding.ElementPath", "Binding_ElementPath\Binding.ElementPath.csproj", "{7E5145E2-6971-4AFC-9853-6CE740D019E9}"
 EndProject
@@ -26,8 +26,6 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BindingTests", "BindingTests\BindingTests.csproj", "{75D68DAB-8871-40A9-9E5A-4D9E8E4B122A}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Binding.GameOfLife", "Binding.GameOfLife\Binding.GameOfLife.csproj", "{AB070D43-E641-4864-8B92-E8C617DD2A91}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Binding.GameOfLife.Mart", "Binding.GameOfLife.Mart\Binding.GameOfLife.Mart.csproj", "{8CDA161B-17A1-474D-BC54-2EC1BA10ADEB}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Binding.GameOfLife.Simpler", "Binding.GameOfLife.Simpler\Binding.GameOfLife.Simpler.csproj", "{DC007352-C24B-4E91-A0AB-5BD2AE7BE717}"
 EndProject
@@ -85,10 +83,6 @@ Global
 		{AB070D43-E641-4864-8B92-E8C617DD2A91}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{AB070D43-E641-4864-8B92-E8C617DD2A91}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{AB070D43-E641-4864-8B92-E8C617DD2A91}.Release|Any CPU.Build.0 = Release|Any CPU
-		{8CDA161B-17A1-474D-BC54-2EC1BA10ADEB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{8CDA161B-17A1-474D-BC54-2EC1BA10ADEB}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{8CDA161B-17A1-474D-BC54-2EC1BA10ADEB}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{8CDA161B-17A1-474D-BC54-2EC1BA10ADEB}.Release|Any CPU.Build.0 = Release|Any CPU
 		{DC007352-C24B-4E91-A0AB-5BD2AE7BE717}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{DC007352-C24B-4E91-A0AB-5BD2AE7BE717}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DC007352-C24B-4E91-A0AB-5BD2AE7BE717}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -96,5 +90,8 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {1A5288CC-67C8-4550-896F-2E56E9B6D515}
 	EndGlobalSection
 EndGlobal
